@@ -82,9 +82,10 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#fcf9f8] text-[#1c1b1b] flex flex-col font-body antialiased selection:bg-[#b7f473] selection:text-[#081d00]">
       {/* Top Urgency & Social Proof Announcement Bar */}
-      <div className="bg-[#173404] text-[#b7f473] text-[11px] font-mono-caps py-2 px-4 text-center tracking-wider border-b border-[#3e6a00]/30 flex items-center justify-center gap-2">
-        <span className="w-2 h-2 rounded-full bg-[#b7f473] animate-pulse"></span>
+      <div className="announcement-bar text-[#b7f473] text-[11px] font-mono-caps py-2.5 px-4 text-center tracking-wider flex items-center justify-center gap-2.5">
+        <span className="w-2 h-2 rounded-full bg-[#b7f473] animate-pulse shrink-0" />
         <span>⚡ SPECIAL LIMITED OFFER: Complete Composure System $20 (Full Value $197 — Save $177 Today) • Over 12,400+ Men Trained • 30-Day Risk-Free Guarantee</span>
+        <span className="w-2 h-2 rounded-full bg-[#b7f473] animate-pulse shrink-0" />
       </div>
 
       {/* Sticky Conversion Header */}

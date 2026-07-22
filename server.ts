@@ -1,6 +1,5 @@
 import express from "express";
 import path from "path";
-import { fileURLToPath } from "url";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 import { validateEvent, WebhookVerificationError } from "@polar-sh/sdk/webhooks";
@@ -14,8 +13,6 @@ import {
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 async function startServer() {
   const app = express();
@@ -63,8 +60,12 @@ async function startServer() {
           const customerEmail =
             orderData.customer_email ||
             orderData.customerEmail ||
-            orderData.customer?.email ||
-            "customer@example.com";
+            orderData.customer?.email;
+
+          if (!customerEmail) {
+            console.warn(`[Polar Webhook] Order ${orderId} missing customer email. Skipping entitlement grant.`);
+            break;
+          }
           const customerId = orderData.customer_id || orderData.customer?.id;
           const productId = orderData.product_id || orderData.product?.id;
           const amount = orderData.amount || orderData.total_amount;
@@ -183,8 +184,10 @@ async function startServer() {
     let productsParam = req.query.products;
     const customerEmail = (req.query.email as string) || undefined;
     const host = req.get("host") || "localhost:3000";
-    const protocol = req.headers["x-forwarded-proto"] || "https";
-    const successUrl = `${protocol}://${host}/?checkout=success${customerEmail ? `&email=${encodeURIComponent(customerEmail)}` : ''}`;
+    const rawProto = (req.headers["x-forwarded-proto"] as string) || req.protocol || "http";
+    const protocol = rawProto.split(",")[0].trim();
+    const baseUrl = process.env.APP_URL ? process.env.APP_URL.replace(/\/$/, "") : `${protocol}://${host}`;
+    const successUrl = `${baseUrl}/?checkout=success${customerEmail ? `&email=${encodeURIComponent(customerEmail)}` : ''}`;
 
     try {
       const polar = getPolarClient();
@@ -201,7 +204,7 @@ async function startServer() {
             description: "Complete 5-Module Digital System + 4 Free Bonus Playbooks & Logs",
             prices: [
               {
-                type: "one_time",
+                amountType: "fixed",
                 priceAmount: 2000, // $20.00 USD
                 priceCurrency: "usd",
               },
@@ -247,7 +250,7 @@ async function startServer() {
           description: "Complete 5-Module Digital System + 4 Free Bonus Playbooks & Logs",
           prices: [
             {
-              type: "one_time",
+              amountType: "fixed",
               priceAmount: 2000, // $20.00 USD
               priceCurrency: "usd",
             },
@@ -267,7 +270,7 @@ async function startServer() {
     }
   });
 
-  app.post("/api/polar/provision-test-product", async (_req, res) => {
+  const handleProvisionProduct = async (_req: express.Request, res: express.Response) => {
     try {
       const polar = getPolarClient();
       const existing = await polar.products.list({ limit: 10 });
@@ -286,7 +289,7 @@ async function startServer() {
         description: "Complete 5-Module Digital System + 4 Free Bonus Playbooks & Logs",
         prices: [
           {
-            type: "one_time",
+            amountType: "fixed",
             priceAmount: 2000, // $20.00 USD
             priceCurrency: "usd",
           },
@@ -301,7 +304,10 @@ async function startServer() {
       console.error("[Polar Provision] Error:", error);
       return res.status(500).json({ error: error.message || "Failed to provision product" });
     }
-  });
+  };
+
+  app.post("/api/polar/provision-product", handleProvisionProduct);
+  app.post("/api/polar/provision-test-product", handleProvisionProduct);
 
   // Gemini AI Client (Lazy initialized or checked per request)
   function getGeminiClient() {

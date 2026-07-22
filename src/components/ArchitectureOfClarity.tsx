@@ -14,45 +14,57 @@ export const ArchitectureOfClarity: React.FC<ArchitectureProps> = ({ onOpenCheck
       onOpenCheckout();
     }
   };
+
   const pillars = [
     {
       num: '01',
       title: 'Physiological Decoding',
       tagline: 'Deconstructing the Anxiety & Shame Loop',
       desc: 'Learn why changes occur in your 30s due to nervous system sensitivity. Normalize the mind-body response to permanently remove performance pressure.',
-      icon: 'psychology'
+      icon: 'psychology',
+      color: 'from-purple-50 to-indigo-50',
+      iconBg: 'bg-indigo-100',
+      iconColor: 'text-indigo-700',
     },
     {
       num: '02',
       title: 'Neuromuscular Pelvic Training',
       tagline: 'The 1–10 Scale & Stop-Start Trainer',
       desc: 'Map your arousal threshold, identify your Level 7 point of no return, and condition your pelvic muscles to regulate nerve signal intensity.',
-      icon: 'fitness_center'
+      icon: 'fitness_center',
+      color: 'from-emerald-50 to-green-50',
+      iconBg: 'bg-emerald-100',
+      iconColor: 'text-emerald-700',
     },
     {
       num: '03',
       title: 'Parasympathetic Breath Control',
       tagline: '4-2-7 Vagus Nerve Regulation',
       desc: 'Activate parasympathetic dominance using slow 4-count inhale / 7-count exhale breathwork to calm rapid heart rate and extend timing.',
-      icon: 'air'
+      icon: 'air',
+      color: 'from-sky-50 to-blue-50',
+      iconBg: 'bg-sky-100',
+      iconColor: 'text-sky-700',
     },
     {
       num: '04',
       title: 'Shame-Free Partner Alignment',
       tagline: 'Word-for-Word Scripts & Pacing',
       desc: 'Shift intimacy from a solo performance test into a relaxed, shared experience with low-stakes communication frameworks.',
-      icon: 'diversity_1'
+      icon: 'diversity_1',
+      color: 'from-rose-50 to-pink-50',
+      iconBg: 'bg-rose-100',
+      iconColor: 'text-rose-700',
     }
   ];
 
   return (
-    <section id="the-method" className="py-12 md:py-16 space-y-10 border-t border-[#173404]/10">
-      {/* Section Header */}
-      <div className="text-center max-w-3xl mx-auto space-y-3">
-        <span className="text-xs font-mono-caps text-[#3e6a00] bg-[#b7f473]/30 px-3.5 py-1 rounded-full">
-          THE 4-PILLAR METHODOLOGY
-        </span>
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-[#081d00] tracking-tight">
+    <section id="the-method" className="py-16 md:py-20 space-y-12 relative">
+      <div className="section-divider mb-12" />
+
+      {/* Header */}
+      <div className="text-center max-w-3xl mx-auto space-y-4 reveal-slide-up">
+        <h2 className="font-display text-3xl md:text-[2.6rem] font-bold text-[#081d00] tracking-tight">
           A Complete, 4-Pillar System For Lasting Control
         </h2>
         <p className="font-body text-sm md:text-base text-[#43483e] leading-relaxed">
@@ -60,55 +72,67 @@ export const ArchitectureOfClarity: React.FC<ArchitectureProps> = ({ onOpenCheck
         </p>
       </div>
 
-      {/* 4 Pillars Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {pillars.map((pillar) => (
+      {/* 4 Pillars */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {pillars.map((pillar, i) => (
           <div
             key={pillar.num}
-            className="bg-white p-8 rounded-2xl border border-[#173404]/10 shadow-sm space-y-4 hover:border-[#173404]/30 transition-all duration-300 relative overflow-hidden group"
+            className="reveal-scale premium-card p-8 overflow-hidden relative group"
+            style={{ animationDelay: `${i * 0.08}s` }}
           >
-            <div className="flex items-center justify-between border-b border-[#173404]/10 pb-4">
-              <span className="w-10 h-10 rounded-xl bg-[#173404] text-white font-mono font-bold text-sm flex items-center justify-center">
-                {pillar.num}
-              </span>
-              <span className="material-symbols-outlined text-[#3e6a00] text-2xl group-hover:scale-110 transition-transform">
-                {pillar.icon}
-              </span>
-            </div>
+            {/* Decorative background gradient */}
+            <div className={`absolute inset-0 bg-gradient-to-br ${pillar.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[20px]`} />
 
-            <div className="space-y-1">
-              <span className="font-mono-caps text-[11px] text-[#3e6a00] block font-bold">
-                {pillar.tagline}
-              </span>
-              <h3 className="font-display text-2xl font-bold text-[#081d00]">
-                {pillar.title}
-              </h3>
-            </div>
+            <div className="relative z-10 space-y-4">
+              {/* Number + icon row */}
+              <div className="flex items-center justify-between pb-4 border-b border-[#173404]/8">
+                <span className="w-10 h-10 rounded-xl bg-[#173404] text-white font-mono font-bold text-sm flex items-center justify-center">
+                  {pillar.num}
+                </span>
+                <div className={`w-11 h-11 rounded-xl ${pillar.iconBg} ${pillar.iconColor} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                  <span className="material-symbols-outlined text-2xl">{pillar.icon}</span>
+                </div>
+              </div>
 
-            <p className="font-body text-xs md:text-sm text-[#43483e] leading-relaxed">
-              {pillar.desc}
-            </p>
+              {/* Text */}
+              <div>
+                <span className="font-mono-caps text-[10px] text-[#3e6a00] font-bold block mb-1">
+                  {pillar.tagline}
+                </span>
+                <h3 className="font-display text-xl font-bold text-[#081d00] mb-2">
+                  {pillar.title}
+                </h3>
+                <p className="font-body text-sm text-[#43483e] leading-relaxed">
+                  {pillar.desc}
+                </p>
+              </div>
+            </div>
           </div>
         ))}
       </div>
 
-      {/* Mid-Page Call to Action Banner */}
-      <div className="bg-[#f0ebe3] p-8 md:p-10 rounded-3xl border border-[#173404]/15 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs">
-        <div className="space-y-1 text-center md:text-left">
-          <h3 className="font-display text-xl md:text-2xl font-bold text-[#081d00]">
+      {/* Mid-page CTA banner */}
+      <div className="reveal-scale dark-card p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+        {/* Glow accent */}
+        <div className="absolute -right-24 -top-24 w-64 h-64 bg-[#b7f473]/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -left-12 -bottom-12 w-48 h-48 bg-[#b7f473]/8 rounded-full blur-2xl pointer-events-none" />
+
+        <div className="space-y-2 text-center md:text-left relative z-10">
+          <h3 className="font-display text-xl md:text-2xl font-bold text-white">
             Ready to retrain your nervous system and regain complete bedroom confidence?
           </h3>
-          <p className="font-body text-xs md:text-sm text-[#52574c]">
+          <p className="font-body text-sm text-white/70">
             Get immediate access to all Assets + 4 Free Bonuses for $20 (Full Value $197).
           </p>
         </div>
 
         <button
           onClick={handleClick}
-          className="bg-[#173404] text-white font-mono-caps text-xs px-8 py-4 rounded-full hover:bg-[#081d00] transition-colors shadow-sm shrink-0 cursor-pointer flex items-center gap-2 font-bold"
+          className="btn-accent shrink-0 text-sm py-4 px-8 relative z-10"
         >
+          <span className="material-symbols-outlined text-[#081d00] text-lg">lock_open</span>
           <span>{isMemberVerified ? 'Access Unlocked 4-Pillar System' : 'Get Started Now — $20 (Worth $197)'}</span>
-          <span className="material-symbols-outlined text-sm">arrow_forward</span>
+          <span className="material-symbols-outlined text-lg">arrow_forward</span>
         </button>
       </div>
     </section>

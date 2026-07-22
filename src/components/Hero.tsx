@@ -1,5 +1,5 @@
 import React from 'react';
-import heroBundleImg from '../assets/images/composure_hero_bundle_1784675960820.jpg';
+import heroBundleImg from '../assets/images/lt.png';
 
 interface HeroProps {
   onOpenCheckout: () => void;
@@ -15,146 +15,190 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckout, isMemberVerified = f
       onOpenCheckout();
     }
   };
+
   return (
-    <section className="pt-6 pb-10 md:py-12 space-y-8">
-      {/* Top Rating Pill */}
-      <div className="flex items-center justify-center sm:justify-start gap-2.5 bg-[#b7f473]/30 border border-[#173404]/15 px-4 py-1.5 rounded-full w-fit mx-auto sm:mx-0">
-        <div className="flex text-amber-500 text-xs">
-          {"★".repeat(5)}
-        </div>
-        <span className="font-mono-caps text-xs text-[#081d00] font-bold">
-          4.9 / 5 Rating
-        </span>
-        <span className="text-xs text-[#43483e] font-body hidden sm:inline">
-          • 12,400+ Verified Men Trained
-        </span>
-      </div>
+    <section className="hero-bg pt-8 pb-16 md:py-16 relative overflow-hidden">
+      {/* Subtle decorative orbs */}
+      <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-[#b7f473]/8 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[300px] rounded-full bg-[#173404]/4 blur-3xl pointer-events-none" />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-        {/* Left Column: Direct, High-Converting Hero Messaging */}
-        <div className="lg:col-span-7 space-y-5 text-center sm:text-left">
-          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#081d00] tracking-tight leading-[1.1]">
-            Master Pre-Ejaculation Control & Build Lasting Stamina.
-          </h1>
-
-          <p className="font-body text-base md:text-lg text-[#333a2e] max-w-xl leading-relaxed">
-            <strong className="text-[#081d00]">Overcome premature ejaculation naturally.</strong> No numbing sprays, pills, or awkward tricks. Retrain your autonomic nervous system with our proven neuromuscular pelvic & arousal control framework.
-          </p>
-
-          {/* Streamlined Key Highlights */}
-          <div className="flex flex-wrap gap-x-6 gap-y-2 pt-1 text-left justify-center sm:justify-start font-body text-xs md:text-sm text-[#081d00]">
-            <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-[#3e6a00] text-base shrink-0">check_circle</span>
-              <span>Arousal Scale Regulation</span>
+      <div className="relative space-y-8">
+        {/* Social proof pill */}
+        <div className="flex justify-center sm:justify-start">
+          <div className="flex items-center gap-2.5 glass-panel-mint px-4 py-2 rounded-full shadow-sm">
+            <div className="flex text-amber-400 text-sm gap-0.5">
+              {'★'.repeat(5)}
             </div>
-            <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-[#3e6a00] text-base shrink-0">check_circle</span>
-              <span>In-Bed 5-Step Protocol</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-[#3e6a00] text-base shrink-0">check_circle</span>
-              <span>Partner Script Playbook</span>
-            </div>
+            <span className="font-mono-caps text-[11px] text-[#081d00] font-bold">
+              4.9 / 5 Rating
+            </span>
+            <span className="hidden sm:block text-[11px] font-body text-[#43483e]">
+              • 12,400+ Verified Men Trained
+            </span>
           </div>
+        </div>
 
-          {/* Primary CTA Block */}
-          <div className="pt-3 space-y-3">
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-              <button
-                onClick={handlePrimaryClick}
-                className="bg-[#173404] text-white font-display text-base md:text-lg font-bold px-8 py-4 rounded-2xl hover:bg-[#081d00] transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer flex items-center justify-center gap-2.5 group"
-              >
-                <span>{isMemberVerified ? 'Access Member Curriculum' : 'Get Instant Access — $20'}</span>
-                <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">
-                  arrow_forward
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* ── LEFT: Headline & CTA ───────────────────── */}
+          <div className="lg:col-span-7 space-y-5 text-center sm:text-left">
+            {/* Headline */}
+            <div className="space-y-2">
+              <h1 className="font-display text-[2.1rem] sm:text-[2.6rem] md:text-[3.0rem] lg:text-[3.0rem] font-bold text-[#081d00] tracking-tight leading-[1.1]">
+                Master Pre-Ejaculation Control &amp; Build Lasting Stamina.
+              </h1>
+              <p className="font-body text-base md:text-lg text-[#333a2e] max-w-xl leading-relaxed mx-auto sm:mx-0">
+                <strong className="text-[#081d00]">Overcome premature ejaculation naturally.</strong>{' '}
+                No numbing sprays, pills, or awkward tricks. Retrain your autonomic nervous system with our proven neuromuscular pelvic &amp; arousal control framework.
+              </p>
+            </div>
+
+            {/* Feature pills */}
+            <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
+              {[
+                { icon: 'trending_up', label: 'Arousal Scale Regulation' },
+                { icon: 'checklist', label: 'In-Bed 5-Step Protocol' },
+                { icon: 'psychology', label: 'Partner Script Playbook' },
+              ].map((f) => (
+                <span key={f.label} className="inline-flex items-center gap-1.5 bg-white border border-[#173404]/12 px-3 py-1.5 rounded-full font-body text-xs text-[#081d00] shadow-sm">
+                  <span className="material-symbols-outlined text-[#3e6a00] text-sm">{f.icon}</span>
+                  {f.label}
                 </span>
-              </button>
+              ))}
+            </div>
 
-              <div className="flex flex-col justify-center text-center sm:text-left">
-                <div className="flex items-center justify-center sm:justify-start gap-2">
+            {/* CTA block */}
+            <div className="pt-1 space-y-4">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                {/* Primary button */}
+                <button
+                  id="hero-cta-btn"
+                  onClick={handlePrimaryClick}
+                  className="btn-primary text-base md:text-lg py-4 px-8 group"
+                >
+                  <span className="material-symbols-outlined text-[#b7f473] text-xl">lock_open</span>
+                  <span>{isMemberVerified ? 'Access Member Curriculum' : 'Get Instant Access — $20'}</span>
+                  <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </button>
+
+                {/* Price badge */}
+                <div className="flex flex-col items-center sm:items-start">
                   {isMemberVerified ? (
-                    <span className="bg-[#b7f473] text-[#081d00] font-mono-caps font-bold text-xs px-3 py-1 rounded-full flex items-center gap-1.5 shadow-xs">
-                      <span className="w-2 h-2 rounded-full bg-[#081d00] animate-pulse"></span>
-                      <span>LIFETIME MEMBER UNLOCKED</span>
+                    <span className="badge-lime flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#3e6a00] animate-pulse" />
+                      Lifetime Member Unlocked
                     </span>
                   ) : (
-                    <>
+                    <div className="flex items-center gap-2">
                       <span className="line-through text-gray-400 font-mono text-sm">$197</span>
-                      <span className="bg-[#b7f473]/50 text-[#081d00] font-mono-caps font-bold text-xs px-2.5 py-0.5 rounded-full">
-                        SPECIAL $20 OFFER
-                      </span>
-                    </>
+                      <span className="badge-lime">Save $177 Today</span>
+                    </div>
                   )}
+                  <span className="text-[11px] font-mono text-[#74796d] mt-1">
+                    {isMemberVerified ? '5 Core Modules & 4 Bonuses Active' : 'One-time · Lifetime Access · Instant Delivery'}
+                  </span>
                 </div>
-                <span className="text-[11px] font-mono text-[#74796d] mt-0.5">
-                  {isMemberVerified ? '5 Core Modules & 4 Bonuses Active' : 'Save $177 Today • Lifetime Access'}
+              </div>
+
+              {/* Trust row */}
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 pt-1">
+                <span className="flex items-center gap-1.5 font-mono text-[11px] text-[#52574c]">
+                  <span className="material-symbols-outlined text-sm text-[#3e6a00]">verified_user</span>
+                  30-Day Money-Back Guarantee
+                </span>
+                <span className="text-[#ccc]">|</span>
+                <span className="flex items-center gap-1.5 font-mono text-[11px] text-[#52574c]">
+                  <span className="material-symbols-outlined text-sm text-[#3e6a00]">lock</span>
+                  Discreet Billing ("CM DIGITAL")
+                </span>
+                <span className="text-[#ccc]">|</span>
+                <span className="flex items-center gap-1.5 font-mono text-[11px] text-[#52574c]">
+                  <span className="material-symbols-outlined text-sm text-[#3e6a00]">bolt</span>
+                  Instant Digital Delivery
                 </span>
               </div>
-            </div>
-
-            {/* Trust Badges */}
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 pt-1 font-mono text-[11px] text-[#52574c]">
-              <span className="flex items-center gap-1">
-                <span className="material-symbols-outlined text-sm text-[#3e6a00]">verified_user</span>
-                30-Day Money-Back Guarantee
-              </span>
-              <span>•</span>
-              <span className="flex items-center gap-1">
-                <span className="material-symbols-outlined text-sm text-[#3e6a00]">lock</span>
-                Discreet Billing ("CM DIGITAL")
-              </span>
             </div>
           </div>
-        </div>
 
-        {/* Right Column: Sleek Product Bundle Mockup Image & Floating Card */}
-        <div className="lg:col-span-5 relative">
-          <div className="bg-white p-3 rounded-3xl border border-[#173404]/15 shadow-xl space-y-4 overflow-hidden relative group">
-            {/* High Quality Rendered Bundle Image */}
-            <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-[#173404]">
-              <img
-                src={heroBundleImg}
-                alt="The Composure Method Digital Bundle Mockup"
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#081d00]/80 via-transparent to-transparent"></div>
-              
-              <div className="absolute bottom-3 left-3 right-3 text-white flex items-center justify-between font-mono-caps text-xs">
-                <span className="bg-[#173404]/80 backdrop-blur-md px-3 py-1 rounded-full text-[#b7f473] font-bold border border-white/10">
-                  5 MODULES + 4 BONUSES
-                </span>
-                <span className="bg-[#b7f473] text-[#081d00] px-3 py-1 rounded-full font-bold">
-                  $20 USD
-                </span>
+          {/* ── RIGHT: Product mockup card ─────────────── */}
+          <div className="lg:col-span-5 relative w-full max-w-md mx-auto lg:max-w-none">
+            {/* Glow behind card */}
+            <div className="absolute inset-0 -m-6 bg-[#b7f473]/15 rounded-[40px] blur-2xl pointer-events-none animate-pulse-glow" />
+
+            <div className="relative bg-white rounded-3xl border border-[#173404]/10 shadow-xl overflow-hidden group">
+              {/* Image */}
+              <div className="relative aspect-[4/3] overflow-hidden bg-[#173404]">
+                <img
+                  src={heroBundleImg}
+                  alt="The Composure Method Digital Bundle"
+                  fetchPriority="high"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                {/* Overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#081d00]/75 via-[#081d00]/10 to-transparent" />
+
+                {/* Floating badges on image */}
+                <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+                  <span className="bg-[#b7f473] text-[#081d00] px-3 py-1.5 rounded-full font-display font-bold text-sm shadow-lg">
+                    $20 USD
+                  </span>
+                </div>
+
+                {/* Verified members badge – top right */}
+                <div className="absolute top-4 right-4 glass-panel px-2.5 py-1.5 rounded-xl shadow-sm border-0">
+                  <div className="flex items-center gap-1.5">
+                    <div className="flex text-amber-400 text-[10px]">{'★'.repeat(5)}</div>
+                    <span className="font-mono text-[10px] text-[#173404] font-bold">12,400+ men</span>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            {/* Bundle Caption & Action */}
-            <div className="p-2 space-y-3">
-              <div className="flex items-start justify-between">
+              {/* Card footer */}
+              <div className="p-5 space-y-4">
                 <div>
                   <h3 className="font-display text-lg font-bold text-[#081d00]">
                     The Complete Composure Bundle
                   </h3>
-                  <p className="font-body text-xs text-[#43483e]">
-                    Instant access across mobile, tablet, & desktop.
+                  <p className="font-body text-xs text-[#43483e] mt-0.5">
+                    Instant access across mobile, tablet, &amp; desktop.
                   </p>
                 </div>
-              </div>
 
-              <button
-                onClick={handlePrimaryClick}
-                className="w-full bg-[#173404] text-white hover:bg-[#081d00] font-mono-caps text-xs font-bold py-3 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <span>{isMemberVerified ? 'Access Unlocked Curriculum' : 'Claim Complete Bundle for $20 (Worth $197)'}</span>
-                <span className="material-symbols-outlined text-sm">arrow_forward</span>
-              </button>
+                {/* Mini feature list */}
+                <div className="grid grid-cols-2 gap-1.5">
+                  {['5-Module Master Guide', 'In-Bed Protocol Sheet', 'Partner Script Playbook'].map((item) => (
+                    <div key={item} className="flex items-center gap-1.5">
+                      <span className="material-symbols-outlined text-[#3e6a00] text-sm shrink-0">check_circle</span>
+                      <span className="font-body text-[11px] text-[#43483e] leading-tight">{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  onClick={handlePrimaryClick}
+                  className="w-full btn-primary text-sm py-3.5 rounded-xl"
+                >
+                  <span>{isMemberVerified ? 'Access Unlocked Curriculum' : 'Claim Complete Bundle for $20 (Worth $197)'}</span>
+                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                </button>
+              </div>
             </div>
           </div>
+        </div>
+
+        {/* Stats row */}
+        <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-2">
+          {[
+            { stat: '12,400+', label: 'Men Trained' },
+            { stat: '89%', label: 'Results in 30 Days' },
+            { stat: '$177', label: 'Saved Today' },
+          ].map((s) => (
+            <div key={s.stat} className="text-center premium-card p-2 sm:p-4 reveal-scale">
+              <div className="stat-number">{s.stat}</div>
+              <p className="font-mono text-[9px] sm:text-[11px] text-[#74796d] mt-1 uppercase tracking-wide leading-tight">{s.label}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 };
-
