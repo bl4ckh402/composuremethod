@@ -97,6 +97,7 @@ export default function App() {
         isMemberVerified={isMemberVerified}
       />
 
+
       <main className="flex-grow max-w-7xl w-full mx-auto px-5 md:px-12">
         {currentView === 'home' && (
           <div className="space-y-4 animate-fadeIn">
