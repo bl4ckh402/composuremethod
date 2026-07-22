@@ -2,7 +2,7 @@ import { validateEvent, WebhookVerificationError } from '@polar-sh/sdk/webhooks'
 import {
   grantOrderEntitlement,
   revokeOrderEntitlement,
-} from '../../src/lib/entitlementsStore';
+} from '../../src/lib/entitlementsStore.js';
 
 export default async (req: any, res: any) => {
   if (req.method !== 'POST') {

@@ -1,4 +1,4 @@
-import { getGeminiClient } from '../src/lib/gemini';
+import { getGeminiClient } from '../src/lib/gemini.js';
 
 export default async (req: any, res: any) => {
   if (req.method !== 'POST') {
