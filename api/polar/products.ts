@@ -1,4 +1,4 @@
-import { getPolarClient } from '../src/lib/polar';
+import { getPolarClient } from '../../src/lib/polar';
 
 export default async (req: any, res: any) => {
   if (req.method !== 'GET') {
