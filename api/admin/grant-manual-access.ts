@@ -1,4 +1,4 @@
-import { grantOrderEntitlement } from '../src/lib/entitlementsStore';
+import { grantOrderEntitlement } from '../_libs/entitlementsStore';
 
 export default async (req: any, res: any) => {
   if (req.method !== 'POST') {

@@ -1,4 +1,4 @@
-import { getAllEntitlements } from '../src/lib/entitlementsStore';
+import { getAllEntitlements } from '../_libs/entitlementsStore';
 
 export default async (_req: any, res: any) => {
   const all = await getAllEntitlements();
