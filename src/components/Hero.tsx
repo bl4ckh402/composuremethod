@@ -1,5 +1,5 @@
 import React from 'react';
-import heroBundleImg from '../assets/images/lt.png';
+import { IMAGES } from '../data/initialData';
 
 interface HeroProps {
   onOpenCheckout: () => void;
@@ -128,7 +128,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckout, isMemberVerified = f
               {/* Image */}
               <div className="relative aspect-[4/3] overflow-hidden bg-[#173404]">
                 <img
-                  src={heroBundleImg}
+                  src={IMAGES.guideBookCover}
                   alt="The Composure Method Digital Bundle"
                   fetchPriority="high"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
@@ -156,10 +156,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckout, isMemberVerified = f
               <div className="p-5 space-y-4">
                 <div>
                   <h3 className="font-display text-lg font-bold text-[#081d00]">
-                    The Complete Composure Bundle
+                    Composure — The Practical Confidence Guide
                   </h3>
                   <p className="font-body text-xs text-[#43483e] mt-0.5">
-                    Instant access across mobile, tablet, &amp; desktop.
+                    Six modules, exercises, worksheets & bonus resources. Instant access on any device.
                   </p>
                 </div>
 

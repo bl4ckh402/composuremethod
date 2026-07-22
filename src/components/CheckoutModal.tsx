@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { IMAGES } from '../data/initialData';
 import { ViewMode } from '../types';
 import { trackAddToCart, trackLead, trackPurchase } from '../lib/redditPixel';
 
@@ -9,16 +8,28 @@ interface CheckoutModalProps {
   isModalOverlay?: boolean;
 }
 
+interface PolarProductMedia {
+  id: string;
+  name: string;
+  publicUrl: string;
+}
+
 interface PolarProduct {
   id: string;
   name: string;
   description?: string;
   prices?: Array<{ priceAmount: number; priceCurrency: string }>;
+  medias?: PolarProductMedia[];
+  benefits?: Array<{ id: string; type: string; description: string }>;
 }
 
-// Shared close button used by the modal shell. Rendered OUTSIDE the
-// scrollable content area and pinned with a real z-index so it can
-// never scroll out of view or get buried behind other layers.
+function getShortDescription(product: PolarProduct | null): string {
+  if (!product?.description) return 'Digital educational guide';
+  const text = product.description.replace(/\*\*/g, '').replace(/\n/g, ' ');
+  if (text.length <= 90) return text;
+  return text.slice(0, 87).trim() + '...';
+}
+
 const CloseButton: React.FC<{ onClose: () => void }> = ({ onClose }) => (
   <button
     onClick={onClose}
@@ -80,9 +91,12 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
     window.location.href = checkoutUrl;
   };
 
-  const priceFormatted = polarProduct?.prices?.[0]
-    ? `$${(polarProduct.prices[0].priceAmount / 100).toFixed(2)} USD`
+  const priceFormatted = polarProduct?.prices?.find((p) => p.priceCurrency === 'usd')
+    ? `$${(polarProduct.prices.find((p) => p.priceCurrency === 'usd')!.priceAmount / 100).toFixed(2)} USD`
     : '$20.00 USD';
+
+  const productDescription = getShortDescription(polarProduct);
+  const productImage = polarProduct?.medias?.[0]?.publicUrl || '';
 
   // ─── SUCCESS STATE ─────────────────────────────────────
   const successContent = (
@@ -100,7 +114,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
       <div className="premium-card p-6 mb-8 text-left max-w-md mx-auto space-y-3 font-mono text-xs">
         <div className="flex justify-between text-[#74796d]">
           <span>PRODUCT</span>
-          <span className="text-[#081d00] font-bold">The Composure Method Bundle</span>
+          <span className="text-[#081d00] font-bold">{polarProduct?.name || 'The Composure Method'}</span>
         </div>
         <div className="flex justify-between text-[#74796d]">
           <span>CREDIT STATEMENT</span>
@@ -108,7 +122,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
         </div>
         <div className="flex justify-between border-t border-[#173404]/10 pt-3 font-bold text-[#081d00] text-sm">
           <span>TOTAL BILLED</span>
-          <span>$20.00 USD</span>
+          <span>{priceFormatted}</span>
         </div>
       </div>
       <button
@@ -138,25 +152,25 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
         {/* ── LEFT: Order summary ───────────────── */}
         <div className="order-2 md:order-1 md:col-span-5 flex flex-col gap-4">
           <div className="premium-card px-4 py-2 sm:p-5 flex flex-col gap-4">
-            <div className="flex items-center justify-between">
-              <span className="badge-lime">SAVE $177 TODAY</span>
-              <span className="font-mono text-[8px] text-[#74796d]">Worth $197</span>
-            </div>
-
             {/* Product row */}
             <div className="flex gap-3 items-start pb-3 border-b border-[#173404]/8">
-              <img
-                src={IMAGES.guideBookCover}
-                alt="The Composure Method"
-                className="w-14 h-20 sm:w-16 sm:h-24 object-cover rounded-lg shadow-md border border-[#173404]/10 shrink-0"
-              />
+              {productImage ? (
+                <img
+                  src={productImage}
+                  alt={polarProduct?.name || 'Product'}
+                  className="w-14 h-20 sm:w-16 sm:h-24 object-cover rounded-lg shadow-md border border-[#173404]/10 shrink-0"
+                />
+              ) : (
+                <div className="w-14 h-20 sm:w-16 sm:h-24 bg-[#f4f7f2] border border-[#173404]/10 rounded-lg flex items-center justify-center shrink-0">
+                  <span className="material-symbols-outlined text-[#173404] text-2xl">menu_book</span>
+                </div>
+              )}
               <div className="flex flex-col gap-0.5">
                 <h3 className="font-display text-sm sm:text-base font-bold text-[#081d00] leading-snug">
-                  {polarProduct?.name || 'The Composure Method System'}
+                  {polarProduct?.name || 'The Composure Method'}
                 </h3>
-                <p className="font-body text-xs text-[#43483e]">5 Core Modules + 4 Free Bonuses</p>
+                <p className="font-body text-xs text-[#43483e]">{productDescription}</p>
                 <div className="flex items-center gap-2 mt-1.5">
-                  <span className="line-through text-gray-400 font-mono text-xs">$197.00</span>
                   <span className="font-display text-lg sm:text-xl font-bold text-[#173404]">{priceFormatted}</span>
                 </div>
               </div>
@@ -167,11 +181,11 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
               {[
                 ['check_circle', 'Instant access across all devices, all free bonus playbooks & trackers'],
                 ['shield', '30-Day 100% money-back risk-free guarantee'],].map(([icon, text]) => (
-                  <li key={text} className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-[#3e6a00] text-base shrink-0">{icon}</span>
-                    <span dangerouslySetInnerHTML={{ __html: text }} />
-                  </li>
-                ))}
+                <li key={text} className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[#3e6a00] text-base shrink-0">{icon}</span>
+                  <span dangerouslySetInnerHTML={{ __html: text }} />
+                </li>
+              ))}
             </ul>
           </div>
 
