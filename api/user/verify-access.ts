@@ -1,4 +1,4 @@
-import { checkAccessByEmail } from '../_libs/entitlementsStore';
+import { checkAccessByEmail } from '../src/lib/entitlementsStore';
 
 export default async (req: any, res: any) => {
   if (req.method !== 'POST') {
