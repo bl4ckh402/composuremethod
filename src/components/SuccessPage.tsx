@@ -17,7 +17,7 @@ export const SuccessPage: React.FC<SuccessPageProps> = ({ userEmail, onNavigate 
 
       <div className="inline-flex items-center gap-2 font-mono-caps text-xs text-[#3e6a00] bg-[#173404]/5 px-3.5 py-1.5 rounded-full border border-[#173404]/10 mb-4">
         <span className="w-2 h-2 rounded-full bg-[#3e6a00] animate-pulse"></span>
-        <span>POLAR.SH ORDER CONFIRMED & VERIFIED</span>
+        <span>ORDER CONFIRMED & VERIFIED</span>
       </div>
 
       <h1 className="font-display text-3xl sm:text-4xl font-bold text-[#081d00] mb-3 tracking-tight">
@@ -25,7 +25,7 @@ export const SuccessPage: React.FC<SuccessPageProps> = ({ userEmail, onNavigate 
       </h1>
 
       <p className="font-body text-base text-[#333a2e] mb-8 max-w-lg mx-auto leading-relaxed">
-        Your payment has been successfully processed by Polar.sh. We have dispatched your digital access token, 5 core modules, and 4 bonus playbooks directly to <strong className="text-[#081d00] underline">{email}</strong>.
+        Your payment has been successfully processed. We have dispatched your digital access token, core modules, and 4 bonus playbooks directly to <strong className="text-[#081d00] underline">{email}</strong>.
       </p>
 
       {/* Digital Order Receipt Card */}

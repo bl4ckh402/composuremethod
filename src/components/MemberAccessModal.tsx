@@ -49,14 +49,14 @@ export const MemberAccessModal: React.FC<MemberAccessModalProps> = ({
       } else {
         setMessage({
           type: 'error',
-          text: `No active Polar order found for ${email.trim()}. Please ensure you completed checkout with this email address, or place a new order below.`,
+          text: `No active order found for ${email.trim()}. Please ensure you completed checkout with this email address, or place a new order below.`,
         });
       }
     } catch (err) {
       console.error('Error verifying access:', err);
       setMessage({
         type: 'error',
-        text: 'Failed to verify order status with Polar database. Please try again.',
+        text: 'Failed to verify order status with database. Please try again.',
       });
     } finally {
       setLoading(false);
@@ -78,10 +78,10 @@ export const MemberAccessModal: React.FC<MemberAccessModalProps> = ({
             MEMBER ACCESS VERIFICATION
           </span>
           <h3 className="font-display text-2xl font-bold text-[#081d00]">
-            Check Digital Access Status
+            Check Access Status
           </h3>
           <p className="font-body text-xs text-[#43483e] leading-relaxed">
-            Enter the email address you used during Polar checkout to verify your paid order status and instantly restore full digital access.
+            Enter the email address you used during checkout to verify your paid order status and instantly restore full digital access.
           </p>
         </div>
 
@@ -120,7 +120,7 @@ export const MemberAccessModal: React.FC<MemberAccessModalProps> = ({
             className="w-full bg-[#173404] text-white font-mono-caps text-xs py-3.5 rounded-full hover:bg-[#081d00] transition-all duration-200 shadow-sm cursor-pointer flex items-center justify-center gap-2"
           >
             {loading ? (
-              <span>VERIFYING POLAR ORDER...</span>
+              <span>VERIFYING ORDER...</span>
             ) : (
               <>
                 <span className="material-symbols-outlined text-sm">verified</span>
@@ -135,7 +135,7 @@ export const MemberAccessModal: React.FC<MemberAccessModalProps> = ({
             Haven't purchased yet? <button onClick={onClose} className="text-[#173404] font-bold underline cursor-pointer">Get access for $20</button>
           </p>
           <p className="font-mono text-[10px] text-[#a0a599]">
-            Discreet Polar.sh verification • Instant delivery
+            Discreet verification • Instant delivery
           </p>
         </div>
       </div>

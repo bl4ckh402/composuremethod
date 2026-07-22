@@ -76,7 +76,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
     trackLead(email);
 
     const productId = polarProduct?.id ? encodeURIComponent(polarProduct.id) : '';
-    const checkoutUrl = `/checkout?${productId ? `products=${productId}&` : ''}email=${encodeURIComponent(email.trim())}`;
+    const checkoutUrl = `/api/checkout?${productId ? `products=${productId}&` : ''}email=${encodeURIComponent(email.trim())}`;
     
     // Redirect to backend Polar checkout endpoint
     window.location.href = checkoutUrl;
@@ -92,16 +92,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
         <h2 className="font-display text-3xl font-bold text-[#081d00] mb-2">
           Order Verified — Welcome to Composure
         </h2>
-
-        <p className="font-body text-sm md:text-base text-[#43483e] mb-6 max-w-md mx-auto">
-          Your payment was processed securely via Polar.sh. Digital access credentials and instructions have been prepared for <strong className="text-[#081d00]">{email || 'your account'}</strong>.
-        </p>
-
         <div className="bg-[#fcf9f8] border border-[#173404]/10 rounded-2xl p-6 mb-8 text-left max-w-md mx-auto space-y-3 shadow-xs font-mono text-xs">
-          <div className="flex justify-between text-[#74796d]">
-            <span>PAYMENT PROCESSOR</span>
-            <span className="text-[#081d00] font-bold">POLAR.SH</span>
-          </div>
           <div className="flex justify-between text-[#74796d]">
             <span>PRODUCT</span>
             <span className="text-[#081d00] font-bold">The Composure Method Bundle</span>
@@ -142,12 +133,6 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
       {/* Modal Header */}
       {isModalOverlay && onClose && (
         <div className="flex justify-between items-center mb-6 pb-4 border-b border-[#173404]/10">
-          <div className="flex items-center gap-2">
-            <span className="w-7 h-7 rounded-lg bg-[#173404] text-[#b7f473] font-display font-bold text-sm flex items-center justify-center">
-              P
-            </span>
-            <span className="font-display font-bold text-lg text-[#081d00]">Polar Checkout Portal</span>
-          </div>
           <button
             onClick={onClose}
             className="p-2 text-gray-500 hover:text-black rounded-full hover:bg-gray-100 transition-colors cursor-pointer"
@@ -163,9 +148,6 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
         <div className="md:col-span-5 flex flex-col gap-5">
           <div className="bg-white p-6 border border-[#173404]/10 rounded-2xl flex flex-col gap-5 shadow-xs">
             <div className="flex items-center justify-between">
-              <span className="font-mono-caps text-[10px] bg-[#173404] text-[#b7f473] font-bold px-2.5 py-1 rounded-full uppercase">
-                POLAR.SH SECURE BACKEND
-              </span>
               <span className="bg-[#b7f473]/40 text-[#081d00] font-mono-caps text-[10px] font-bold px-2 py-0.5 rounded-full">
                 SAVE $177 TODAY
               </span>
@@ -196,7 +178,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
               </li>
               <li className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-[#3e6a00] text-base">check_circle</span>
-                <span>Includes all 4 free bonus playbooks & trackers</span>
+                <span>Includes all free bonus playbooks & trackers</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-[#3e6a00] text-base">check_circle</span>
@@ -208,11 +190,6 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
               </li>
             </ul>
           </div>
-
-          <div className="flex items-center gap-2 text-[#52574c] font-mono-caps text-[11px] justify-center tracking-wider">
-            <span className="material-symbols-outlined text-sm text-[#3e6a00]">shield</span>
-            <span>POWERED BY POLAR.SH MERCHANT OF RECORD</span>
-          </div>
         </div>
 
         {/* Right Column: Instant Access Form */}
@@ -220,10 +197,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
           <div className="bg-white p-6 md:p-8 border border-[#173404]/10 rounded-2xl shadow-xs space-y-6">
             <div>
               <h3 className="font-display text-xl font-bold text-[#081d00] mb-1">
-                Complete Your Order via Polar
+                Complete Your Order
               </h3>
               <p className="font-body text-xs text-[#43483e]">
-                Enter your email address below to initiate a secure checkout session on Polar.sh.
+                Enter your email address below to initiate a secure checkout session
               </p>
             </div>
 
@@ -245,7 +222,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
               {polarProduct && (
                 <div className="bg-[#f4f7f2] border border-[#173404]/10 p-3.5 rounded-xl text-xs font-mono flex items-center justify-between text-[#43483e]">
                   <div>
-                    <span className="text-[10px] text-[#74796d] block uppercase">POLAR PRODUCT ID</span>
+                    <span className="text-[10px] text-[#74796d] block uppercase">PRODUCT ID</span>
                     <span className="text-[#081d00] font-bold truncate block max-w-[200px] sm:max-w-[300px]">{polarProduct.id}</span>
                   </div>
                   <span className="text-[#173404] font-bold text-sm">{priceFormatted}</span>
@@ -258,10 +235,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
                 className="w-full bg-[#173404] text-white font-display text-base font-bold py-4 px-6 rounded-xl hover:bg-[#081d00] transition-all duration-200 flex justify-center items-center gap-2 cursor-pointer shadow-md disabled:opacity-50"
               >
                 {loading ? (
-                  <span>Redirecting to Polar Checkout...</span>
+                  <span>Redirecting to Checkout...</span>
                 ) : (
                   <>
-                    <span>Proceed to Polar Checkout — {priceFormatted}</span>
+                    <span>Proceed to Checkout — {priceFormatted}</span>
                     <span className="material-symbols-outlined">arrow_forward</span>
                   </>
                 )}
@@ -269,7 +246,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
 
               <div className="pt-2 border-t border-[#173404]/10 space-y-2 text-center">
                 <p className="font-mono-caps text-[10px] text-[#74796d] uppercase">
-                  ACCEPTED PAYMENT METHODS ON POLAR
+                  ACCEPTED PAYMENT METHODS
                 </p>
                 <div className="flex items-center justify-center gap-3 font-mono text-[11px] text-[#43483e]">
                   <span>Apple Pay</span>
@@ -283,7 +260,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
                   <span>AMEX</span>
                 </div>
                 <p className="font-mono text-[10px] text-[#74796d] pt-1">
-                  256-Bit SSL Encryption • Instant Fulfillment • 30-Day Refund Policy
+                  Instant Fulfillment • 30-Day Refund Policy
                 </p>
               </div>
             </form>

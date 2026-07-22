@@ -178,8 +178,8 @@ async function startServer() {
     });
   });
 
-  // 2. Polar Checkout Endpoint: GET /checkout?products=<id>&email=<email>
-  app.get("/checkout", async (req, res) => {
+  // 2. Polar Checkout Endpoint: GET /checkout or GET /api/checkout
+  const handlePolarCheckoutRoute = async (req: express.Request, res: express.Response) => {
     let productsParam = req.query.products;
     const customerEmail = (req.query.email as string) || undefined;
     const host = req.get("host") || "localhost:3000";
@@ -228,7 +228,10 @@ async function startServer() {
         error: error.message || "Failed to create Polar checkout session",
       });
     }
-  });
+  };
+
+  app.get("/checkout", handlePolarCheckoutRoute);
+  app.get("/api/checkout", handlePolarCheckoutRoute);
 
   // 3. Helper Endpoint to list or auto-provision Polar products
   app.get("/api/polar/products", async (_req, res) => {
