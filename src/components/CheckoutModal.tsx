@@ -158,10 +158,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
                 <img
                   src={productImage}
                   alt={polarProduct?.name || 'Product'}
-                  className="w-14 h-20 sm:w-16 sm:h-24 object-cover rounded-lg shadow-md border border-[#173404]/10 shrink-0"
+                  className="w-full sm:w-32 aspect-video object-cover rounded-lg shadow-md border border-[#173404]/10 shrink-0"
                 />
               ) : (
-                <div className="w-14 h-20 sm:w-16 sm:h-24 bg-[#f4f7f2] border border-[#173404]/10 rounded-lg flex items-center justify-center shrink-0">
+                <div className="w-full sm:w-32 aspect-video bg-[#f4f7f2] border border-[#173404]/10 rounded-lg flex items-center justify-center shrink-0">
                   <span className="material-symbols-outlined text-[#173404] text-2xl">menu_book</span>
                 </div>
               )}

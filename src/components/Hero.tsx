@@ -1,5 +1,6 @@
 import React from 'react';
 import { IMAGES } from '../data/initialData';
+import lt from '../assets/images/lt.png';
 
 interface HeroProps {
   onOpenCheckout: () => void;
@@ -125,14 +126,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckout, isMemberVerified = f
             <div className="absolute inset-0 -m-6 bg-[#b7f473]/15 rounded-[40px] blur-2xl pointer-events-none animate-pulse-glow" />
 
             <div className="relative bg-white rounded-3xl border border-[#173404]/10 shadow-xl overflow-hidden group">
-              {/* Image */}
-              <div className="relative aspect-[4/3] overflow-hidden bg-[#173404]">
-                <img
-                  src={IMAGES.guideBookCover}
-                  alt="The Composure Method Digital Bundle"
-                  fetchPriority="high"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
+               {/* Image */}
+               <div className="relative aspect-video overflow-hidden bg-[#173404]">
+                 <img
+                   src={lt}
+                   alt="The Composure Method Digital Bundle"
+                   fetchPriority="high"
+                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                 />
                 {/* Overlay gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#081d00]/75 via-[#081d00]/10 to-transparent" />
 
