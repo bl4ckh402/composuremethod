@@ -71,7 +71,7 @@ async function startServer() {
           const amount = orderData.amount || orderData.total_amount;
           const currency = orderData.currency || "usd";
 
-          grantOrderEntitlement({
+          await grantOrderEntitlement({
             orderId,
             customerEmail,
             customerId,
@@ -94,7 +94,7 @@ async function startServer() {
         case "order.refunded": {
           const orderData = event.data as any;
           if (orderData.id) {
-            revokeOrderEntitlement(orderData.id);
+            await revokeOrderEntitlement(orderData.id);
             console.log(`[Polar Webhook] Revoked entitlement for order ${orderData.id}`);
           }
           break;
@@ -121,12 +121,12 @@ async function startServer() {
   app.use(express.json());
 
   // 2. User Access & Entitlements API Endpoints
-  app.post("/api/user/verify-access", (req, res) => {
+  app.post("/api/user/verify-access", async (req, res) => {
     const { email } = req.body;
     if (!email) {
       return res.status(400).json({ error: "Email is required to verify access" });
     }
-    const result = checkAccessByEmail(email);
+    const result = await checkAccessByEmail(email);
     return res.json({
       email,
       hasAccess: result.hasAccess,
@@ -134,12 +134,12 @@ async function startServer() {
     });
   });
 
-  app.get("/api/user/access-status", (req, res) => {
+  app.get("/api/user/access-status", async (req, res) => {
     const email = req.query.email as string;
     if (!email) {
       return res.status(400).json({ error: "Email query parameter required" });
     }
-    const result = checkAccessByEmail(email);
+    const result = await checkAccessByEmail(email);
     return res.json({
       email,
       hasAccess: result.hasAccess,
@@ -147,21 +147,21 @@ async function startServer() {
     });
   });
 
-  app.get("/api/admin/entitlements", (_req, res) => {
-    const all = getAllEntitlements();
+  app.get("/api/admin/entitlements", async (_req, res) => {
+    const all = await getAllEntitlements();
     return res.json({
       total: all.length,
       entitlements: all,
     });
   });
 
-  app.post("/api/admin/grant-manual-access", (req, res) => {
+  app.post("/api/admin/grant-manual-access", async (req, res) => {
     const { email, note } = req.body;
     if (!email) {
       return res.status(400).json({ error: "Email is required" });
     }
     const orderId = `manual_${Date.now()}`;
-    grantOrderEntitlement({
+    await grantOrderEntitlement({
       orderId,
       customerEmail: email,
       productId: "manual_grant",

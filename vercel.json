@@ -1,0 +1,7 @@
+{
+  "outputDirectory": "dist",
+  "rewrites": [
+    { "source": "/checkout", "destination": "/api/checkout" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
