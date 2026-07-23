@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ViewMode } from '../types';
 import { trackAddToCart, trackLead, trackPurchase } from '../lib/redditPixel';
+import { COPY } from '../lib/brand';
 
 interface CheckoutModalProps {
   onNavigate: (view: ViewMode) => void;
@@ -111,20 +112,9 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
       <h2 className="font-display text-3xl font-bold text-[#081d00] mb-3">
         Order Verified — Welcome to Composure
       </h2>
-      <div className="premium-card p-6 mb-8 text-left max-w-md mx-auto space-y-3 font-mono text-xs">
-        <div className="flex justify-between text-[#74796d]">
-          <span>PRODUCT</span>
-          <span className="text-[#081d00] font-bold">{polarProduct?.name || 'The Composure Method'}</span>
-        </div>
-        <div className="flex justify-between text-[#74796d]">
-          <span>CREDIT STATEMENT</span>
-          <span className="text-[#081d00] font-bold">CM DIGITAL</span>
-        </div>
-        <div className="flex justify-between border-t border-[#173404]/10 pt-3 font-bold text-[#081d00] text-sm">
-          <span>TOTAL BILLED</span>
-          <span>{priceFormatted}</span>
-        </div>
-      </div>
+      <p className="font-body text-sm text-[#43483e] max-w-md mx-auto mb-8">
+        Your order is confirmed. Your digital access details have been sent to your email. If you don’t see it within a few minutes, please check your spam or junk folder.
+      </p>
       <button
         onClick={() => { if (onClose) onClose(); onNavigate('home'); setTimeout(() => { const el = document.getElementById('curriculum'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }, 100); }}
         className="btn-primary py-4 px-8"
@@ -217,7 +207,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
             <form onSubmit={handleProceedToPolarCheckout} className="space-y-5">
               <div>
                 <label className="font-mono-caps text-[11px] text-[#43483e] block mb-1.5 font-bold">
-                  YOUR EMAIL FOR INSTANT DIGITAL DELIVERY
+                  {COPY.emailLabel}
                 </label>
                 <input
                   id="checkout-email-input"
@@ -225,7 +215,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
                   required
                   value={email}
                   onChange={handleEmailChange}
-                  placeholder="name@example.com"
+                  placeholder={COPY.emailPlaceholder}
                   className="input-field"
                 />
               </div>
@@ -249,12 +239,12 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
                 {loading ? (
                   <>
                     <span className="animate-spin material-symbols-outlined text-sm">autorenew</span>
-                    <span>Redirecting to Checkout...</span>
+                    <span>{COPY.loadingCopy}</span>
                   </>
                 ) : (
                   <>
                     <span className="material-symbols-outlined text-[#b7f473]">lock_open</span>
-                    <span>Proceed to Checkout — {priceFormatted}</span>
+                    <span>{COPY.ctaPrimary}</span>
                     <span className="material-symbols-outlined">arrow_forward</span>
                   </>
                 )}

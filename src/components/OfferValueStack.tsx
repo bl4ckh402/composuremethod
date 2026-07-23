@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'motion/react';
 
 interface OfferProps {
   onOpenCheckout: () => void;
@@ -26,14 +27,17 @@ export const OfferValueStack: React.FC<OfferProps> = ({ onOpenCheckout, isMember
     <section className="py-16 md:py-20 relative">
       <div className="section-divider mb-12" />
 
-      <div className="dark-card p-8 md:p-14 relative overflow-hidden max-w-4xl mx-auto space-y-10 reveal-scale">
-        {/* Glow orbs */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="dark-card p-8 md:p-14 relative overflow-hidden max-w-4xl mx-auto space-y-10"
+      >
         <div className="absolute -right-24 -top-24 w-80 h-80 bg-[#b7f473]/12 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -left-16 -bottom-16 w-60 h-60 bg-[#b7f473]/8 rounded-full blur-2xl pointer-events-none" />
 
-        {/* Header */}
         <div className="text-center space-y-3 relative z-10">
-          <span className="badge-lime">SPECIAL LIMITED OFFER · $20 TODAY (FULL RETAIL VALUE $197)</span>
           <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-white">
             Get The Complete Composure System Today
           </h2>
@@ -42,7 +46,6 @@ export const OfferValueStack: React.FC<OfferProps> = ({ onOpenCheckout, isMember
           </p>
         </div>
 
-        {/* Value stack table */}
         <div className="bg-white/8 rounded-2xl p-6 border border-white/10 backdrop-blur-sm space-y-1 relative z-10">
           <div className="flex justify-between items-center font-mono-caps text-[10px] text-[#b7f473] border-b border-white/12 pb-3 mb-3">
             <span>INCLUDED DIGITAL ASSETS</span>
@@ -70,7 +73,6 @@ export const OfferValueStack: React.FC<OfferProps> = ({ onOpenCheckout, isMember
           </div>
         </div>
 
-        {/* Pricing & CTA */}
         <div className="text-center space-y-6 relative z-10">
           <div className="space-y-1">
             <span className="font-mono-caps text-xs text-white/60 uppercase">TODAY'S SPECIAL DISCOUNT PRICE</span>
@@ -115,7 +117,7 @@ export const OfferValueStack: React.FC<OfferProps> = ({ onOpenCheckout, isMember
             </span>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import { COMPOSURE_MODULES } from '../data/guideData';
 import { ViewMode } from '../types';
 
@@ -26,26 +27,38 @@ export const FoundationGuide: React.FC<FoundationGuideProps> = ({
     <section id="curriculum" className="py-16 md:py-20 space-y-12 relative">
       <div className="section-divider mb-12" />
 
-      {/* Header */}
-      <div className="text-center max-w-3xl mx-auto space-y-4 reveal-slide-up">
-        <h2 className="font-display text-3xl md:text-[2.6rem] font-bold text-[#081d00] tracking-tight">
+      <div className="text-center max-w-3xl mx-auto space-y-4">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="font-display text-3xl md:text-[2.6rem] font-bold text-[#081d00] tracking-tight"
+        >
           What You Get Inside The Composure Method
-        </h2>
-        <p className="font-body text-sm md:text-base text-[#43483e] leading-relaxed">
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="font-body text-sm md:text-base text-[#43483e] leading-relaxed"
+        >
           5 structured digital modules, step-by-step physical protocols, and 4 free instant bonuses designed for rapid, discreet implementation.
-        </p>
+        </motion.p>
       </div>
 
-      {/* 5 Core Modules */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {COMPOSURE_MODULES.map((mod, i) => (
-          <div
+          <motion.div
             key={mod.id}
-            className="reveal-scale premium-card p-6 flex flex-col justify-between space-y-5 group"
-            style={{ animationDelay: `${i * 0.08}s` }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.5, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
+            className="premium-card p-6 flex flex-col justify-between space-y-5 group"
           >
             <div className="space-y-4">
-              {/* Header row */}
               <div className="flex items-center justify-between">
                 <span className="badge-lime text-[10px]">MODULE 0{mod.moduleNumber}</span>
                 <span className={`flex items-center gap-1 font-mono text-[11px] ${isMemberVerified ? 'text-[#3e6a00]' : 'text-[#74796d]'}`}>
@@ -56,7 +69,6 @@ export const FoundationGuide: React.FC<FoundationGuideProps> = ({
                 </span>
               </div>
 
-              {/* Title */}
               <h3 className="font-display text-lg font-bold text-[#081d00] leading-snug">
                 {mod.title}
               </h3>
@@ -64,7 +76,6 @@ export const FoundationGuide: React.FC<FoundationGuideProps> = ({
                 {mod.description}
               </p>
 
-              {/* Lesson list */}
               <div className="pt-3 border-t border-[#173404]/8 space-y-2">
                 <span className="font-mono-caps text-[10px] text-[#74796d] block uppercase tracking-wider">
                   Key Lessons:
@@ -96,11 +107,16 @@ export const FoundationGuide: React.FC<FoundationGuideProps> = ({
                 </>
               )}
             </button>
-          </div>
+          </motion.div>
         ))}
 
-        {/* Bonus Highlight Card */}
-        <div className="reveal-scale dark-card p-6 flex flex-col justify-between space-y-5 relative overflow-hidden ring-1 ring-[#b7f473]/30" style={{ animationDelay: '0.4s' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.5, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          className="dark-card p-6 flex flex-col justify-between space-y-5 relative overflow-hidden ring-1 ring-[#b7f473]/30"
+        >
           <div className="absolute -top-12 -right-12 w-40 h-40 bg-[#b7f473]/12 rounded-full blur-2xl pointer-events-none" />
           <div className="space-y-3 relative z-10">
             <span className="badge-lime text-[10px]">4 FREE BONUSES</span>
@@ -126,17 +142,29 @@ export const FoundationGuide: React.FC<FoundationGuideProps> = ({
             <span>Claim All Bonuses for $20</span>
             <span className="material-symbols-outlined text-sm">arrow_forward</span>
           </button>
-        </div>
+        </motion.div>
       </div>
 
-      {/* Bonus cards detail grid */}
       <div className="space-y-4">
-        <h3 className="font-display text-xl font-bold text-[#081d00] text-center">
+        <motion.h3
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="font-display text-xl font-bold text-[#081d00] text-center"
+        >
           Your 4 Free Bonuses — Included Instantly
-        </h3>
+        </motion.h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {bonuses.map((bonus, i) => (
-            <div key={bonus.num} className="reveal-scale premium-card p-5 space-y-3 text-center group hover:bg-gradient-to-b hover:from-white hover:to-[#f6fef0]" style={{ animationDelay: `${i * 0.08}s` }}>
+            <motion.div
+              key={bonus.num}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.5, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
+              className="premium-card p-5 space-y-3 text-center group hover:bg-gradient-to-b hover:from-white hover:to-[#f6fef0]"
+            >
               <div className="w-12 h-12 rounded-2xl bg-[#b7f473]/20 border border-[#b7f473]/40 flex items-center justify-center mx-auto group-hover:bg-[#b7f473]/40 transition-colors">
                 <span className="material-symbols-outlined text-[#3e6a00] text-2xl">{bonus.icon}</span>
               </div>
@@ -146,7 +174,7 @@ export const FoundationGuide: React.FC<FoundationGuideProps> = ({
                 <p className="font-body text-xs text-[#43483e] mt-1 leading-relaxed">{bonus.desc}</p>
               </div>
               <span className="inline-block font-mono text-xs text-[#74796d] line-through">{bonus.value} Value</span>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
