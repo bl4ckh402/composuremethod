@@ -14,6 +14,7 @@ import { StickyCtaBar } from './components/StickyCtaBar';
 import { CheckoutModal } from './components/CheckoutModal';
 import { MemberAccessModal } from './components/MemberAccessModal';
 import { MemberDashboard } from './components/MemberDashboard';
+import { MobileDashboard } from './components/MobileDashboard';
 import { SuccessPage } from './components/SuccessPage';
 import { CancelPage } from './components/CancelPage';
 import { TermsOfService } from './components/TermsOfService';
@@ -56,6 +57,13 @@ export default function App() {
   const [memberAccessModalOpen, setMemberAccessModalOpen] = useState(false);
   const [isMemberVerified, setIsMemberVerified] = useState(false);
   const [verifiedEmail, setVerifiedEmail] = useState('');
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const savedAccess = localStorage.getItem('composure_verified_access');
@@ -180,8 +188,10 @@ export default function App() {
       />
 
       <main className="flex-grow max-w-7xl w-full mx-auto px-5 md:px-12">
-        {isMemberVerified && currentView === 'home' ? (
-          <MemberDashboard email={verifiedEmail} onNavigate={handleNavigate} />
+        {isMemberVerified && currentView === 'home' && isMobile ? (
+          <MobileDashboard email={verifiedEmail} onNavigate={(view) => handleNavigate(view as ViewMode)} />
+        ) : isMemberVerified && currentView === 'home' && !isMobile ? (
+          <MemberDashboard email={verifiedEmail} onNavigate={(view) => handleNavigate(view as ViewMode)} />
         ) : currentView !== 'home' && currentView !== 'success' && currentView !== 'cancel' && currentView !== 'terms' && currentView !== 'privacy' ? (
           renderToolView()
         ) : (
@@ -223,7 +233,7 @@ export default function App() {
         )}
       </main>
 
-      {currentView === 'home' && (
+      {!isMobile && currentView === 'home' && (
         <StickyCtaBar onOpenCheckout={handleOpenCheckout} isMemberVerified={isMemberVerified} />
       )}
 
@@ -241,7 +251,7 @@ export default function App() {
         onAccessGranted={handleAccessGranted}
       />
 
-      {currentView === 'home' && (
+      {!isMobile && currentView === 'home' && (
         <Footer onNavigate={handleNavigate} onOpenCheckout={handleOpenCheckout} />
       )}
     </div>

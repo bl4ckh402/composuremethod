@@ -477,3 +477,43 @@
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
+
+/* ─────────────────────────────────────────────────────────
+   FLAME ANIMATION FOR MOBILE STREAK COUNTER
+───────────────────────────────────────────────────────── */
+@keyframes flicker {
+  0%, 100% { transform: scale(1) rotate(-1deg); opacity: 0.9; }
+  25% { transform: scale(1.05) rotate(1deg); opacity: 1; }
+  50% { transform: scale(0.98) rotate(-0.5deg); opacity: 0.85; }
+  75% { transform: scale(1.02) rotate(0.5deg); opacity: 0.95; }
+}
+
+.flame-icon {
+  animation: flicker 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flame-icon {
+    animation: none;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   SAFE AREA INSETS (mobile)
+───────────────────────────────────────────────────────── */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   MOBILE DASHBOARD UTILITIES
+───────────────────────────────────────────────────────── */
+.mobile-dashboard-scroll {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
