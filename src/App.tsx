@@ -63,6 +63,7 @@ export default function App() {
     if (savedAccess === 'true') {
       setIsMemberVerified(true);
       if (savedEmail) setVerifiedEmail(savedEmail);
+      setCurrentView('journal');
     }
 
     const urlParams = new URLSearchParams(window.location.search);
