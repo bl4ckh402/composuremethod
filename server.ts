@@ -4,6 +4,7 @@ import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 import { validateEvent, WebhookVerificationError } from "@polar-sh/sdk/webhooks";
 import { getPolarClient } from "./src/lib/polar";
+import { handleRedditCAPI } from "./src/lib/redditCAPI";
 import {
   grantOrderEntitlement,
   checkAccessByEmail,
@@ -194,23 +195,13 @@ async function startServer() {
       let productsList: string[] = [];
 
       if (!productsParam) {
-        // Fetch or auto-provision active Polar product
         const existing = await polar.products.list({ limit: 10 });
-        let activeProduct = (existing.result?.items || []).find((p: any) => !p.isArchived);
+        const activeProduct = (existing.result?.items || []).find((p: any) => !p.isArchived);
 
         if (!activeProduct) {
-          activeProduct = await polar.products.create({
-            name: "The Composure Method: Pre-Ejaculation Control & Stamina System",
-            description: "Complete 5-Module Digital System + 4 Free Bonus Playbooks & Logs",
-            prices: [
-              {
-                amountType: "fixed",
-                priceAmount: 2000, // $20.00 USD
-                priceCurrency: "usd",
-              },
-            ],
-          });
+          return res.status(400).json({ error: "No active product configured in Polar. Please create a product and prices in your Polar dashboard." });
         }
+
         productsList = [activeProduct.id];
       } else {
         productsList = Array.isArray(productsParam)
@@ -243,22 +234,6 @@ async function startServer() {
       const response = await polar.products.list({ limit: 10 });
       let items = response.result?.items || [];
       
-      // Auto-provision standard product if none exist
-      if (items.length === 0) {
-        const newProduct = await polar.products.create({
-          name: "The Composure Method: Pre-Ejaculation Control & Stamina System",
-          description: "Complete 5-Module Digital System + 4 Free Bonus Playbooks & Logs",
-          prices: [
-            {
-              amountType: "fixed",
-              priceAmount: 2000, // $20.00 USD
-              priceCurrency: "usd",
-            },
-          ],
-        });
-        items = [newProduct];
-      }
-
       return res.json({
         result: {
           items,
@@ -283,22 +258,8 @@ async function startServer() {
         });
       }
 
-      // Create standard product with $20.00 price
-      const newProduct = await polar.products.create({
-        name: "The Composure Method: Pre-Ejaculation Control & Stamina System",
-        description: "Complete 5-Module Digital System + 4 Free Bonus Playbooks & Logs",
-        prices: [
-          {
-            amountType: "fixed",
-            priceAmount: 2000, // $20.00 USD
-            priceCurrency: "usd",
-          },
-        ],
-      });
-
-      return res.json({
-        message: "Created Polar product successfully.",
-        product: newProduct,
+      return res.status(400).json({
+        error: "Auto-provisioning with default USD pricing is disabled. Please create your product with the correct regional prices directly in the Polar dashboard.",
       });
     } catch (error: any) {
       console.error("[Polar Provision] Error:", error);
@@ -322,6 +283,8 @@ async function startServer() {
   app.get("/api/health", (_req, res) => {
     res.json({ status: "ok", timestamp: new Date().toISOString() });
   });
+
+  app.post("/api/reddit/capi", handleRedditCAPI);
 
   // API Endpoint: Generate Custom Composure & Cortisol Reset Protocol
   app.post("/api/clarity-protocol", async (req, res) => {

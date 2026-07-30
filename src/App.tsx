@@ -30,6 +30,7 @@ import { PartnerScriptsAccordion } from './components/PartnerScriptsAccordion';
 import { RoadmapTracker } from './components/RoadmapTracker';
 import { ShameCycleDiagram } from './components/ShameCycleDiagram';
 import { PracticeLogViewer } from './components/PracticeLogViewer';
+import { trackPageVisit } from './lib/redditPixel';
 
 function ToolShell({ title, subtitle, onBack, children }: { title: string; subtitle?: string; onBack: () => void; children: React.ReactNode }) {
   return (
@@ -97,6 +98,8 @@ export default function App() {
     } else if (checkoutStatus === 'cancel' || checkoutStatus === 'fail') {
       setCurrentView('cancel');
     }
+
+    trackPageVisit(window.location.href);
   }, []);
 
   const handleNavigate = (view: ViewMode) => {

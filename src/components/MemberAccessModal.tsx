@@ -24,7 +24,7 @@ export const MemberAccessModal: React.FC<MemberAccessModalProps> = ({
 
     setLoading(true);
     setMessage(null);
-    trackLead(email.trim());
+    trackLead(email.trim(), typeof window !== 'undefined' ? window.location.href : undefined);
 
     try {
       const res = await fetch('/api/user/verify-access', {

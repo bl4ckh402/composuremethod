@@ -51,7 +51,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
   const [submitted, setSubmitted] = useState(false);
 
   React.useEffect(() => {
-    trackAddToCart(20, 'USD');
+    const sourceUrl = typeof window !== 'undefined' ? window.location.href : undefined;
 
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('checkout') === 'success') {
@@ -59,7 +59,6 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
       const savedEmail = urlParams.get('email') || localStorage.getItem('composure_user_email') || '';
       if (savedEmail) {
         setEmail(savedEmail);
-        trackPurchase({ value: 20, currency: 'USD', orderId: `polar_${Date.now()}`, email: savedEmail });
       }
     }
 
@@ -67,7 +66,21 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
       .then((res) => res.json())
       .then((data) => {
         const items = data.result?.items || data.items || [];
-        if (items.length > 0) setPolarProduct(items[0]);
+        if (items.length > 0) {
+          const product = items[0];
+          setPolarProduct(product);
+
+          const price = product.prices?.[0];
+          if (price) {
+            const amount = (price.priceAmount / 100).toFixed(2);
+            const currency = (price.priceCurrency || 'usd').toUpperCase();
+            trackAddToCart(parseFloat(amount), currency, sourceUrl);
+            try {
+              localStorage.setItem('composure_checkout_amount', amount);
+              localStorage.setItem('composure_checkout_currency', currency);
+            } catch {}
+          }
+        }
       })
       .catch((err) => console.error('[Polar API] Error loading product:', err))
       .finally(() => setFetchingProduct(false));
@@ -76,7 +89,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newEmail = e.target.value;
     setEmail(newEmail);
-    if (newEmail.includes('@') && newEmail.length > 5) trackLead(newEmail);
+    if (newEmail.includes('@') && newEmail.length > 5) trackLead(newEmail, typeof window !== 'undefined' ? window.location.href : undefined);
   };
 
   const handleProceedToPolarCheckout = (e: React.FormEvent) => {
@@ -86,15 +99,16 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
       return;
     }
     setLoading(true);
-    trackLead(email);
+    trackLead(email, typeof window !== 'undefined' ? window.location.href : undefined);
     const productId = polarProduct?.id ? encodeURIComponent(polarProduct.id) : '';
     const checkoutUrl = `/api/checkout?${productId ? `products=${productId}&` : ''}email=${encodeURIComponent(email.trim())}`;
     window.location.href = checkoutUrl;
   };
 
-  const priceFormatted = polarProduct?.prices?.find((p) => p.priceCurrency === 'usd')
-    ? `$${(polarProduct.prices.find((p) => p.priceCurrency === 'usd')!.priceAmount / 100).toFixed(2)} USD`
-    : '$20.00 USD';
+  const productPrice = polarProduct?.prices?.[0];
+  const priceFormatted = productPrice
+    ? `${(productPrice.priceAmount / 100).toFixed(2)} ${(productPrice.priceCurrency || 'usd').toUpperCase()}`
+    : '';
 
   const productDescription = getShortDescription(polarProduct);
   const productImage = polarProduct?.medias?.[0]?.publicUrl || '';
@@ -143,7 +157,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
         <div className="order-2 md:order-1 md:col-span-5 flex flex-col gap-4">
           <div className="premium-card px-4 py-2 sm:p-5 flex flex-col gap-4">
             {/* Product row */}
-            <div className="flex gap-3 items-start pb-3 border-b border-[#173404]/8">
+            <div className="flex gap-3 items-start pb-3 border-b border-[#173404]/8 flex-col">
               {productImage ? (
                 <img
                   src={productImage}
@@ -216,7 +230,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
                   value={email}
                   onChange={handleEmailChange}
                   placeholder={COPY.emailPlaceholder}
-                  className="input-field"
+                  className="input-field w-full border border-[#173404]/10 focus:border-[#3e6a00] focus:ring-1 focus:ring-[#3e6a00] rounded-lg px-4 py-3 text-sm text-[#081d00] placeholder:text-[#74796d] font-body"
                 />
               </div>
 

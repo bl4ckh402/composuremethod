@@ -13,12 +13,15 @@ export const SuccessPage: React.FC<SuccessPageProps> = ({ userEmail, onNavigate 
 
   useEffect(() => {
     const emailToTrack = email && email !== 'your email address' ? email : undefined;
+    const sourceUrl = typeof window !== 'undefined' ? window.location.href : undefined;
+    const storedAmount = typeof window !== 'undefined' ? localStorage.getItem('composure_checkout_amount') : null;
+    const storedCurrency = typeof window !== 'undefined' ? localStorage.getItem('composure_checkout_currency') : null;
     trackPurchase({
-      value: 20,
-      currency: 'USD',
+      value: storedAmount ? parseFloat(storedAmount) : 20,
+      currency: storedCurrency || 'USD',
       orderId: `polar_${Date.now()}`,
       email: emailToTrack,
-    });
+    }, sourceUrl);
   }, [email]);
 
   return (
