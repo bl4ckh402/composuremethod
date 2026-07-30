@@ -1,49 +1,10 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import { useI18n } from '../lib/i18n';
 
 export const TestimonialsSection: React.FC = () => {
-  const reviews = [
-    {
-      name: 'Marcus T.',
-      age: 'Age 34 • Verified Member',
-      role: 'Architect, Chicago IL',
-      rating: 5,
-      headline: 'Shifted from constant 90-second panic to complete 15-minute relaxed control.',
-      text: 'When I turned 33, performance anxiety hit me out of nowhere. I tried numbing sprays from pharmacy shelves and hated losing all physical sensation. The 1-to-10 arousal scale in Module 2 was the exact missing link. Learning to spot Level 7 arousal early and using the 4-2-7 parasympathetic breathing reset allowed me to stay present and relaxed without losing my rhythm.',
-      stat: '15+ Min Consistent Control',
-      date: 'Purchased May 2026',
-    },
-    {
-      name: 'Richard K.',
-      age: 'Age 41 • Verified Member',
-      role: 'Software Director, Austin TX',
-      rating: 5,
-      headline: 'The partner communication scripts eliminated years of unspoken tension.',
-      text: 'Bringing this topic up with my partner was what kept me up at night. The word-for-word conversation scripts in Bonus #2 gave me a neutral, confident framework to talk about somatic arousal regulation as a shared skill. The 8-minute daily reverse-kegel pelvic floor routine completely eliminated my involuntary pelvic muscle spasms within 3 weeks.',
-      stat: '90% Reduction in Pre-Anxiety',
-      date: 'Purchased June 2026',
-    },
-    {
-      name: 'David S.',
-      age: 'Age 38 • Verified Member',
-      role: 'Operations Manager, Denver CO',
-      rating: 5,
-      headline: 'Groundbreaking physiology-first approach. No gimmick tricks or pills.',
-      text: 'I was deeply skeptical because of the sheer amount of scam supplements online. Composure is fundamentally different—it\'s based on human autonomic nervous system science. The 5-step "Tonight" reference sheet gave me immediate tactical adjustments on night one, and the 30-day roadmap kept me accountable.',
-      stat: 'Noticeable Results in 12 Days',
-      date: 'Purchased April 2026',
-    },
-    {
-      name: 'Jason L.',
-      age: 'Age 47 • Verified Member',
-      role: 'Financial Analyst, Boston MA',
-      rating: 5,
-      headline: 'Restored my confidence in the bedroom after feeling stuck for 4 years.',
-      text: 'I thought getting into my late 40s meant accepting loss of control. This program proved that ejaculation control is a trainable neuromuscular reflex, not a mystery. Understanding bulbospongiosus muscle isolation vs. deep relaxation changed everything for me.',
-      stat: 'Lasting Bedroom Confidence',
-      date: 'Purchased May 2026',
-    }
-  ];
+  const { strings } = useI18n();
+  const reviews = strings.testimonials.reviews;
 
   return (
     <section id="reviews" className="py-16 md:py-20 space-y-12 relative">
@@ -60,7 +21,7 @@ export const TestimonialsSection: React.FC = () => {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="font-display text-3xl md:text-[2.6rem] font-bold text-[#081d00] tracking-tight"
         >
-          What Men Experience With The Composure Method
+          {strings.testimonials.heading}
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -69,7 +30,7 @@ export const TestimonialsSection: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="font-body text-sm md:text-base text-[#43483e] leading-relaxed"
         >
-          Read verified feedback from men who applied the 4-pillar neuromuscular and breathwork framework to retrain their autonomic nervous system.
+          {strings.testimonials.subtitle}
         </motion.p>
       </div>
 
