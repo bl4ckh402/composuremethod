@@ -180,54 +180,7 @@ async function startServer() {
     });
   });
 
-  // 2. Polar Checkout Endpoint: GET /checkout or GET /api/checkout
-  const handlePolarCheckoutRoute = async (req: express.Request, res: express.Response) => {
-    let productsParam = req.query.products;
-    const customerEmail = (req.query.email as string) || undefined;
-    const host = req.get("host") || "localhost:3000";
-    const rawProto = (req.headers["x-forwarded-proto"] as string) || req.protocol || "http";
-    const protocol = rawProto.split(",")[0].trim();
-    const baseUrl = process.env.APP_URL ? process.env.APP_URL.replace(/\/$/, "") : `${protocol}://${host}`;
-    const successUrl = `${baseUrl}/?checkout=success${customerEmail ? `&email=${encodeURIComponent(customerEmail)}` : ''}`;
-
-    try {
-      const polar = getPolarClient();
-      let productsList: string[] = [];
-
-      if (!productsParam) {
-        const existing = await polar.products.list({ limit: 10 });
-        const activeProduct = (existing.result?.items || []).find((p: any) => !p.isArchived);
-
-        if (!activeProduct) {
-          return res.status(400).json({ error: "No active product configured in Polar. Please create a product and prices in your Polar dashboard." });
-        }
-
-        productsList = [activeProduct.id];
-      } else {
-        productsList = Array.isArray(productsParam)
-          ? productsParam.map((p) => String(p))
-          : String(productsParam).split(",");
-      }
-
-      const checkoutSession = await polar.checkouts.create({
-        products: productsList,
-        customerEmail: customerEmail,
-        successUrl: successUrl,
-      });
-
-      return res.redirect(302, checkoutSession.url);
-    } catch (error: any) {
-      console.error("[Polar Checkout] Error creating checkout session:", error);
-      return res.status(500).json({
-        error: error.message || "Failed to create Polar checkout session",
-      });
-    }
-  };
-
-  app.get("/checkout", handlePolarCheckoutRoute);
-  app.get("/api/checkout", handlePolarCheckoutRoute);
-
-  // 3. Helper Endpoint to list or auto-provision Polar products
+  // 2. Helper Endpoint to list or auto-provision Polar products
   app.get("/api/polar/products", async (_req, res) => {
     try {
       const polar = getPolarClient();

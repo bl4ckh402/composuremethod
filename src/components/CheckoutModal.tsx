@@ -92,7 +92,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
     if (newEmail.includes('@') && newEmail.length > 5) trackLead(newEmail, typeof window !== 'undefined' ? window.location.href : undefined);
   };
 
-  const handleProceedToPolarCheckout = (e: React.FormEvent) => {
+    const handleProceedToPolarCheckout = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !email.includes('@')) {
       alert('Please enter a valid email address so we can deliver your instant digital access.');
@@ -100,9 +100,14 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
     }
     setLoading(true);
     trackLead(email, typeof window !== 'undefined' ? window.location.href : undefined);
-    const productId = polarProduct?.id ? encodeURIComponent(polarProduct.id) : '';
-    const checkoutUrl = `/api/checkout?${productId ? `products=${productId}&` : ''}email=${encodeURIComponent(email.trim())}`;
-    window.location.href = checkoutUrl;
+    const checkoutLink = document.getElementById('polar-checkout-link') as HTMLAnchorElement | null;
+    if (checkoutLink) {
+      const productId = polarProduct?.id ? encodeURIComponent(polarProduct.id) : '';
+      const baseCheckoutUrl = 'https://buy.polar.sh/polar_cl_PDCLMgJIjDKHFNMnIJPq0VdO51YKqYoXa4DGo0JhM7Z';
+      const checkoutUrl = productId ? `${baseCheckoutUrl}?products=${productId}` : baseCheckoutUrl;
+      checkoutLink.href = `${checkoutUrl}${productId ? '&' : '?'}email=${encodeURIComponent(email.trim())}`;
+      checkoutLink.click();
+    }
   };
 
   const productPrice = polarProduct?.prices?.[0];

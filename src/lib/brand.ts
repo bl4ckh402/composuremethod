@@ -11,7 +11,7 @@ export const BRAND = {
   guaranteeDays: 30,
   billingDescriptor: 'CM DIGITAL',
   supportEmail: 'support@composuremethod.com',
-  checkoutSuccessRedirect: '/?checkout=success',
+  checkoutSuccessRedirect: '/?checkout=success&checkout_id={CHECKOUT_ID}',
 };
 
 export const COPY = {
@@ -25,6 +25,6 @@ export const COPY = {
     'Your digital access details have been sent to your email. If you don’t see it within a few minutes, please check your spam or junk folder.',
   emailLabel: 'YOUR EMAIL FOR INSTANT DIGITAL DELIVERY',
   emailPlaceholder: 'name@example.com',
-  loadingCopy: 'Redirecting to Checkout...',
+  loadingCopy: 'Opening Checkout...',
   supportEmail: 'support@composuremethod.com',
 };

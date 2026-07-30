@@ -80,6 +80,7 @@ export default function App() {
     const checkoutStatus = urlParams.get('checkout');
     if (checkoutStatus === 'success') {
       const emailParam = urlParams.get('email');
+      const checkoutId = urlParams.get('checkout_id');
       if (emailParam) {
         localStorage.setItem('composure_verified_access', 'true');
         localStorage.setItem('composure_user_email', emailParam);
@@ -93,6 +94,9 @@ export default function App() {
       } else {
         localStorage.setItem('composure_verified_access', 'true');
         setIsMemberVerified(true);
+      }
+      if (checkoutId) {
+        localStorage.setItem('composure_checkout_id', checkoutId);
       }
       setCurrentView('success');
     } else if (checkoutStatus === 'cancel' || checkoutStatus === 'fail') {
