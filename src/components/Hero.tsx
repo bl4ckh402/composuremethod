@@ -135,6 +135,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckout, isMemberVerified = f
                 muted
                 playsInline
                 loop={false}
+                onEnded={() => {}}
+                controls
                 className="w-full h-full object-cover"
                 aria-label="Mark testimonial video"
               />

@@ -250,6 +250,8 @@ export default function App() {
                           muted
                           playsInline
                           loop={false}
+                          onEnded={() => {}}
+                          controls
                           className="w-full h-full object-cover"
                           aria-label="Stephan testimonial video"
                         />
