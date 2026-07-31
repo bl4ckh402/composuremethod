@@ -63,7 +63,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckout, isMemberVerified = f
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <div className="lg:col-span-6 space-y-8 text-center lg:text-left">
             <div className="space-y-5">
-              <h1 className="font-display text-[2.5rem] sm:text-[3rem] md:text-[3.5rem] font-bold text-[#081d00] tracking-tight leading-[1.08]">
+              <h1 className="font-display text-[2rem] sm:text-[2.5rem] md:text-[3rem] font-bold text-[#081d00] tracking-tight leading-[1.08]">
                 {t('hero.headline')}
               </h1>
               <p className="font-body text-base md:text-lg text-[#43483e] max-w-xl leading-relaxed mx-auto lg:mx-0">
@@ -106,12 +106,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckout, isMemberVerified = f
               ref={imageRef}
               className="relative rounded-3xl overflow-hidden shadow-2xl border border-[#173404]/10 bg-[#081d00] will-change-transform"
             >
-              <div className="aspect-video">
+              <div className="w-full">
                 <img
                   src={lt}
                   alt={t('hero.productImageAlt')}
                   fetchPriority="high"
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto object-contain"
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-[#081d00]/60 via-transparent to-transparent pointer-events-none" />
