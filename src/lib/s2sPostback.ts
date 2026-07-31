@@ -15,6 +15,8 @@ const TRAFFICSTARS_DEFAULT_PRICE = getEnv('VITE_TRAFFICSTARS_DEFAULT_PRICE')
   ? parseFloat(getEnv('VITE_TRAFFICSTARS_DEFAULT_PRICE')!)
   : undefined;
 
+console.log(`[S2S] Config: URL=${TRAFFICSTARS_POSTBACK_URL ? 'set' : 'MISSING'}, KEY=${TRAFFICSTARS_KEY ? 'set' : 'MISSING'}, GOAL_ID=${TRAFFICSTARS_GOAL_ID ? 'set' : 'MISSING'}`);
+
 interface ClickRecord {
   clickId: string;
   email?: string;
@@ -132,10 +134,21 @@ export async function fireTrafficStarsPostback(options: {
 
   if (options.email) {
     clickId = (await getClickIdByEmail(options.email)) || '';
+    if (clickId) {
+      console.log(`[TrafficStars S2S] Found clickId by email ${options.email}: ${clickId}`);
+    }
   }
 
   if (!clickId) {
     clickId = (await getAnyClickId()) || '';
+    if (clickId) {
+      console.log(`[TrafficStars S2S] Using fallback clickId: ${clickId}`);
+    }
+  }
+
+  if (!clickId) {
+    console.warn(`[TrafficStars S2S] No clickId found for order ${options.orderId}`);
+    return;
   }
 
   const url = TRAFFICSTARS_POSTBACK_URL

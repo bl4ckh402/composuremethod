@@ -6,6 +6,8 @@ import {
 import { fireTrafficStarsPostback } from '../../src/lib/s2sPostback.js';
 
 export default async (req: any, res: any) => {
+  console.log(`[Polar Webhook] Received ${req.method} request`);
+  
   if (req.method !== 'POST') {
     res.statusCode = 405;
     res.setHeader('Content-Type', 'application/json');
@@ -14,6 +16,8 @@ export default async (req: any, res: any) => {
   }
 
   const webhookSecret = process.env.POLAR_WEBHOOK_SECRET;
+  console.log(`[Polar Webhook] webhookSecret present: ${!!webhookSecret}`);
+  
   if (!webhookSecret) {
     console.warn('[Polar Webhook] POLAR_WEBHOOK_SECRET is missing from environment.');
     res.statusCode = 500;
@@ -109,6 +113,27 @@ export default async (req: any, res: any) => {
       console.log(
         `[Polar Webhook] Successfully granted access to ${customerEmail} for order ${orderId}`
       );
+
+      const postbackUrl = (() => {
+        const url = TRAFFICSTARS_POSTBACK_URL
+          .replace('{value}', encodeURIComponent(String(amount)))
+          .replace('{price}', encodeURIComponent(String(amount)))
+          .replace('{lead_code}', encodeURIComponent(orderId))
+          .replace('{click_id}', encodeURIComponent(clickId))
+          .replace('{key}', encodeURIComponent(TRAFFICSTARS_KEY))
+          .replace('{goalid}', encodeURIComponent(TRAFFICSTARS_GOAL_ID));
+        return url;
+      })();
+
+      console.log(`[TrafficStars S2S] Firing postback: ${postbackUrl}`);
+
+      try {
+        await fetch(postbackUrl, { method: 'GET' });
+        console.log(`[TrafficStars S2S] Postback fired successfully`);
+      } catch (err) {
+        console.error(`[TrafficStars S2S] Postback failed:`, err);
+      }
+
       break;
     }
 
