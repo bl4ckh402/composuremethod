@@ -43,13 +43,9 @@ export function trackTrafficStarsPurchase(options?: {
     .replace('{lead_code}', encodeURIComponent(leadCode))
     .replace('{click_id}', encodeURIComponent(clickId));
 
-  if (navigator.sendBeacon) {
-    try {
-      navigator.sendBeacon(url);
-    } catch {
-      // ignore beacon failures
-    }
-  } else {
-    fetch(url, { method: 'GET', keepalive: true, mode: 'no-cors' }).catch(() => {});
+  try {
+    new Image().src = url;
+  } catch {
+    // ignore tracking pixel failures
   }
 }

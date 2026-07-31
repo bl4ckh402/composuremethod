@@ -77,6 +77,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('checkout') === 'success') {
       setSubmitted(true);
+      if (onClose) onClose();
       const savedEmail = urlParams.get('email') || localStorage.getItem('composure_user_email') || '';
       if (savedEmail) {
         setEmail(savedEmail);
@@ -126,7 +127,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
       const productId = polarProduct?.id ? encodeURIComponent(polarProduct.id) : '';
       const baseCheckoutUrl = 'https://buy.polar.sh/polar_cl_PDCLMgJIjDKHFNMnIJPq0VdO51YKqYoXa4DGo0JhM7Z';
       const checkoutUrl = productId ? `${baseCheckoutUrl}?products=${productId}` : baseCheckoutUrl;
-      checkoutLink.href = `${checkoutUrl}${productId ? '&' : '?'}email=${encodeURIComponent(email.trim())}`;
+      const successUrl = encodeURIComponent('https://composuremethod.help/?checkout=success&checkout_id={CHECKOUT_ID}');
+      const cancelUrl = encodeURIComponent('https://composuremethod.help/?checkout=cancel');
+      const returnUrl = encodeURIComponent('https://composuremethod.help/');
+      checkoutLink.href = `${checkoutUrl}${productId ? '&' : '?'}email=${encodeURIComponent(email.trim())}&success_url=${successUrl}&cancel_url=${cancelUrl}&return_url=${returnUrl}`;
       checkoutLink.click();
     }
   };
