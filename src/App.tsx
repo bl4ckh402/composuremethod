@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { ViewMode } from './types';
 import { I18nProvider } from './lib/i18n';
@@ -31,6 +31,7 @@ import { PartnerScriptsAccordion } from './components/PartnerScriptsAccordion';
 import { RoadmapTracker } from './components/RoadmapTracker';
 import { ShameCycleDiagram } from './components/ShameCycleDiagram';
 import { PracticeLogViewer } from './components/PracticeLogViewer';
+import stephanTestimonial from './assets/images/stephan_testimonial.mp4';
 import { trackPageVisit, trackPurchase as trackRedditPurchase } from './lib/redditPixel';
 import { trackTrafficStarsPurchase } from './lib/trafficStars';
 
@@ -62,6 +63,8 @@ export default function App() {
   const [isMemberVerified, setIsMemberVerified] = useState(false);
   const [verifiedEmail, setVerifiedEmail] = useState('');
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
+  const [stephanMuted, setStephanMuted] = useState(true);
+  const stephanVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -236,8 +239,44 @@ export default function App() {
                 <ProblemSection />
                 <ArchitectureOfClarity onOpenCheckout={handleOpenCheckout} isMemberVerified={isMemberVerified} />
                 <FoundationGuide onNavigate={handleNavigate} onOpenCheckout={handleOpenCheckout} isMemberVerified={isMemberVerified} />
-                <SelfQualification />
-                <TestimonialsSection />
+                 <SelfQualification />
+                 <div className="max-w-4xl mx-auto">
+                   <div className="relative rounded-3xl overflow-hidden shadow-xl border border-[#173404]/10 bg-[#081d00]">
+                     <div className="aspect-video">
+                        <video
+                          ref={stephanVideoRef}
+                          src={stephanTestimonial}
+                          autoPlay
+                          muted
+                          playsInline
+                          loop={false}
+                          className="w-full h-full object-cover"
+                          aria-label="Stephan testimonial video"
+                        />
+                     </div>
+                     <button
+                       onClick={() => {
+                         if (!stephanVideoRef.current) return;
+                         const next = !stephanMuted;
+                         setStephanMuted(next);
+                         stephanVideoRef.current.muted = next;
+                       }}
+                       className="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 transition-colors z-10"
+                       aria-label={stephanMuted ? 'Unmute video' : 'Mute video'}
+                     >
+                       <span className="material-symbols-outlined text-base">
+                         {stephanMuted ? 'volume_off' : 'volume_up'}
+                       </span>
+                     </button>
+                     <div className="absolute inset-0 bg-gradient-to-t from-[#081d00]/40 via-transparent to-transparent pointer-events-none" />
+                     <div className="absolute bottom-4 left-4">
+                       <span className="bg-[#b7f473] text-[#081d00] px-3 py-1.5 rounded-full font-display font-bold text-sm shadow-lg">
+                         Stephan
+                       </span>
+                     </div>
+                   </div>
+                 </div>
+                 <TestimonialsSection />
                 <OfferValueStack onOpenCheckout={handleOpenCheckout} isMemberVerified={isMemberVerified} />
                 <GuaranteeSection />
                 <FaqSection />
@@ -267,7 +306,7 @@ export default function App() {
         )}
       </main>
 
-      {!isMobile && currentView === 'home' && (
+      {currentView === 'home' && (
         <StickyCtaBar onOpenCheckout={handleOpenCheckout} isMemberVerified={isMemberVerified} />
       )}
 

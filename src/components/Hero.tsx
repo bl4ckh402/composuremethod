@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import lt from '../assets/images/lt.png';
+import markTestimonial from '../assets/images/mark_testmonial.mp4';
 import { COPY } from '../lib/brand';
 import { useI18n } from '../lib/i18n';
 
@@ -14,6 +15,8 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onOpenCheckout, isMemberVerified = false }) => {
   const { t } = useI18n();
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const handlePrimaryClick = () => {
     if (isMemberVerified) {
       const el = document.getElementById('curriculum');
@@ -21,6 +24,13 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckout, isMemberVerified = f
     } else {
       onOpenCheckout();
     }
+  };
+
+  const handleToggleMute = () => {
+    if (!videoRef.current) return;
+    const next = !isMuted;
+    setIsMuted(next);
+    videoRef.current.muted = next;
   };
 
   const imageRef = useRef<HTMLDivElement>(null);
@@ -111,6 +121,38 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckout, isMemberVerified = f
                   $20 USD
                 </span>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-8 md:mt-12 max-w-4xl mx-auto">
+          <div className="relative rounded-3xl overflow-hidden shadow-xl border border-[#173404]/10 bg-[#081d00]">
+            <div className="aspect-video">
+              <video
+                ref={videoRef}
+                src={markTestimonial}
+                autoPlay
+                muted
+                playsInline
+                loop={false}
+                className="w-full h-full object-cover"
+                aria-label="Mark testimonial video"
+              />
+            </div>
+            <button
+              onClick={handleToggleMute}
+              className="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 transition-colors z-10"
+              aria-label={isMuted ? 'Unmute video' : 'Mute video'}
+            >
+              <span className="material-symbols-outlined text-base">
+                {isMuted ? 'volume_off' : 'volume_up'}
+              </span>
+            </button>
+            <div className="absolute inset-0 bg-gradient-to-t from-[#081d00]/40 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute bottom-4 left-4">
+              <span className="bg-[#b7f473] text-[#081d00] px-3 py-1.5 rounded-full font-display font-bold text-sm shadow-lg">
+                Mark
+              </span>
             </div>
           </div>
         </div>
