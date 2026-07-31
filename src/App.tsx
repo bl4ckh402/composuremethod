@@ -179,7 +179,8 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fcf9f8] text-[#1c1b1b] flex flex-col font-body antialiased selection:bg-[#b7f473] selection:text-[#081d00]">
+    <I18nProvider>
+      <div className="min-h-screen bg-[#fcf9f8] text-[#1c1b1b] flex flex-col font-body antialiased selection:bg-[#b7f473] selection:text-[#081d00]">
       <div className="noise-overlay" aria-hidden="true" />
 
       <div className="announcement-bar text-[#b7f473] text-[11px] font-mono-caps py-2.5 px-4 text-center tracking-wider flex items-center justify-center gap-2.5">
@@ -265,5 +266,6 @@ export default function App() {
       )}
       <Analytics />
     </div>
+    </I18nProvider>
   );
 }
