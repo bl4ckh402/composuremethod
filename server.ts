@@ -11,6 +11,7 @@ import {
   getAllEntitlements,
   revokeOrderEntitlement,
 } from "./src/lib/entitlementsStore";
+import { registerS2SRoutes, fireTrafficStarsPostback } from "./src/lib/s2sPostback";
 
 dotenv.config();
 
@@ -84,6 +85,16 @@ async function startServer() {
               source: "polar_webhook",
               eventType: event.type,
             },
+          });
+
+          fireTrafficStarsPostback({
+            value: amount,
+            price: amount,
+            leadCode: orderId,
+            orderId,
+            email: customerEmail,
+          }).catch((err) => {
+            console.error("[TrafficStars S2S] Postback failed:", err);
           });
 
           console.log(
@@ -238,6 +249,8 @@ async function startServer() {
   });
 
   app.post("/api/reddit/capi", handleRedditCAPI);
+
+  registerS2SRoutes(app);
 
   // API Endpoint: Generate Custom Composure & Cortisol Reset Protocol
   app.post("/api/clarity-protocol", async (req, res) => {

@@ -33,7 +33,7 @@ import { ShameCycleDiagram } from './components/ShameCycleDiagram';
 import { PracticeLogViewer } from './components/PracticeLogViewer';
 import stephanTestimonial from './assets/images/stephan_testimonial.mp4';
 import { trackPageVisit, trackPurchase as trackRedditPurchase } from './lib/redditPixel';
-import { trackTrafficStarsPurchase } from './lib/trafficStars';
+import { trackTrafficStarsPurchase, trackTrafficStarsClick } from './lib/trafficStars';
 
 function ToolShell({ title, subtitle, onBack, children }: { title: string; subtitle?: string; onBack: () => void; children: React.ReactNode }) {
   return (
@@ -108,6 +108,7 @@ export default function App() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: emailParam }),
         }).catch(() => {});
+        trackTrafficStarsClick(emailParam);
         trackTrafficStarsPurchase({
           value: 20,
           price: 20,
@@ -117,6 +118,7 @@ export default function App() {
       } else {
         localStorage.setItem('composure_verified_access', 'true');
         setIsMemberVerified(true);
+        trackTrafficStarsClick();
         trackTrafficStarsPurchase({
           value: 20,
           price: 20,

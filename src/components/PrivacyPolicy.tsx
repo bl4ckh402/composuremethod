@@ -49,7 +49,7 @@ export const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onNavigate }) => {
         <section>
           <h2 className="font-display text-xl font-bold text-[#081d00] mb-3">4. Contacting Privacy Support</h2>
           <p>
-            For any questions or data deletion requests, contact our privacy team at <a href="mailto:privacy@composuremethod.com" className="text-[#173404] font-bold underline">privacy@composuremethod.com</a>.
+            For any questions or data deletion requests, contact our privacy team at <a href="mailto:privacy@composuremethod.help" className="text-[#173404] font-bold underline">privacy@composuremethod.help</a>.
           </p>
         </section>
       </article>

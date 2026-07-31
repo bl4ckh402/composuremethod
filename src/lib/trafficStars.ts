@@ -1,5 +1,12 @@
-const TRAFFICSTARS_POSTBACK_URL =
-  'https://tsyndicate.com/api/v1/cpa/action?value={value}&price={price}&lead_code={lead_code}&allow_duplicates=1&clickid={click_id}&key=jhF0JX78NYeYY9O1JAro6oHYMxhDzCoWn9fA&goalid=5123';
+const TRAFFICSTARS_POSTBACK_URL = import.meta.env.VITE_TRAFFICSTARS_POSTBACK_URL || '';
+const TRAFFICSTARS_KEY = import.meta.env.VITE_TRAFFICSTARS_KEY || '';
+const TRAFFICSTARS_GOAL_ID = import.meta.env.VITE_TRAFFICSTARS_GOAL_ID || '';
+const TRAFFICSTARS_DEFAULT_VALUE = import.meta.env.VITE_TRAFFICSTARS_DEFAULT_VALUE
+  ? parseFloat(import.meta.env.VITE_TRAFFICSTARS_DEFAULT_VALUE)
+  : undefined;
+const TRAFFICSTARS_DEFAULT_PRICE = import.meta.env.VITE_TRAFFICSTARS_DEFAULT_PRICE
+  ? parseFloat(import.meta.env.VITE_TRAFFICSTARS_DEFAULT_PRICE)
+  : undefined;
 
 function getTrafficStarsClickId(): string | null {
   if (typeof window === 'undefined') return null;
@@ -20,32 +27,31 @@ function getTrafficStarsClickId(): string | null {
   }
 }
 
+export function trackTrafficStarsClick(email?: string): void {
+  if (typeof window === 'undefined') return;
+  const clickId = getTrafficStarsClickId();
+  if (!clickId) return;
+
+  try {
+    fetch('/api/track/ts-click', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ click_id: clickId, email: email?.trim().toLowerCase() }),
+      keepalive: true,
+    }).catch(() => {
+      // ignore tracking failures so page load never breaks
+    });
+  } catch {
+    // ignore
+  }
+}
+
 export function trackTrafficStarsPurchase(options?: {
   value?: number;
   price?: number;
   leadCode?: string;
   orderId?: string;
 }) {
-  if (typeof window === 'undefined') return;
-
-  const clickId = getTrafficStarsClickId();
-  if (!clickId) {
-    return;
-  }
-
-  const value = options?.value ?? 20;
-  const price = options?.price ?? 20;
-  const leadCode = options?.leadCode || options?.orderId || `order_${Date.now()}`;
-
-  const url = TRAFFICSTARS_POSTBACK_URL
-    .replace('{value}', encodeURIComponent(String(value)))
-    .replace('{price}', encodeURIComponent(String(price)))
-    .replace('{lead_code}', encodeURIComponent(leadCode))
-    .replace('{click_id}', encodeURIComponent(clickId));
-
-  try {
-    new Image().src = url;
-  } catch {
-    // ignore tracking pixel failures
-  }
+  // Client-side purchase pixel removed intentionally.
+  // Conversion tracking is handled server-side from the Polar webhook via fireTrafficStarsPostback().
 }

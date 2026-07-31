@@ -52,6 +52,10 @@ export interface I18nStrings {
     instantLine: string;
     oneTimeLine: string;
     disclaimerLine: string;
+    items: Array<{
+      label: string;
+      value: string;
+    }>;
   };
   mobileDashboard: {
     memberAccessActive: string;
@@ -98,6 +102,12 @@ export interface I18nStrings {
     guarantee: string;
     discreetBilling: string;
     instantDelivery: string;
+    priceBadge: string;
+    productImageAlt: string;
+    markVideoAria: string;
+    muteVideo: string;
+    unmuteVideo: string;
+    markLabel: string;
   };
   problem: {
     headline: string;
@@ -122,6 +132,11 @@ export interface I18nStrings {
     ctaHeadline: string;
     ctaBody: string;
     ctaButton: string;
+    pillars: Array<{
+      title: string;
+      tagline: string;
+      desc: string;
+    }>;
   };
   curriculum: {
     headline: string;
@@ -140,6 +155,13 @@ export interface I18nStrings {
     bonus4Label: string;
     bonusesCta: string;
     yourBonusesHeading: string;
+    bonusLabelPrefix: string;
+    modules: Array<{
+      moduleNumber: number;
+      title: string;
+      description: string;
+      lessons: string[];
+    }>;
   };
   guarantee: {
     heading: string;
@@ -152,6 +174,10 @@ export interface I18nStrings {
   faq: {
     heading: string;
     subtitle: string;
+    items: Array<{
+      q: string;
+      a: string;
+    }>;
   };
   stickyCta: {
     productTitle: string;
@@ -178,6 +204,11 @@ export interface I18nStrings {
     accessButton: string;
     supportLabel: string;
     pleaseEnterEmail: string;
+    closeCheckout: string;
+    digitalGuideFallback: string;
+    orderVerifiedHeading: string;
+    fulfillmentFooter: string;
+    submitButton: string;
     includedItems: {
       instantAccess: string;
       moneyBack: string;
@@ -211,6 +242,7 @@ export interface I18nStrings {
     guaranteeBody: string;
     getAccess: string;
     medicalDisclaimer: string;
+    medicalDisclaimerBody: string;
     copyright: string;
     encryptedCheckout: string;
   };
@@ -420,6 +452,12 @@ const translations: Record<Locale, I18nStrings> = {
       guarantee: '30-Day Money-Back Guarantee',
       discreetBilling: 'Discreet Billing',
       instantDelivery: 'Instant Digital Delivery',
+      priceBadge: '$20 USD',
+      productImageAlt: 'The Composure Method Digital Bundle',
+      markVideoAria: 'Mark testimonial video',
+      muteVideo: 'Mute video',
+      unmuteVideo: 'Unmute video',
+      markLabel: 'Mark',
     },
     checkout: {
       title: 'Complete Your Order',
@@ -441,9 +479,14 @@ const translations: Record<Locale, I18nStrings> = {
       supportLabel: 'Need assistance?',
       pleaseEnterEmail: 'Please enter your email address to continue.',
       includedItems: {
-        instantAccess: 'Instant digital access after payment',
-        moneyBack: '30-day money-back guarantee',
+        instantAccess: 'Instant access across all devices, all free bonus playbooks & trackers',
+        moneyBack: '30-Day 100% money-back risk-free guarantee',
       },
+      closeCheckout: 'Close checkout',
+      digitalGuideFallback: 'Digital educational guide',
+      orderVerifiedHeading: 'Order Verified — Welcome to Composure',
+      fulfillmentFooter: 'Instant Fulfillment • 30-Day Refund Policy • Discreet Billing',
+      submitButton: 'Get Instant Access — $20',
     },
     success: {
       title: 'Order verified. Welcome to Composure.',
@@ -473,6 +516,7 @@ const translations: Record<Locale, I18nStrings> = {
       guaranteeBody: '100% risk-free. If you don\'t feel noticeably more in control within 30 days, receive a full refund. No questions asked.',
       getAccess: 'Get Access for $20',
       medicalDisclaimer: 'Medical Disclaimer:',
+      medicalDisclaimerBody: 'This guide is educational and does not constitute medical advice or replace consultation with a licensed physician or urologist.',
       copyright: '© 2026 SAVITY LLC / COMPOSURE METHOD. ALL RIGHTS RESERVED.',
       encryptedCheckout: 'ENCRYPTED 256-BIT SSL DIGITAL CHECKOUT',
     },
@@ -558,6 +602,12 @@ const translations: Record<Locale, I18nStrings> = {
       ctaHeadline: 'Ready to retrain your nervous system and regain complete bedroom confidence?',
       ctaBody: 'Get immediate access to all Assets + 4 Free Bonuses for $20 (Full Value $197).',
       ctaButton: 'Get Started Now — $20 (Worth $197)',
+      pillars: [
+        { title: 'Physiological Decoding', tagline: 'Deconstructing the Anxiety & Shame Loop', desc: 'Learn why changes occur in your 30s due to nervous system sensitivity. Normalize the mind-body response to permanently remove performance pressure.' },
+        { title: 'Neuromuscular Pelvic Training', tagline: 'The 1–10 Scale & Stop-Start Trainer', desc: 'Map your arousal threshold, identify your Level 7 point of no return, and condition your pelvic muscles to regulate nerve signal intensity.' },
+        { title: 'Parasympathetic Breath Control', tagline: '4-2-7 Vagus Nerve Regulation', desc: 'Activate parasympathetic dominance using slow 4-count inhale / 7-count exhale breathwork to calm rapid heart rate and extend timing.' },
+        { title: 'Shame-Free Partner Alignment', tagline: 'Word-for-Word Scripts & Pacing', desc: 'Shift intimacy from a solo performance test into a relaxed, shared experience with low-stakes communication frameworks.' },
+      ],
     },
     curriculum: {
       headline: 'What You Get Inside The Composure Method',
@@ -576,6 +626,14 @@ const translations: Record<Locale, I18nStrings> = {
       bonus4Label: 'AI Personalization Protocol ($20 Value)',
       bonusesCta: 'Claim All Bonuses for $20',
       yourBonusesHeading: 'Your 4 Free Bonuses — Included Instantly',
+      bonusLabelPrefix: 'BONUS #',
+      modules: [
+        { moduleNumber: 1, title: 'Understanding What\'s Actually Happening', description: 'Arousal control is a learned skill tied to familiarity and nervous system sensitivity. Discover why changes occur in your 30s and how to break the shame cycle.', lessons: ['Lesson 1.1 — Why this shows up, starting in your 30s', 'Lesson 1.2 — Debunking the myths that keep men stuck', 'Lesson 1.3 — The shame cycle', 'Lesson 1.4 — Setting realistic expectations'] },
+        { moduleNumber: 2, title: 'The Physical Toolkit', description: 'Learn to locate and train pelvic floor muscles, map your 1–10 arousal scale, utilize stop-start/edging techniques, and harness parasympathetic breathing.', lessons: ['Lesson 2.1 — Pelvic floor awareness and training', 'Lesson 2.2 — Arousal tracking: the stop-start and edging methods', 'Lesson 2.3 — Breathing and nervous-system regulation', 'Lesson 2.4 — Lifestyle levers'] },
+        { moduleNumber: 3, title: 'The Mental Game', description: 'Shift attention from self-monitoring to present sensation, establish pre-intimacy mindset routines, and treat off nights as data rather than verdicts.', lessons: ['Lesson 3.1 — How performance anxiety becomes self-fulfilling', 'Lesson 3.2 — Reframing the moment', 'Lesson 3.3 — Pre-intimacy mindset routines', 'Lesson 3.4 — Handling a bad night without spiraling'] },
+        { moduleNumber: 4, title: 'The Relationship & Communication Layer', description: 'Learn how to talk to a partner without shame, reframe intimacy as a shared journey, and utilize sensate focus techniques.', lessons: ['Lesson 4.1 — Talking to a partner about it', 'Lesson 4.2 — Reframing intimacy as a shared experience', 'Lesson 4.3 — Rebuilding confidence together', 'Lesson 4.4 — Building ongoing communication habits'] },
+        { moduleNumber: 5, title: 'Building a Sustainable Routine', description: 'Construct a structured daily habit loop across 90 days, monitor trends without obsession, and understand medical consultation triggers.', lessons: ['Lesson 5.1 — A 30/60/90-day practice structure', 'Lesson 5.2 — Tracking progress without obsessing', 'Lesson 5.3 — When to see a doctor, urologist, or therapist', 'Lesson 5.4 — Long-term confidence maintenance'] },
+      ],
     },
     guarantee: {
       heading: '100% RISK-FREE IRONCLAD GUARANTEE',
@@ -588,6 +646,13 @@ const translations: Record<Locale, I18nStrings> = {
     faq: {
       heading: 'Everything You Need To Know',
       subtitle: 'Common questions about discreet billing, instant digital access, and how the program works.',
+      items: [
+        { q: 'Does this mean something\'s wrong with me?', a: 'No. This is one of the most common physical experiences for men, and for most men without an underlying medical condition, it\'s a trainable pattern, not a defect.' },
+        { q: 'Will this happen again even after I improve?', a: 'Probably, occasionally. Progress here is a trend, not a permanent switch. An off night after weeks of progress is noise, not a sign you\'re back at the start.' },
+        { q: 'How long until I actually notice a difference?', a: 'Most men notice meaningful change in 4–8 weeks of consistent practice, with continued improvement over 2–3 months.' },
+        { q: 'Should I tell my partner I\'m using a guide like this?', a: 'Entirely up to you. Module 4 covers this in more detail, but many men find that even a brief, low-key mention reduces pressure rather than adding it.' },
+        { q: 'Is this the same thing as erectile dysfunction?', a: 'No — this guide is about timing and control, not the ability to get or maintain an erection. They\'re related areas but distinct issues, and ED has its own evaluation path with a doctor.' },
+      ],
     },
     stickyCta: {
       productTitle: 'The Composure Method Bundle',
@@ -785,6 +850,12 @@ const translations: Record<Locale, I18nStrings> = {
       instantLine: 'Instant Digital Access',
       oneTimeLine: 'One-time payment • No subscription • Instant digital delivery',
       disclaimerLine: '100% risk-free. If you don\'t notice meaningful progress in 30 days, you get a full refund.',
+      items: [
+        { label: 'The Composure Method 5-Module Master Guide', value: '$97' },
+        { label: 'Bonus #1: The "Tonight" In-Bed 5-Step Reference Sheet', value: '$30' },
+        { label: 'Bonus #2: Word-for-Word Partner Communication Playbook', value: '$25' },
+        { label: 'Bonus #3: 30/60/90-Day Interactive Progress Roadmap & Log', value: '$45' },
+      ],
     },
     mobileDashboard: {
       memberAccessActive: 'MEMBER ACCESS ACTIVE',
@@ -845,6 +916,12 @@ const translations: Record<Locale, I18nStrings> = {
       guarantee: 'Garantie de Remboursement 30 Jours',
       discreetBilling: 'Facturation Discrète',
       instantDelivery: 'Livraison Numérique Immédiate',
+      priceBadge: '20 $ USD',
+      productImageAlt: 'Le Pack Méthode Composure Numérique',
+      markVideoAria: 'Vidéo témoignage de Mark',
+      muteVideo: 'Couper le son',
+      unmuteVideo: 'Réactiver le son',
+      markLabel: 'Mark',
     },
     checkout: {
       title: 'Finalisez Votre Commande',
@@ -866,9 +943,14 @@ const translations: Record<Locale, I18nStrings> = {
       supportLabel: 'Besoin d\'aide ?',
       pleaseEnterEmail: 'Veuillez entrer votre adresse e-mail pour continuer.',
       includedItems: {
-        instantAccess: 'Accès numérique immédiat après paiement',
-        moneyBack: 'Garantie de remboursement de 30 jours',
+        instantAccess: 'Accès instantané sur tous les appareils, tous les playbooks et trackers bonus inclus',
+        moneyBack: 'Garantie de remboursement de 30 jours, 100% sans risque',
       },
+      closeCheckout: 'Fermer le paiement',
+      digitalGuideFallback: 'Guide éducatif numérique',
+      orderVerifiedHeading: 'Commande Vérifiée — Bienvenue dans Composure',
+      fulfillmentFooter: 'Livraison Immédiate • Garantie 30 Jours • Facturation Discrète',
+      submitButton: 'Accès Immédiat — 20 $',
     },
     success: {
       title: 'Commande vérifiée. Bienvenue dans Composure.',
@@ -898,6 +980,7 @@ const translations: Record<Locale, I18nStrings> = {
       guaranteeBody: 'Sans risque à 100 %. Si vous ne ressentez pas une amélioration notable du contrôle en 30 jours, obtenez un remboursement intégral. Sans question.',
       getAccess: 'Accès pour 20 $',
       medicalDisclaimer: 'Avertissement Médical :',
+      medicalDisclaimerBody: 'Ce guide est éducatif et ne constitue pas un avis médical ni ne remplace une consultation avec un médecin ou un urologue agréé.',
       copyright: '© 2026 SAVITY LLC / COMPOSURE METHOD. TOUS DROITS RÉSERVÉS.',
       encryptedCheckout: 'PAIEMENT NUMÉRIQUE SSL 256 BITS CHIFFRÉ',
     },
@@ -976,6 +1059,12 @@ const translations: Record<Locale, I18nStrings> = {
       ctaHeadline: 'Prêt à rééduquer votre système nerveux et retrouver une confiance totale ?',
       ctaBody: 'Accédez immédiatement à tous les contenus + 4 bonus pour 20 $ (valeur 197 $).',
       ctaButton: 'Commencer Maintenant — 20 $ (valeur 197 $)',
+      pillars: [
+        { title: 'Décodage Physiologique', tagline: 'Déconstruire Le Cycle Anxiété-Honte', desc: 'Comprenez pourquoi des changements surviennent dans votre trentaine à cause de la sensibilité du système nerveux. Normalisez la réponse corps-esprit pour éliminer définitivement la pression de performance.' },
+        { title: 'Entraînement Neuromusculaire Pelvien', tagline: 'L\'échelle 1-10 & L\'entraînement Stop-Start', desc: 'Cartographiez votre seuil d\'excitation, identifiez votre point de non-retour au niveau 7, et conditionnez vos muscles pelviens pour réguler l\'intensité du signal nerveux.' },
+        { title: 'Contrôle Respiratoire Parasympathique', tagline: 'Régulation Du Nerf Vague 4-2-7', desc: 'Activez la dominance parasympathique en utilisant une breathwork lente avec inspiration 4 temps / expiration 7 temps pour calmer le rythme cardiaque rapide et prolonger le timing.' },
+        { title: 'Alignement Partenaire Sans Honte', tagline: 'Scripts Mot Pour Mot & Rythme', desc: 'Transformez l\'intimité d\'un test de performance solo en une expérience partagée et détendue grâce à des cadres de communication à faible enjeu.' },
+      ],
     },
     curriculum: {
       headline: 'Ce Que Vous Obtenez Avec La Méthode Composure',
@@ -992,8 +1081,16 @@ const translations: Record<Locale, I18nStrings> = {
       bonus4Label: 'Protocole IA Personnalisé (valeur 20 $)',
       bonusesCta: 'Réclamer Tous Les Bonus Pour 20 $',
       yourBonusesHeading: 'Vos 4 Bonus Gratuits — Inclus Instantanément',
+      bonusLabelPrefix: 'BONUS #',
       unlocked: 'Débloqué',
       membersOnly: 'Réservé Aux Membres',
+      modules: [
+        { moduleNumber: 1, title: 'Comprendre Ce Qui Se Passe Réellement', description: 'Le contrôle de l\'excitation est une compétence apprise liée à la familiarité et à la sensibilité du système nerveux. Découvrez pourquoi des changements surviennent dans votre trentaine et comment briser le cycle de la honte.', lessons: ['Leçon 1.1 — Pourquoi ça apparaît, dès la trentaine', 'Leçon 1.2 — Démystifier les mythes qui gardent les hommes bloqués', 'Leçon 1.3 — Le cycle de la honte', 'Leçon 1.4 — Fixer des attentes réalistes'] },
+        { moduleNumber: 2, title: 'La Boîte À Outils Physique', description: 'Apprenez à localiser et entraîner les muscles du plancher pelvien, cartographier votre échelle d\'excitation 1-10, utiliser les techniques stop-start/edging, et exploiter la respiration parasympathique.', lessons: ['Leçon 2.1 — Conscience et entraînement du plancher pelvien', 'Leçon 2.2 — Suivi de l\'excitation : les méthodes stop-start et edging', 'Leçon 2.3 — Respiration et régulation du système nerveux', 'Leçon 2.4 — Leviers de mode de vie'] },
+        { moduleNumber: 3, title: 'Le Mental', description: 'Déplacez l\'attention de l\'auto-surveillance vers les sensations présentes, établissez des routines de préparation mentale avant l\'intimité, et traitez les soirées ratées comme des données plutôt que des verdicts.', lessons: ['Leçon 3.1 — Comment l\'anxiété de performance devient une prophétie auto-réalisatrice', 'Leçon 3.2 — Redéfinir le moment', 'Leçon 3.3 — Routines mentales pré-intimité', 'Leçon 3.4 — Gérer une mauvaise soirée sans sombrer'] },
+        { moduleNumber: 4, title: 'La Couple & Communication', description: 'Apprenez à parler à un partenaire sans honte, redéfinissez l\'intimité comme un voyage partagé, et utilisez les techniques de focus sensoriel.', lessons: ['Leçon 4.1 — Parler à un partenaire de ça', 'Leçon 4.2 — Redéfinir l\'intimité comme une expérience partagée', 'Leçon 4.3 — Reconstruire la confiance ensemble', 'Leçon 4.4 — Développer des habitudes de communication continues'] },
+        { moduleNumber: 5, title: 'Construire Une Routine Durable', description: 'Construisez une boucle d\'habitude quotidienne structurée sur 90 jours, surveillez les tendances sans obsession, et comprenez les déclencheurs de consultation médicale.', lessons: ['Leçon 5.1 — Une structure de pratique 30/60/90 jours', 'Leçon 5.2 — Suivre les progrès sans obsession', 'Leçon 5.3 — Quand consulter un médecin, un urologue ou un thérapeute', 'Leçon 5.4 — Maintenance de la confiance à long terme'] },
+      ],
     },
     guarantee: {
       heading: 'ESSAYEZ LA MÉTHODE COMPOSURE PENDANT 30 JOURS COMPLETS — ZERO RISQUE',
@@ -1038,10 +1135,23 @@ const translations: Record<Locale, I18nStrings> = {
       instantLine: 'Accès Numérique Instantané',
       oneTimeLine: 'Paiement unique • Pas d\'abonnement • Livraison numérique instantanée',
       disclaimerLine: '100 % sans risque. Si vous ne constatez pas de progrès notable en 30 jours, vous êtes intégralement remboursé.',
+      items: [
+        { label: 'Le Guide Maître 5 Modules De La Méthode Composure', value: '97 $' },
+        { label: 'Bonus #1 : La Fiche De Référence "Tonight" En 5 Étapes', value: '30 $' },
+        { label: 'Bonus #2 : Le Playbook De Communication De Couple Mot Pour Mot', value: '25 $' },
+        { label: 'Bonus #3 : La Feuille De Route Interactive 30/60/90 Jours', value: '45 $' },
+      ],
     },
     faq: {
       heading: 'Tout Ce Que Vous Devez Savoir',
       subtitle: 'Questions fréquentes sur la facturation discrète, l\'accès numérique instantané et le fonctionnement du programme.',
+      items: [
+        { q: 'Est-ce que ça veut dire qu\'il y a quelque chose qui ne va pas chez moi ?', a: 'Non. C\'est l\'une des expériences physiques les plus courantes chez les hommes, et pour la plupart des hommes sans condition médicale sous-jacente, c\'est un pattern entraînable, pas un défaut.' },
+        { q: 'Est-ce que ça va revenir même après avoir progressé ?', a: 'Probablement, occasionnellement. Le progrès est une tendance, pas un interrupteur permanent. Une soirée ratée après des semaines de progrès est du bruit, pas un signe que vous êtes revenu au point de départ.' },
+        { q: 'Combien de temps avant de remarquer une différence ?', a: 'La plupart des hommes remarquent un changement significatif en 4 à 8 semaines de pratique régulière, avec une amélioration continue sur 2 à 3 mois.' },
+        { q: 'Dois-je dire à mon partenaire que j\'utilise un guide comme celui-ci ?', a: 'Entièrement à vous de décider. Le Module 4 couvre cela plus en détail, mais beaucoup d\'hommes trouvent que même une mention brève et discrète réduit la pression plutôt que de l\'ajouter.' },
+        { q: 'Est-ce la même chose que la dysfonction érectile ?', a: 'Non — ce guide porte sur le timing et le contrôle, pas sur la capacité à obtenir ou maintenir une érection. Ce sont des domaines liés mais distincts, et la DE a son propre parcours d\'évaluation chez un médecin.' },
+      ],
     },
     stickyCta: {
       productTitle: 'Le Pack Méthode Composure',
@@ -1270,6 +1380,12 @@ const translations: Record<Locale, I18nStrings> = {
       guarantee: 'Garanzia Rimborso 30 Giorni',
       discreetBilling: 'Fatturazione Discreta',
       instantDelivery: 'Consegna Digitale Immediata',
+      priceBadge: '$20 USD',
+      productImageAlt: 'Il Pacchetto Digitale Metodo Composure',
+      markVideoAria: 'Video testimonianza di Mark',
+      muteVideo: 'Disattiva audio',
+      unmuteVideo: 'Attiva audio',
+      markLabel: 'Mark',
     },
     checkout: {
       title: 'Completa il Tuo Ordine',
@@ -1291,9 +1407,14 @@ const translations: Record<Locale, I18nStrings> = {
       supportLabel: 'Hai bisogno di assistenza?',
       pleaseEnterEmail: 'Inserisci il tuo indirizzo e-mail per continuare.',
       includedItems: {
-        instantAccess: 'Accesso digitale immediato dopo il pagamento',
-        moneyBack: 'Garanzia di rimborso di 30 giorni',
+        instantAccess: 'Accesso istantaneo su tutti i dispositivi, tutti i playbook e tracker bonus inclusi',
+        moneyBack: 'Garanzia di rimborso di 30 giorni, 100% senza rischi',
       },
+      closeCheckout: 'Chiudi il pagamento',
+      digitalGuideFallback: 'Guida educativa digitale',
+      orderVerifiedHeading: 'Ordine Verificato — Benvenuto in Composure',
+      fulfillmentFooter: 'Consegna Immediata • Garanzia 30 Giorni • Fatturazione Discreta',
+      submitButton: 'Accesso Immediato — $20',
     },
     success: {
       title: 'Ordine verificato. Benvenuto in Composure.',
@@ -1323,6 +1444,7 @@ const translations: Record<Locale, I18nStrings> = {
       guaranteeBody: 'Senza rischi al 100%. Se non noti un miglioramento significativo del controllo entro 30 giorni, ricevi un rimborso completo. Senza domande.',
       getAccess: 'Accesso per $20',
       medicalDisclaimer: 'Disclaimer Medico:',
+      medicalDisclaimerBody: 'Questa guida è educativa e non costituisce consulenza medica né sostituisce la consultazione con un medico o urologo autorizzato.',
       copyright: '© 2026 SAVITY LLC / COMPOSURE METHOD. TUTTI I DIRITTI RISERVATI.',
       encryptedCheckout: 'PAGAMENTO DIGITALE SSL 256 BIT CRIPTATO',
     },
@@ -1408,6 +1530,12 @@ const translations: Record<Locale, I18nStrings> = {
       ctaHeadline: 'Pronto a rieducare il tuo sistema nervoso e riconquistare piena sicurezza in camera da letto?',
       ctaBody: 'Ottieni accesso immediato a tutti i contenuti + 4 bonus gratuiti per $20 (valore totale $197).',
       ctaButton: 'Inizia Ora — $20 (Valore $197)',
+      pillars: [
+        { title: 'Decodifica Fisiologica', tagline: 'Decostruire Il Ciclo Ansia-Vergogna', desc: 'Scopri perché i cambiamenti avvengono nella tua trentina a causa della sensibilità del sistema nervoso. Normalizza la risposta corpo-mente per rimuovere permanentemente la pressione della performance.' },
+        { title: 'Allenamento Neuromuscolare Pelvico', tagline: 'La Scala 1-10 & L\'allenamento Stop-Start', desc: 'Mappa la tua soglia di eccitazione, identifica il tuo punto di non ritorno al livello 7, e condiziona i tuoi muscoli pelvici per regolare l\'intensità del segnale nervoso.' },
+        { title: 'Controllo Respiratorio Parasimpatico', tagline: 'Regolazione Del Nervo Vago 4-2-7', desc: 'Attiva la dominanza parasimpatica usando una respirazione lenta con inspirazione di 4 conti / espirazione di 7 conti per calmare il battito cardiaco rapido e prolungare il timing.' },
+        { title: 'Allineamento Con Il Partner Senza Vergogna', tagline: 'Script Parola Per Parola & Ritmo', desc: 'Trasforma l\'intimità da un test di performance individuale in un\'esperienza condivisa e rilassata grazie a framework di comunicazione a basso rischio.' },
+      ],
     },
     curriculum: {
       headline: 'Cosa Ottieni Con Il Metodo Composure',
@@ -1426,6 +1554,14 @@ const translations: Record<Locale, I18nStrings> = {
       bonus4Label: 'Protocollo Di Personalizzazione IA (Valore $20)',
       bonusesCta: 'Richiedi Tutti I Bonus Per $20',
       yourBonusesHeading: 'I Tuoi 4 Bonus Gratuiti — Inclusi Istantaneamente',
+      bonusLabelPrefix: 'BONUS #',
+      modules: [
+        { moduleNumber: 1, title: 'Comprendere Cosa Sta Succedendo Davvero', description: 'Il controllo dell\'eccitazione è una competenza appresa legata alla familiarità e alla sensibilità del sistema nervoso. Scopri perché i cambiamenti avvengono nella tua trentina e come rompere il ciclo della vergogna.', lessons: ['Lezione 1.1 — Perché questo appare, a partire dalla trentina', 'Lezione 1.2 — Smontare i miti che tengono gli uomini bloccati', 'Lezione 1.3 — Il ciclo della vergogna', 'Lezione 1.4 — Impostare aspettative realistiche'] },
+        { moduleNumber: 2, title: 'Il Kit Di Strumenti Fisici', description: 'Impara a localizzare e allenare i muscoli del pavimento pelvico, mappare la tua scala di eccitazione 1-10, utilizzare le tecniche stop-start/edging, e sfruttare la respirazione parasimpatica.', lessons: ['Lezione 2.1 — Consapevolezza e allenamento del pavimento pelvico', 'Lezione 2.2 — Monitoraggio dell\'eccitazione: i metodi stop-start e edging', 'Lezione 2.3 — Respirazione e regolazione del sistema nervoso', 'Lezione 2.4 — Leve di stile di vita'] },
+        { moduleNumber: 3, title: 'Il Gioco Mentale', description: 'Sposta l\'attenzione dall\'auto-monitoraggio alle sensazioni presenti, stabilisci routine mentali pre-intimità, e tratta le serate negative come dati piuttosto che verdetti.', lessons: ['Lezione 3.1 — Come l\'ansia da performance diventa una profezia auto-avverante', 'Lezione 3.2 — Ristrutturare il momento', 'Lezione 3.3 — Routine mentali pre-intimità', 'Lezione 3.4 — Gestire una brutta serata senza spirare'] },
+        { moduleNumber: 4, title: 'La Relazione & Comunicazione', description: 'Impara a parlare con un partner senza vergogna, ridefinisci l\'intimità come un viaggio condiviso, e utilizza le tecniche di focus sensoriale.', lessons: ['Lezione 4.1 — Parlare con un partner di questo', 'Lezione 4.2 — Ridefinire l\'intimità come un\'esperienza condivisa', 'Lezione 4.3 — Ricostruire la fiducia insieme', 'Lezione 4.4 — Costruire abitudini di comunicazione continue'] },
+        { moduleNumber: 5, title: 'Costruire Una Routine Sostenibile', description: 'Costruisci una struttura di abitudine quotidiana su 90 giorni, monitora le tendenze senza ossessione, e comprendi i trigger di consultazione medica.', lessons: ['Lezione 5.1 — Una struttura di pratica 30/60/90 giorni', 'Lezione 5.2 — Tracciare i progressi senza ossessionarsi', 'Lezione 5.3 — Quando vedere un medico, un urologo o un terapeuta', 'Lezione 5.4 — Manutenzione della fiducia a lungo termine'] },
+      ],
     },
     guarantee: {
       heading: 'GARANZIA BLINDATA AL 100% SENZA RISCHI',
@@ -1438,6 +1574,13 @@ const translations: Record<Locale, I18nStrings> = {
     faq: {
       heading: 'Tutto Quello Che Devi Sapere',
       subtitle: 'Domande comuni sulla fatturazione discreta, l\'accesso digitale istantaneo e il funzionamento del programma.',
+      items: [
+        { q: 'Questo significa che c\'è qualcosa che non va in me?', a: 'No. È una delle esperienze fisiche più comuni per gli uomini, e per la maggior parte degli uomini senza una condizione medica sottostante, è un pattern allenabile, non un difetto.' },
+        { q: 'Ricapiterà anche dopo aver migliorato?', a: 'Probabilmente, occasionalmente. Il progresso è una tendenza, non un interruttore permanente. Una serata negativa dopo settimane di progresso è rumore, non un segno che sei tornato al punto di partenza.' },
+        { q: 'Quanto tempo prima di notare una differenza?', a: 'La maggior parte degli uomini nota un cambiamento significativo in 4-8 settimane di pratica costante, con un miglioramento continuo oltre i 2-3 mesi.' },
+        { q: 'Devo dire al mio partner che sto usando una guida come questa?', a: 'Solo a te la scelta. Il Modulo 4 tratta questo argomento più nel dettaglio, ma molti uomini trovano che anche una breve menzione discreta riduca la pressione piuttosto che aggiungerla.' },
+        { q: 'È la stessa cosa della disfunzione erettile?', a: 'No — questa guida riguarda il timing e il controllo, non la capacità di ottenere o mantenere un\'erezione. Sono aree correlate ma distinte, e la DE ha il suo percorso di valutazione con un medico.' },
+      ],
     },
     stickyCta: {
       productTitle: 'Il Pacchetto Metodo Composure',
@@ -1635,6 +1778,12 @@ const translations: Record<Locale, I18nStrings> = {
       instantLine: 'Accesso Digitale Immediato',
       oneTimeLine: 'Pagamento unico • Nessun abbonamento • Consegna digitale istantanea',
       disclaimerLine: '100% senza rischi. Se non noti progressi significativi entro 30 giorni, ricevi un rimborso completo.',
+      items: [
+        { label: 'La Guida Maestra Da 5 Moduli Del Metodo Composure', value: '$97' },
+        { label: 'Bonus #1: Il Foglio Di Riferimento "Stanotte" In 5 Passi', value: '$30' },
+        { label: 'Bonus #2: Il Playbook Di Comunicazione Con Il Partner Parola Per Parola', value: '$25' },
+        { label: 'Bonus #3: La Roadmap Interattiva Di Progresso 30/60/90 Giorni', value: '$45' },
+      ],
     },
     mobileDashboard: {
       memberAccessActive: 'ACCESSO MEMBRO ATTIVO',
@@ -1695,6 +1844,12 @@ const translations: Record<Locale, I18nStrings> = {
       guarantee: '30-Dagen Geld Terug-Garantie',
       discreetBilling: 'Discrete Facturatie',
       instantDelivery: 'Directe Digitale Levering',
+      priceBadge: '$20 USD',
+      productImageAlt: 'Het Composure Methode Digitaal Pakket',
+      markVideoAria: 'Mark getuigenisvideo',
+      muteVideo: 'Geluid uitzetten',
+      unmuteVideo: 'Geluid aanzetten',
+      markLabel: 'Mark',
     },
     checkout: {
       title: 'Voltooi Je Bestelling',
@@ -1716,9 +1871,14 @@ const translations: Record<Locale, I18nStrings> = {
       supportLabel: 'Hulp nodig?',
       pleaseEnterEmail: 'Voer je e-mailadres in om door te gaan.',
       includedItems: {
-        instantAccess: 'Directe digitale toegang na betaling',
-        moneyBack: '30 dagen geld-terug-garantie',
+        instantAccess: 'Directe toegang op alle apparaten, alle gratis bonus playbooks & trackers',
+        moneyBack: '30-dagen 100% geld-terug-garantie',
       },
+      closeCheckout: 'Sluit betaling',
+      digitalGuideFallback: 'Digitale educatieve gids',
+      orderVerifiedHeading: 'Bestelling Geverifieerd — Welkom bij Composure',
+      fulfillmentFooter: 'Directe Levering • 30-Dagen Garantie • Discrete Facturatie',
+      submitButton: 'Directe Toegang — $20',
     },
     success: {
       title: 'Bestelling geverifieerd. Welkom bij Composure.',
@@ -1748,6 +1908,7 @@ const translations: Record<Locale, I18nStrings> = {
       guaranteeBody: '100% risicovrij. Als je binnen 30 dagen geen merkbaar betere controle ervaart, ontvang je een volledige terugbetaling. Geen vragen.',
       getAccess: 'Toegang voor $20',
       medicalDisclaimer: 'Medische Disclaimer:',
+      medicalDisclaimerBody: 'Deze gids is educatief en vormt geen medisch advies of vervanging voor een consult met een erkend arts of uroloog.',
       copyright: '© 2026 SAVITY LLC / COMPOSURE METHOD. ALLE RECHTEN VOORBEHOUDEN.',
       encryptedCheckout: 'VERSLEUTELDE DIGITALE BETALING SSL 256-BIT',
     },
@@ -1831,8 +1992,14 @@ const translations: Record<Locale, I18nStrings> = {
       headline: 'Een Compleet 4-Pijler Systeem Voor Blijvende Controle',
       subtext: 'De Composure Methode combineert fysiologische educatie, bekkenconditionering, parasympathische ademhalingsoefeningen en partnerscripts in een simpele dagelijkse gewoonte.',
       ctaHeadline: 'Klaar om je zenuwstelsel opnieuw te trainen en volledig zelfvertrouwen in de slaapkamer terug te krijgen?',
-      ctaBody: 'Krijg direct toegang tot alle onderdelen + 4 gratis bonussen voor $20 (volledige waarde $197).',
+      ctaBody: 'Krijg direct toegang tot alle assets + 4 gratis bonussen voor $20 (totale waarde $197).',
       ctaButton: 'Begin Nu — $20 (Waarde $197)',
+      pillars: [
+        { title: 'Fysiologische Decodering', tagline: 'Deconstructie Van De Angst- & Schaamtecyclus', desc: 'Leer waarom veranderingen optreden in je 30e vanwege zenuwstelselsensitiviteit. Normaliseer de geest-lichaamrespons om performancedruk permanent te verwijderen.' },
+        { title: 'Neuromusculaire Bekkentraining', tagline: 'De 1-10 Schaal & Stop-Start Trainer', desc: 'Kaart je opwindingdrempel, identificeer je niveau 7 punt van geen retour, en conditioneer je bekken spieren om zenuwsignaalintensiteit te reguleren.' },
+        { title: 'Parasympatische Ademhalingscontrole', tagline: '4-2-7 Vaguszenuwregulatie', desc: 'Activeer parasympathische dominantie met langzame 4-telling inademing / 7-telling uitademing breathwork om een snelle hartslag te kalmeren en timing te verlengen.' },
+        { title: 'Schaamtevrije Partneruitlijning', tagline: 'Woord-voor-woords Scripts & Tijdsindeling', desc: 'Verander intimiteit van een solo prestatietest naar een ontspannen, gedeelde ervaring met communicatieframeworks met lage inzet.' },
+      ],
     },
     curriculum: {
       headline: 'Wat Je Krijgt Met De Composure Methode',
@@ -1851,6 +2018,14 @@ const translations: Record<Locale, I18nStrings> = {
       bonus4Label: 'AI Personalisatieprotocol (Waarde $20)',
       bonusesCta: 'Claim Alle Bonussen Voor $20',
       yourBonusesHeading: 'Jouw 4 Gratis Bonussen — Direct Inbegrepen',
+      bonusLabelPrefix: 'BONUS #',
+      modules: [
+        { moduleNumber: 1, title: 'Begrijpen Wat Er Werkelijk Gebeurt', description: 'Opwindingcontrole is een aangeleerde vaardigheid die gekoppeld is aan familiariteit en zenuwstelselsensitiviteit. Ontdek waarom veranderingen optreden in je 30e en hoe je de schaamtecyclus kunt doorbreken.', lessons: ['Les 1.1 — Waarom dit voorkomt, vanaf je 30e', 'Les 1.2 — De mythen ontkrachten die mannen vastlaten', 'Les 1.3 — De schaamtecyclus', 'Les 1.4 — Realistische verwachtingen stellen'] },
+        { moduleNumber: 2, title: 'De Fysieke Toolkit', description: 'Leer de bekkenbodemspieren te lokaliseren en trainen, je 1-10 opwindingsschaal te in kaart te brengen, stop-start/edging technieken te gebruiken, en parasympathische ademhaling te benutten.', lessons: ['Les 2.1 — Bekkenbodem bewustzijn en training', 'Les 2.2 — Opwinding volgen: de stop-start en edging methoden', 'Les 2.3 — Ademhaling en zenuwstelselregulatie', 'Les 2.4 — Levensstijl grepen'] },
+        { moduleNumber: 3, title: 'Het Mentale Spel', description: 'Verplaats de aandacht van zelf-monitoring naar huidige sensatie, vestig pre-intimiteit mindset routines, en behandel slechte avonden als data in plaats van vonnis.', lessons: ['Les 3.1 — Hoe prestatieangst een self-fulfilling prophecy wordt', 'Les 3.2 — Het moment herframen', 'Les 3.3 — Pre-intimiteit mindset routines', 'Les 3.4 — Een slechte avond hanteren zonder te spiralen'] },
+        { moduleNumber: 4, title: 'De Relatie & Communicatielaag', description: 'Leer hoe je met een partner kunt praten zonder schaamte, herdefinieer intimiteit als een gedeelde reis, en gebruik sensate focus technieken.', lessons: ['Les 4.1 — Met een partner hierover praten', 'Les 4.2 — Intimiteit herdefinieren als een gedeelde ervaring', 'Les 4.3 — Vertrouwen samen opbouwen', 'Les 4.4 — Doorlopende communicatiegewoonten opbouwen'] },
+        { moduleNumber: 5, title: 'Een Duurzame Routine Opbouwen', description: 'Bouw een gestructureerde dagelijkse gewoonte loop over 90 dagen, monitor trends zonder obsessie, en begrijp medische consult triggers.', lessons: ['Les 5.1 — Een 30/60/90-dagen praktijkstructuur', 'Les 5.2 — Vooruitgang volgen zonder te obsederen', 'Les 5.3 — Wanneer een arts, uroloog of therapeut raadplegen', 'Les 5.4 — Lange-termijn vertrouwen onderhouden'] },
+      ],
     },
     guarantee: {
       heading: '100% RISICOVRIJE IJZERSTERKE GARANTIE',
@@ -1863,6 +2038,13 @@ const translations: Record<Locale, I18nStrings> = {
     faq: {
       heading: 'Alles Wat Je Moet Weten',
       subtitle: 'Veelgestelde vragen over discrete facturering, directe digitale toegang en hoe het programma werkt.',
+      items: [
+        { q: 'Betekent dit dat er iets mis is met me?', a: 'Nee. Dit is een van de meest voorkomende fysieke ervaringen voor mannen, en voor de meeste mannen zonder een onderliggende medische aandoening is het een treinbaar patroon, geen defect.' },
+        { q: 'Zal dit weer gebeuren ook nadat ik heb verbeterd?', a: 'Waarschijnlijk, af en toe. Vooruitgang is een trend, geen permanente schakelaar. Een slechte avond na weken van vooruitgang is ruis, geen teken dat je weer bij de start staat.' },
+        { q: 'Hoe lang duurt het voordat ik echt een verschil merk?', a: 'De meeste mannen merken een betekenisvolle verandering in 4-8 weken van consistente oefening, met voortdurende verbetering over 2-3 maanden.' },
+        { q: 'Moet ik mijn partner vertellen dat ik een gids als deze gebruik?', a: 'Volledig aan jou. Module 4 behandelt dit meer in detail, maar veel mannen vinden dat zelfs een korte, low-key vermelding de druk verlaagt in plaats van toevoegt.' },
+        { q: 'Is dit hetzelfde als erectiestoornissen?', a: 'Nee — deze gids gaat over timing en controle, niet over het vermogen om een erectie te krijgen of te behouden. Het zijn gerelateerde maar verschillende gebieden, en ED heeft zijn eigen evaluatiepad bij een arts.' },
+      ],
     },
     stickyCta: {
       productTitle: 'Het Composure Methode Pakket',
@@ -2060,6 +2242,12 @@ const translations: Record<Locale, I18nStrings> = {
       instantLine: 'Directe Digitale Toegang',
       oneTimeLine: 'Eenmalige betaling • Geen abonnement • Directe digitale levering',
       disclaimerLine: '100% risicovrij. Als je binnen 30 dagen geen betekenisvolle vooruitgang merkt, krijg je een volledige terugbetaling.',
+      items: [
+        { label: 'De Composure Methode 5-Module Hoofdgids', value: '$97' },
+        { label: 'Bonus #1: De "Vanavond" 5-Stappen In-Bed Naslagkaart', value: '$30' },
+        { label: 'Bonus #2: Woord-voor-woords Partner Communicatie Playbook', value: '$25' },
+        { label: 'Bonus #3: 30/60/90-Dagen Interactieve Voortgangsroadmap & Log', value: '$45' },
+      ],
     },
     mobileDashboard: {
       memberAccessActive: 'LEDENTOEGANG ACTIEF',
@@ -2120,6 +2308,12 @@ const translations: Record<Locale, I18nStrings> = {
       guarantee: '30-Tage-Geld-zurück-Garantie',
       discreetBilling: 'Diskrete Abrechnung',
       instantDelivery: 'Sofortige Digitale Zustellung',
+      priceBadge: '$20 USD',
+      productImageAlt: 'Das Composure-Methode Digital-Paket',
+      markVideoAria: 'Mark-Zeugenaussage-Video',
+      muteVideo: 'Stummschalten',
+      unmuteVideo: 'Stummschaltung aufheben',
+      markLabel: 'Mark',
     },
     checkout: {
       title: 'Bestellung Abschließen',
@@ -2141,9 +2335,14 @@ const translations: Record<Locale, I18nStrings> = {
       supportLabel: 'Brauchen Sie Hilfe?',
       pleaseEnterEmail: 'Bitte geben Sie Ihre E-Mail-Adresse ein, um fortzufahren.',
       includedItems: {
-        instantAccess: 'Sofortiger digitaler Zugang nach der Zahlung',
-        moneyBack: '30-Tage-Geld-zurück-Garantie',
+        instantAccess: 'Sofortiger Zugriff auf alle Geräte, alle kostenlosen Bonus-Handbücher & Tracker',
+        moneyBack: '30-Tage 100% Geld-zurück-Garantie',
       },
+      closeCheckout: 'Bezahlung schließen',
+      digitalGuideFallback: 'Digitaler Bildungsleitfaden',
+      orderVerifiedHeading: 'Bestellung Verifiziert — Willkommen bei Composure',
+      fulfillmentFooter: 'Sofortige Zustellung • 30-Tage-Garantie • Diskrete Abrechnung',
+      submitButton: 'Sofortiger Zugang — $20',
     },
     success: {
       title: 'Bestellung verifiziert. Willkommen bei Composure.',
@@ -2173,6 +2372,7 @@ const translations: Record<Locale, I18nStrings> = {
       guaranteeBody: '100 % risikofrei. Wenn Sie innerhalb von 30 Tagen keine spürbare Verbesserung der Kontrolle feststellen, erhalten Sie eine vollständige Rückerstattung. Ohne Fragen.',
       getAccess: 'Zugang für $20',
       medicalDisclaimer: 'Medizinischer Hinweis:',
+      medicalDisclaimerBody: 'Dieser Leitfaden ist Bildungsmaterial und stellt keine medizinische Beratung dar und ersetzt keine Konsultation mit einem zugelassenen Arzt oder Urologen.',
       copyright: '© 2026 SAVITY LLC / COMPOSURE METHOD. ALLE RECHTE VORBEHALTEN.',
       encryptedCheckout: 'VERSCHLÜSSELTE DIGITALE BEZAHLUNG SSL 256-BIT',
     },
@@ -2256,8 +2456,14 @@ const translations: Record<Locale, I18nStrings> = {
       headline: 'Ein Vollständiges 4-Säulen-System Für Dauerhafte Kontrolle',
       subtext: 'Die Composure Methode kombiniert physiologische Aufklärung, Beckenkonditionierung, parasympathische Atemarbeit und Partner-Skripte zu einer einfachen täglichen Gewohnheit.',
       ctaHeadline: 'Bereit, Ihr Nervensystem neu zu trainieren und volles Selbstvertrauen im Schlafzimmer zurückzugewinnen?',
-      ctaBody: 'Erhalten Sie sofortigen Zugang zu allen Inhalten + 4 kostenlosen Boni für $20 (Gesamtwert $197).',
-      ctaButton: 'Jetzt Starten — $20 (Wert $197)',
+      ctaBody: 'Erhalten Sie sofortigen Zugriff auf alle Assets + 4 kostenlose Boni für $20 (Gesamtwert $197).',
+      ctaButton: 'Jetzt Loslegen — $20 (Wert $197)',
+      pillars: [
+        { title: 'Physiologische Dekodierung', tagline: 'Dekonstruktion Der Angst- & Scham-Schleife', desc: 'Lernen Sie, warum Veränderungen in Ihren 30er Jahren aufgrund von Nervensystemempfindlichkeit auftreten. Normalisieren Sie die Geist-Körper-Reaktion, um Leistungsdruck dauerhaft zu beseitigen.' },
+        { title: 'Neuromuskuläres Beckenbodentraining', tagline: 'Die 1–10 Skala & Stop-Start-Trainer', desc: 'Kartieren Sie Ihre Erregungsschwelle, identifizieren Sie Ihren Punkt ohne Rückkehr auf Stufe 7, und konditionieren Sie Ihre Beckenbodenmuskeln, um die Nervensignalintensität zu regulieren.' },
+        { title: 'Parasympathische Atemkontrolle', tagline: '4-2-7 Vagusnerven-Regulation', desc: 'Aktivieren Sie parasympathische Dominanz mit langsamer 4er-Einatmung / 7er-Ausatmung Atemarbeit, um schnellen Herzschlag zu beruhigen und den Zeitpunkt zu verlängern.' },
+        { title: 'Schamfreie Partnerausrichtung', tagline: 'Wörtliche Skripte & Tempo', desc: 'Verwandeln Sie Intimität von einem Solo-Leistungstest in eine entspannte, gemeinsame Erfahrung mit risikoarmen Kommunikationsframeworks.' },
+      ],
     },
     curriculum: {
       headline: 'Was Sie Mit Der Composure Methode Erhalten',
@@ -2276,6 +2482,14 @@ const translations: Record<Locale, I18nStrings> = {
       bonus4Label: 'KI-Personalisierungsprotokoll (Wert $20)',
       bonusesCta: 'Alle Boni Für $20 Sichern',
       yourBonusesHeading: 'Ihre 4 Kostenlosen Boni — Sofort Inbegriffen',
+      bonusLabelPrefix: 'BONUS #',
+      modules: [
+        { moduleNumber: 1, title: 'Verstehen, Was Wirklich Passiert', description: 'Erregungskontrolle ist eine erlernte Fähigkeit, die an Vertrautheit und Nervensystemempfindlichkeit gebunden ist. Entdecken Sie, warum Veränderungen in Ihren 30er Jahren auftreten und wie Sie die Scham-Schleife durchbrechen.', lessons: ['Lektion 1.1 — Warum das auftritt, ab den 30er Jahren', 'Lektion 1.2 — Die Mythen entlarven, die Männer festhalten', 'Lektion 1.3 — Die Scham-Schleife', 'Lektion 1.4 — Realistische Erwartungen setzen'] },
+        { moduleNumber: 2, title: 'Der Physische Werkzeugkasten', description: 'Lernen Sie, die Beckenbodenmuskeln zu lokalisieren und zu trainieren, Ihre 1–10 Erregungsskala zu kartieren, Stop-Start/Edging-Techniken einzusetzen und parasympathische Atemarbeit zu nutzen.', lessons: ['Lektion 2.1 — Beckenboden-Bewusstsein und -Training', 'Lektion 2.2 — Erregungsverfolgung: die Stop-Start- und Edging-Methoden', 'Lektion 2.3 — Atmung und Nervensystem-Regulation', 'Lektion 2.4 — Lifestyle-Hebel'] },
+        { moduleNumber: 3, title: 'Das Mentale Spiel', description: 'Verlagern Sie die Aufmerksamkeit von der Selbstüberwachung auf gegenwärtige Empfindungen, etablieren Sie Pre-Intimität-Mindset-Routinen und behandeln Sie schlechte Nächte als Daten statt als Urteile.', lessons: ['Lektion 3.1 — Wie Leistungsangst selbst erfüllend wird', 'Lektion 3.2 — Den Moment neu framen', 'Lektion 3.3 — Pre-Intimität-Mindset-Routinen', 'Lektion 3.4 — Eine schlechte Nacht handhaben, ohne zu spirale'] },
+        { moduleNumber: 4, title: 'Die Beziehungs- & Kommunikationsebene', description: 'Lernen Sie, wie Sie ohne Scham mit einem Partner sprechen, Intimität als gemeinsame Reise neu definieren und Sensate-Focus-Techniken einsetzen.', lessons: ['Lektion 4.1 — Mit einem Partner darüber sprechen', 'Lektion 4.2 — Intimität als gemeinsame Erfahrung neu definieren', 'Lektion 4.3 — Gemeinsam Vertrauen wiederaufbauen', 'Lektion 4.4 — Laufende Kommunikationsgewohnheiten aufbauen'] },
+        { moduleNumber: 5, title: 'Eine Nachhaltige Routine Aufbauen', description: 'Konstruieren Sie eine strukturierte tägliche Gewohnheitsschleife über 90 Tage, überwachen Sie Trends ohne Obsession und verstehen Sie medizinische Konsultationsauslöser.', lessons: ['Lektion 5.1 — Eine 30/60/90-Tage-Praxisstruktur', 'Lektion 5.2 — Fortschritt verfolgen, ohne zu obsessieren', 'Lektion 5.3 — Wann einen Arzt, Urologen oder Therapeuten aufsuchen', 'Lektion 5.4 — Langfristige Vertrauenswartung'] },
+      ],
     },
     guarantee: {
       heading: '100 % RISIKOFREIE EISERNE GARANTIE',
@@ -2288,6 +2502,13 @@ const translations: Record<Locale, I18nStrings> = {
     faq: {
       heading: 'Alles, Was Sie Wissen Müssen',
       subtitle: 'Häufige Fragen zu diskreter Abrechnung, sofortigem digitalen Zugang und der Funktionsweise des Programms.',
+      items: [
+        { q: 'Bedeutet das, dass etwas mit mir nicht stimmt?', a: 'Nein. Dies ist eine der häufigsten körperlichen Erfahrungen für Männer, und für die meisten Männer ohne eine zugrunde liegende Erkrankung ist es ein trainierbares Muster, kein Defekt.' },
+        { q: 'Wird das auch nach meiner Verbesserung wieder auftreten?', a: 'Wahrscheinlich, gelegentlich. Fortschritt ist ein Trend, kein permanenter Schalter. Eine schlechte Nacht nach Wochen des Fortschritts ist Rauschen, kein Zeichen, dass Sie wieder am Anfang stehen.' },
+        { q: 'Wie lange dauert es, bis ich tatsächlich einen Unterschied bemerke?', a: 'Die meisten Männer bemerken eine bedeutsame Veränderung in 4–8 Wochen konsequenter Übung, mit weiterer Verbesserung über 2–3 Monate.' },
+        { q: 'Sollte ich meiner Partnerin sagen, dass ich einen solchen Leitfaden verwende?', a: 'Völlig Ihre Entscheidung. Modul 4 behandelt dies ausführlicher, aber viele Männer finden, dass selbst eine kurze, unaufdringliche Erwähnung den Druck eher verringert als erhöht.' },
+        { q: 'Ist das dasselbe wie Erektionsstörungen?', a: 'Nein — dieser Leitfaden handelt von Timing und Kontrolle, nicht von der Fähigkeit, eine Erektion zu bekommen oder zu halten. Es sind verwandte, aber unterschiedliche Bereiche, und ED hat seinen eigenen Evaluationsweg bei einem Arzt.' },
+      ],
     },
     stickyCta: {
       productTitle: 'Das Composure Methode Paket',
@@ -2485,6 +2706,12 @@ const translations: Record<Locale, I18nStrings> = {
       instantLine: 'Sofortiger Digitaler Zugang',
       oneTimeLine: 'Einmalzahlung • Kein Abonnement • Sofortige digitale Lieferung',
       disclaimerLine: '100 % risikofrei. Wenn Sie innerhalb von 30 Tagen keinen spürbaren Fortschritt bemerken, erhalten Sie eine vollständige Rückerstattung.',
+      items: [
+        { label: 'Die Composure Methode 5-Module Master-Anleitung', value: '$97' },
+        { label: 'Bonus #1: Das "Heute Abend" 5-Schritte-Bett-Referenzblatt', value: '$30' },
+        { label: 'Bonus #2: Wortwörtliches Partner-Kommunikations-Playbook', value: '$25' },
+        { label: 'Bonus #3: 30/60/90-Tage Interaktive Fortschritts-Roadmap & Protokoll', value: '$45' },
+      ],
     },
     mobileDashboard: {
       memberAccessActive: 'MITGLIEDERZUGANG AKTIV',

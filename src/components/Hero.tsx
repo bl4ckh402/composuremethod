@@ -3,7 +3,6 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import lt from '../assets/images/lt.png';
 import markTestimonial from '../assets/images/mark_testmonial.mp4';
-import { COPY } from '../lib/brand';
 import { useI18n } from '../lib/i18n';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -65,10 +64,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckout, isMemberVerified = f
           <div className="lg:col-span-6 space-y-8 text-center lg:text-left">
             <div className="space-y-5">
               <h1 className="font-display text-[2.5rem] sm:text-[3rem] md:text-[3.5rem] font-bold text-[#081d00] tracking-tight leading-[1.08]">
-                {COPY.heroHeadline}
+                {t('hero.headline')}
               </h1>
               <p className="font-body text-base md:text-lg text-[#43483e] max-w-xl leading-relaxed mx-auto lg:mx-0">
-                {COPY.heroSubtext}
+                {t('hero.subtext')}
               </p>
             </div>
 
@@ -79,7 +78,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckout, isMemberVerified = f
                 className="btn-primary text-base md:text-lg py-4 px-10"
               >
                 <span className="material-symbols-outlined text-[#b7f473] text-xl">lock_open</span>
-                <span>{isMemberVerified ? t('hero.ctaSecondary') : COPY.ctaPrimary}</span>
+                <span>{isMemberVerified ? t('hero.ctaSecondary') : t('hero.ctaPrimary')}</span>
                 <span className="material-symbols-outlined text-lg">arrow_forward</span>
               </button>
             </div>
@@ -110,7 +109,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckout, isMemberVerified = f
               <div className="aspect-video">
                 <img
                   src={lt}
-                  alt="The Composure Method Digital Bundle"
+                  alt={t('hero.productImageAlt')}
                   fetchPriority="high"
                   className="w-full h-full object-cover"
                 />
@@ -118,7 +117,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckout, isMemberVerified = f
               <div className="absolute inset-0 bg-gradient-to-t from-[#081d00]/60 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-4 left-4">
                 <span className="bg-[#b7f473] text-[#081d00] px-3 py-1.5 rounded-full font-display font-bold text-sm shadow-lg">
-                  $20 USD
+                  {t('hero.priceBadge')}
                 </span>
               </div>
             </div>
@@ -138,24 +137,24 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckout, isMemberVerified = f
                 onEnded={() => {}}
                 controls
                 className="w-full h-full object-cover"
-                aria-label="Mark testimonial video"
+                aria-label={t('hero.markVideoAria')}
               />
             </div>
-            <button
-              onClick={handleToggleMute}
-              className="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 transition-colors z-10"
-              aria-label={isMuted ? 'Unmute video' : 'Mute video'}
-            >
+              <button
+                onClick={handleToggleMute}
+                className="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 transition-colors z-10"
+                aria-label={isMuted ? t('hero.unmuteVideo') : t('hero.muteVideo')}
+              >
               <span className="material-symbols-outlined text-base">
                 {isMuted ? 'volume_off' : 'volume_up'}
               </span>
             </button>
             <div className="absolute inset-0 bg-gradient-to-t from-[#081d00]/40 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute bottom-4 left-4">
-              <span className="bg-[#b7f473] text-[#081d00] px-3 py-1.5 rounded-full font-display font-bold text-sm shadow-lg">
-                Mark
-              </span>
-            </div>
+              <div className="absolute bottom-4 left-4">
+                <span className="bg-[#b7f473] text-[#081d00] px-3 py-1.5 rounded-full font-display font-bold text-sm shadow-lg">
+                  {t('hero.markLabel')}
+                </span>
+              </div>
           </div>
         </div>
       </div>

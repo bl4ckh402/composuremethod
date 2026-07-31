@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { FAQ_LIST } from '../data/guideData';
+import { useI18n } from '../lib/i18n';
 
 export const FaqSection: React.FC = () => {
+  const { t, strings } = useI18n();
   const [openIdx, setOpenIdx] = useState<number | null>(0);
+  const faqItems = strings.faq.items;
 
   const toggleIdx = (idx: number) => {
     setOpenIdx(openIdx === idx ? null : idx);
@@ -21,7 +23,7 @@ export const FaqSection: React.FC = () => {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="font-display text-3xl md:text-[2.6rem] font-bold text-[#081d00] tracking-tight"
         >
-          Everything You Need To Know
+          {t('faq.heading')}
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -30,12 +32,12 @@ export const FaqSection: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="font-body text-sm md:text-base text-[#43483e] leading-relaxed"
         >
-          Common questions about discreet billing, instant digital access, and how the program works.
+          {t('faq.subtitle')}
         </motion.p>
       </div>
 
       <div className="max-w-3xl mx-auto space-y-3">
-        {FAQ_LIST.map((faq, idx) => {
+        {faqItems.map((faq, idx) => {
           const isOpen = openIdx === idx;
           return (
             <motion.div

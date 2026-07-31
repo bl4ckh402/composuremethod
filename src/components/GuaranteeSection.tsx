@@ -1,7 +1,10 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import { useI18n } from '../lib/i18n';
 
 export const GuaranteeSection: React.FC = () => {
+  const { t, strings } = useI18n();
+  const guarantee = strings.guarantee;
   return (
     <section className="py-12 relative">
       <div className="section-divider mb-12" />
@@ -27,26 +30,26 @@ export const GuaranteeSection: React.FC = () => {
 
             <div className="space-y-3 text-center md:text-left">
               <span className="font-mono-caps text-xs text-[#3e6a00] font-bold uppercase tracking-wider block">
-                100% RISK-FREE IRONCLAD GUARANTEE
+                {guarantee.heading}
               </span>
               <h3 className="font-display text-2xl md:text-3xl font-bold text-[#081d00]">
-                Try The Composure Method For 30 Full Days — Zero Risk
+                {guarantee.subheading}
               </h3>
               <p className="font-body text-sm text-[#43483e] leading-relaxed max-w-2xl">
-                Take a full 30 days to go through the modules, practice the 4-2-7 breathwork, and try the pelvic exercises. If you don't notice a significant increase in your arousal control, stamina, and bedroom confidence, send us a simple one-line email for a prompt, 100% full refund. No questions asked. You keep the guides as our thanks for giving it an honest try.
+                {guarantee.body}
               </p>
               <div className="flex flex-wrap gap-4 justify-center md:justify-start pt-1">
                 <span className="flex items-center gap-1.5 font-mono text-xs text-[#3e6a00]">
                   <span className="material-symbols-outlined text-sm">check_circle</span>
-                  No Questions Asked
+                  {guarantee.noQuestionsAsked}
                 </span>
                 <span className="flex items-center gap-1.5 font-mono text-xs text-[#3e6a00]">
                   <span className="material-symbols-outlined text-sm">check_circle</span>
-                  Keep All Content
+                  {guarantee.keepAllContent}
                 </span>
                 <span className="flex items-center gap-1.5 font-mono text-xs text-[#3e6a00]">
                   <span className="material-symbols-outlined text-sm">check_circle</span>
-                  Full $20 Refund
+                  {guarantee.fullRefund}
                 </span>
               </div>
             </div>

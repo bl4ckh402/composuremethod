@@ -10,7 +10,7 @@ export const BRAND = {
   },
   guaranteeDays: 30,
   billingDescriptor: 'CM DIGITAL',
-  supportEmail: 'support@composuremethod.com',
+  supportEmail: 'support@composuremethod.help',
   checkoutSuccessRedirect: '/?checkout=success&checkout_id={CHECKOUT_ID}',
 };
 
@@ -26,5 +26,5 @@ export const COPY = {
   emailLabel: 'YOUR EMAIL FOR INSTANT DIGITAL DELIVERY',
   emailPlaceholder: 'name@example.com',
   loadingCopy: 'Opening Checkout...',
-  supportEmail: 'support@composuremethod.com',
+  supportEmail: 'support@composuremethod.help',
 };

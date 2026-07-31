@@ -3,8 +3,9 @@ import { motion } from 'motion/react';
 import { useI18n } from '../lib/i18n';
 
 export const TestimonialsSection: React.FC = () => {
-  const { strings } = useI18n();
+  const { t, strings } = useI18n();
   const reviews = strings.testimonials.reviews;
+  const stats = strings.stats;
 
   return (
     <section id="reviews" className="py-16 md:py-20 space-y-12 relative">
@@ -93,10 +94,10 @@ export const TestimonialsSection: React.FC = () => {
       >
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {[
-            { num: '12,400+', label: 'Men Trained' },
-            { num: '4.9 / 5', label: 'Average Rating' },
-            { num: '89%', label: 'Report Results in 30 Days' },
-            { num: '30-Day', label: 'Money-Back Guarantee' },
+            { num: '12,400+', label: stats.menTrained },
+            { num: '4.9 / 5', label: stats.averageRating },
+            { num: '89%', label: stats.resultsIn30Days },
+            { num: '30-Day', label: stats.moneyBackGuarantee },
           ].map((item) => (
             <div key={item.label} className="space-y-1">
               <div className="stat-number text-[#173404]">{item.num}</div>

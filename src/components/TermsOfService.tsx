@@ -49,7 +49,7 @@ export const TermsOfService: React.FC<TermsOfServiceProps> = ({ onNavigate }) =>
           </p>
           <ul className="list-disc pl-6 space-y-2">
             <li>If you do not see measurable improvements in arousal regulation within 30 days, you are entitled to a 100% full refund.</li>
-            <li>Refund requests can be initiated directly through Polar receipt emails or by contacting <a href="mailto:support@composuremethod.com" className="text-[#173404] font-bold underline">support@composuremethod.com</a>.</li>
+            <li>Refund requests can be initiated directly through Polar receipt emails or by contacting <a href="mailto:support@composuremethod.help" className="text-[#173404] font-bold underline">support@composuremethod.help</a>.</li>
           </ul>
         </section>
 

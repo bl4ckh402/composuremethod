@@ -8,7 +8,7 @@ interface ArchitectureProps {
 }
 
 export const ArchitectureOfClarity: React.FC<ArchitectureProps> = ({ onOpenCheckout, isMemberVerified = false }) => {
-  const { t } = useI18n();
+  const { t, strings } = useI18n();
   const handleClick = () => {
     if (isMemberVerified) {
       const el = document.getElementById('curriculum');
@@ -19,10 +19,10 @@ export const ArchitectureOfClarity: React.FC<ArchitectureProps> = ({ onOpenCheck
   };
 
   const pillars = [
-    { num: '01', title: 'Physiological Decoding', tagline: 'Deconstructing the Anxiety & Shame Loop', desc: 'Learn why changes occur in your 30s due to nervous system sensitivity. Normalize the mind-body response to permanently remove performance pressure.', icon: 'psychology' },
-    { num: '02', title: 'Neuromuscular Pelvic Training', tagline: 'The 1–10 Scale & Stop-Start Trainer', desc: 'Map your arousal threshold, identify your Level 7 point of no return, and condition your pelvic muscles to regulate nerve signal intensity.', icon: 'fitness_center' },
-    { num: '03', title: 'Parasympathetic Breath Control', tagline: '4-2-7 Vagus Nerve Regulation', desc: 'Activate parasympathetic dominance using slow 4-count inhale / 7-count exhale breathwork to calm rapid heart rate and extend timing.', icon: 'air' },
-    { num: '04', title: 'Shame-Free Partner Alignment', tagline: 'Word-for-Word Scripts & Pacing', desc: 'Shift intimacy from a solo performance test into a relaxed, shared experience with low-stakes communication frameworks.', icon: 'diversity_1' },
+    { num: '01', icon: 'psychology', ...strings.method.pillars[0] },
+    { num: '02', icon: 'fitness_center', ...strings.method.pillars[1] },
+    { num: '03', icon: 'air', ...strings.method.pillars[2] },
+    { num: '04', icon: 'diversity_1', ...strings.method.pillars[3] },
   ];
 
   return (

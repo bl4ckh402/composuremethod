@@ -46,8 +46,8 @@ The checkout is now embedded directly in the site using the Polar Checkout Embed
 |-----------|-------|
 | `data-polar-checkout` | Enables the embed on the element |
 | `data-polar-checkout-theme` | `dark` |
-| `data-polar-checkout-success-url` | `https://composuremethod.com/?checkout=success&checkout_id={CHECKOUT_ID}` |
-| `data-polar-checkout-return-url` | `https://composuremethod.com/?checkout=cancel` |
+| `data-polar-checkout-success-url` | `https://composuremethod.help/?checkout=success&checkout_id={CHECKOUT_ID}` |
+| `data-polar-checkout-return-url` | `https://composuremethod.help/?checkout=cancel` |
 
 ### Success URL
 

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { COMPOSURE_MODULES } from '../data/guideData';
 import { ViewMode } from '../types';
 import { useI18n } from '../lib/i18n';
 
@@ -15,14 +14,14 @@ export const FoundationGuide: React.FC<FoundationGuideProps> = ({
   onOpenCheckout,
   isMemberVerified,
 }) => {
-  const { t } = useI18n();
+  const { t, strings } = useI18n();
   const [selectedModule, setSelectedModule] = useState<string>('module-1');
 
   const bonuses = [
-    { num: '01', title: 'In-Bed 5-Step Quick Sheet', desc: 'Use tonight. Reference during intimacy without breaking flow.', value: '$30', icon: 'article' },
-    { num: '02', title: 'Partner Communication Playbook', desc: 'Word-for-word scripts to share this journey together.', value: '$25', icon: 'chat_bubble' },
-    { num: '03', title: '30/60/90-Day Progress Roadmap', desc: 'Track your arousal milestones with a daily practice log.', value: '$25', icon: 'insights' },
-    { num: '04', title: 'AI Personalization Protocol', desc: 'Custom nervous system reset protocol tailored to your stress state.', value: '$20', icon: 'smart_toy' },
+    { num: '01', title: t('curriculum.bonus1Label'), value: '$30', icon: 'article' },
+    { num: '02', title: t('curriculum.bonus2Label'), value: '$25', icon: 'chat_bubble' },
+    { num: '03', title: t('curriculum.bonus3Label'), value: '$25', icon: 'insights' },
+    { num: '04', title: t('curriculum.bonus4Label'), value: '$20', icon: 'smart_toy' },
   ];
 
   return (
@@ -51,9 +50,9 @@ export const FoundationGuide: React.FC<FoundationGuideProps> = ({
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {COMPOSURE_MODULES.map((mod, i) => (
+        {strings.curriculum.modules.map((mod, i) => (
           <motion.div
-            key={mod.id}
+            key={mod.moduleNumber}
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
@@ -83,10 +82,10 @@ export const FoundationGuide: React.FC<FoundationGuideProps> = ({
                   {t('curriculum.keyLessonsLabel')}
                 </span>
                 <ul className="space-y-1.5 font-body text-xs text-[#1c1b1b]">
-                  {mod.lessons.map((lesson) => (
-                    <li key={lesson.id} className="flex items-start gap-2">
+                  {mod.lessons.map((lesson, li) => (
+                    <li key={li} className="flex items-start gap-2">
                       <span className="material-symbols-outlined text-[#3e6a00] text-sm shrink-0 mt-0.5">check_circle</span>
-                      <span className="line-clamp-1">{lesson.title}</span>
+                      <span className="line-clamp-1">{lesson}</span>
                     </li>
                   ))}
                 </ul>
@@ -94,7 +93,7 @@ export const FoundationGuide: React.FC<FoundationGuideProps> = ({
             </div>
 
             <button
-              onClick={isMemberVerified ? () => setSelectedModule(mod.id) : onOpenCheckout}
+              onClick={isMemberVerified ? () => setSelectedModule(`module-${mod.moduleNumber}`) : onOpenCheckout}
               className="w-full btn-ghost py-2.5 rounded-xl border-[#173404]/15 group-hover:border-[#173404]/30 group-hover:bg-[#f6fef0] transition-all"
             >
               {isMemberVerified ? (
@@ -121,15 +120,15 @@ export const FoundationGuide: React.FC<FoundationGuideProps> = ({
         >
           <div className="absolute -top-12 -right-12 w-40 h-40 bg-[#b7f473]/12 rounded-full blur-2xl pointer-events-none" />
           <div className="space-y-3 relative z-10">
-            <span className="badge-lime text-[10px]">4 FREE BONUSES</span>
+            <span className="badge-lime text-[10px]">{t('curriculum.freeBonusesLabel')}</span>
             <h3 className="font-display text-xl font-bold text-white">
-              Instant Action Digital Assets
+              {t('curriculum.bonusesHeading')}
             </h3>
             <p className="font-body text-xs text-white/70 leading-relaxed">
-              Includes the "Tonight" In-Bed 5-Step Sheet, Partner Communication Playbook, 30/60/90 Progress Roadmap, and AI Assessor.
+              {t('curriculum.bonusesBody')}
             </p>
             <div className="space-y-2">
-              {['Bonus #1: In-Bed Quick Sheet ($30 Value)', 'Bonus #2: Partner Script Playbook ($25 Value)', 'Bonus #3: 30/60/90 Roadmap ($45 Value)',].map(b => (
+              {[t('curriculum.bonus1Label'), t('curriculum.bonus2Label'), t('curriculum.bonus3Label'), t('curriculum.bonus4Label')].map(b => (
                 <div key={b} className="flex items-center gap-2">
                   <span className="material-symbols-outlined text-[#b7f473] text-sm">check_circle</span>
                   <span className="font-body text-xs text-white/90">{b}</span>
@@ -141,22 +140,22 @@ export const FoundationGuide: React.FC<FoundationGuideProps> = ({
             onClick={onOpenCheckout}
             className="btn-accent w-full text-sm py-3 relative z-10"
           >
-            <span>Claim All Bonuses for $20</span>
+            <span>{t('curriculum.bonusesCta')}</span>
             <span className="material-symbols-outlined text-sm">arrow_forward</span>
           </button>
         </motion.div>
       </div>
 
       <div className="space-y-4">
-        <motion.h3
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display text-xl font-bold text-[#081d00] text-center"
-        >
-          Your 4 Free Bonuses — Included Instantly
-        </motion.h3>
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="font-display text-xl font-bold text-[#081d00] text-center"
+          >
+            {t('curriculum.yourBonusesHeading')}
+          </motion.h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {bonuses.map((bonus, i) => (
             <motion.div
@@ -170,12 +169,11 @@ export const FoundationGuide: React.FC<FoundationGuideProps> = ({
               <div className="w-12 h-12 rounded-2xl bg-[#b7f473]/20 border border-[#b7f473]/40 flex items-center justify-center mx-auto group-hover:bg-[#b7f473]/40 transition-colors">
                 <span className="material-symbols-outlined text-[#3e6a00] text-2xl">{bonus.icon}</span>
               </div>
-              <div>
-                <span className="font-mono-caps text-[9px] text-[#3e6a00] font-bold block mb-1">BONUS #{bonus.num}</span>
-                <h4 className="font-display text-sm font-bold text-[#081d00] leading-snug">{bonus.title}</h4>
-                <p className="font-body text-xs text-[#43483e] mt-1 leading-relaxed">{bonus.desc}</p>
-              </div>
-              <span className="inline-block font-mono text-xs text-[#74796d] line-through">{bonus.value} Value</span>
+               <div>
+                 <span className="font-mono-caps text-[9px] text-[#3e6a00] font-bold block mb-1">{t('curriculum.bonusLabelPrefix')}{bonus.num}</span>
+                 <h4 className="font-display text-sm font-bold text-[#081d00] leading-snug">{bonus.title}</h4>
+               </div>
+               <span className="inline-block font-mono text-xs text-[#74796d] line-through">{bonus.value} Value</span>
             </motion.div>
           ))}
         </div>

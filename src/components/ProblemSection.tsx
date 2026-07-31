@@ -37,7 +37,7 @@ export const ProblemSection: React.FC = () => {
           { titleKey: 'problem.methodTitle', descKey: 'problem.methodDesc', resultKey: 'problem.methodResult', icon: '✓', highlight: true },
         ].map((item, i) => (
           <motion.div
-            key={item.title}
+            key={item.titleKey}
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
