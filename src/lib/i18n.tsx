@@ -417,6 +417,9 @@ const translations: Record<Locale, I18nStrings> = {
       subtext: 'A 4-pillar somatic nervous system framework for men who want natural, reliable control — no pills, no sprays, no awkward tricks.',
       ctaPrimary: 'Get Instant Access — $20',
       ctaSecondary: 'Member Login',
+      guarantee: '30-Day Money-Back Guarantee',
+      discreetBilling: 'Discreet Billing',
+      instantDelivery: 'Instant Digital Delivery',
     },
     checkout: {
       title: 'Complete Your Order',
@@ -431,6 +434,16 @@ const translations: Record<Locale, I18nStrings> = {
       fulfillment: 'Instant Fulfillment',
       refundPolicy: '30-Day Refund Policy',
       discreetBilling: 'Discreet Billing',
+      orderConfirmed: 'Order Confirmed!',
+      orderVerified: 'Payment verified',
+      successBody: 'Your digital access details have been sent to your email. If you don\'t see it within a few minutes, please check your spam or junk folder.',
+      accessButton: 'Access Your Digital Curriculum & Guides',
+      supportLabel: 'Need assistance?',
+      pleaseEnterEmail: 'Please enter your email address to continue.',
+      includedItems: {
+        instantAccess: 'Instant digital access after payment',
+        moneyBack: '30-day money-back guarantee',
+      },
     },
     success: {
       title: 'Order verified. Welcome to Composure.',
@@ -442,6 +455,8 @@ const translations: Record<Locale, I18nStrings> = {
       title: 'Checkout Cancelled',
       body: 'Your checkout was not completed. No charge has been made.',
       retryButton: 'Try Again',
+      whatIsWaiting: 'What\'s Waiting For You',
+      returnToOverview: 'Return to Overview',
     },
     footer: {
       tagline: 'Control & Confidence System',
@@ -827,6 +842,9 @@ const translations: Record<Locale, I18nStrings> = {
       subtext: 'Un cadre de 4 piliers pour le système nerveux somatique, conçu pour les hommes qui veulent un contrôle naturel et fiable — sans pilules, sans sprays, sans astuces gênantes.',
       ctaPrimary: 'Accès Immédiat — 20 $',
       ctaSecondary: 'Connexion Membre',
+      guarantee: 'Garantie de Remboursement 30 Jours',
+      discreetBilling: 'Facturation Discrète',
+      instantDelivery: 'Livraison Numérique Immédiate',
     },
     checkout: {
       title: 'Finalisez Votre Commande',
@@ -841,6 +859,16 @@ const translations: Record<Locale, I18nStrings> = {
       fulfillment: 'Livraison Immédiate',
       refundPolicy: 'Garantie de Remboursement 30 Jours',
       discreetBilling: 'Facturation Discrète',
+      orderConfirmed: 'Commande Confirmée !',
+      orderVerified: 'Paiement vérifié',
+      successBody: 'Vos détails d\'accès numérique ont été envoyés à votre e-mail. Si vous ne les voyez pas dans les quelques minutes qui suivent, vérifiez votre dossier spam ou indésirable.',
+      accessButton: 'Accéder à Votre Programme Numérique et Guides',
+      supportLabel: 'Besoin d\'aide ?',
+      pleaseEnterEmail: 'Veuillez entrer votre adresse e-mail pour continuer.',
+      includedItems: {
+        instantAccess: 'Accès numérique immédiat après paiement',
+        moneyBack: 'Garantie de remboursement de 30 jours',
+      },
     },
     success: {
       title: 'Commande vérifiée. Bienvenue dans Composure.',
@@ -852,6 +880,8 @@ const translations: Record<Locale, I18nStrings> = {
       title: 'Paiement Annulé',
       body: 'Votre paiement n\'a pas été finalisé. Aucun frais n\'a été prélevé.',
       retryButton: 'Réessayer',
+      whatIsWaiting: 'Ce Qui Vous Attend',
+      returnToOverview: 'Retour à l\'Aperçu',
     },
     footer: {
       tagline: 'Système de Contrôle et Confiance',
@@ -1237,6 +1267,9 @@ const translations: Record<Locale, I18nStrings> = {
       subtext: 'Un framework di 4 pilastri per il sistema nervoso somatico, progettato per gli uomini che vogliono un controllo naturale e affidabile — senza pillole, spray o trucchi imbarazzanti.',
       ctaPrimary: 'Accesso Immediato — $20',
       ctaSecondary: 'Accesso Membro',
+      guarantee: 'Garanzia Rimborso 30 Giorni',
+      discreetBilling: 'Fatturazione Discreta',
+      instantDelivery: 'Consegna Digitale Immediata',
     },
     checkout: {
       title: 'Completa il Tuo Ordine',
@@ -1251,6 +1284,16 @@ const translations: Record<Locale, I18nStrings> = {
       fulfillment: 'Consegna Immediata',
       refundPolicy: 'Garanzia Rimborso 30 Giorni',
       discreetBilling: 'Fatturazione Discreta',
+      orderConfirmed: 'Ordine Confermato!',
+      orderVerified: 'Pagamento verificato',
+      successBody: 'I dettagli del tuo accesso digitale sono stati inviati alla tua e-mail. Se non li vedi entro pochi minuti, controlla la cartella spam o indesiderata.',
+      accessButton: 'Accedi al Tuo Programma Digitale e Guide',
+      supportLabel: 'Hai bisogno di assistenza?',
+      pleaseEnterEmail: 'Inserisci il tuo indirizzo e-mail per continuare.',
+      includedItems: {
+        instantAccess: 'Accesso digitale immediato dopo il pagamento',
+        moneyBack: 'Garanzia di rimborso di 30 giorni',
+      },
     },
     success: {
       title: 'Ordine verificato. Benvenuto in Composure.',
@@ -1262,6 +1305,8 @@ const translations: Record<Locale, I18nStrings> = {
       title: 'Pagamento Annullato',
       body: 'Il tuo pagamento non è stato completato. Nessun addebito è stato effettuato.',
       retryButton: 'Riprova',
+      whatIsWaiting: 'Cosa Ti Aspetta',
+      returnToOverview: 'Torna alla Panoramica',
     },
     footer: {
       tagline: 'Sistema di Controllo e Fiducia',
@@ -1647,6 +1692,9 @@ const translations: Record<Locale, I18nStrings> = {
       subtext: 'Een 4-pijler framework voor het somatische zenuwstelsel, ontworpen voor mannen die natuurlijke, betrouwbare controle willen — geen pillen, geen sprays, geen ongemakkelijke trucjes.',
       ctaPrimary: 'Directe Toegang — $20',
       ctaSecondary: 'Lid Login',
+      guarantee: '30-Dagen Geld Terug-Garantie',
+      discreetBilling: 'Discrete Facturatie',
+      instantDelivery: 'Directe Digitale Levering',
     },
     checkout: {
       title: 'Voltooi Je Bestelling',
@@ -1660,7 +1708,17 @@ const translations: Record<Locale, I18nStrings> = {
       acceptedPayment: 'Apple Pay, Google Pay, Visa, Mastercard, AMEX',
       fulfillment: 'Directe Levering',
       refundPolicy: '30-Dagen Geld Terug-Garantie',
-      discreetBilling: 'Diskrete Facturatie',
+      discreetBilling: 'Discrete Facturatie',
+      orderConfirmed: 'Bestelling Bevestigd!',
+      orderVerified: 'Betaling geverifieerd',
+      successBody: 'Je digitale toegangsgegevens zijn naar je e-mail gestuurd. Als je ze niet binnen enkele minuten ziet, controleer dan je spam- of ongewenste-e-mailmap.',
+      accessButton: 'Toegang Tot Je Digitale Curriculum en Gidsen',
+      supportLabel: 'Hulp nodig?',
+      pleaseEnterEmail: 'Voer je e-mailadres in om door te gaan.',
+      includedItems: {
+        instantAccess: 'Directe digitale toegang na betaling',
+        moneyBack: '30 dagen geld-terug-garantie',
+      },
     },
     success: {
       title: 'Bestelling geverifieerd. Welkom bij Composure.',
@@ -1672,6 +1730,8 @@ const translations: Record<Locale, I18nStrings> = {
       title: 'Betaling Geannuleerd',
       body: 'Je betaling is niet voltooid. Er is geen bedrag in rekening gebracht.',
       retryButton: 'Opnieuw Proberen',
+      whatIsWaiting: 'Dit Wacht Op Je',
+      returnToOverview: 'Terug naar Overzicht',
     },
     footer: {
       tagline: 'Controle- en Vertrouwenssysteem',
@@ -1688,7 +1748,7 @@ const translations: Record<Locale, I18nStrings> = {
       guaranteeBody: '100% risicovrij. Als je binnen 30 dagen geen merkbaar betere controle ervaart, ontvang je een volledige terugbetaling. Geen vragen.',
       getAccess: 'Toegang voor $20',
       medicalDisclaimer: 'Medische Disclaimer:',
-      copyright: '© 2026 SAVITY LLC / COMPOSURE METHOD. ALLE RECHTEN FORBEHOUDEN.',
+      copyright: '© 2026 SAVITY LLC / COMPOSURE METHOD. ALLE RECHTEN VOORBEHOUDEN.',
       encryptedCheckout: 'VERSLEUTELDE DIGITALE BETALING SSL 256-BIT',
     },
     stats: {
@@ -2057,6 +2117,9 @@ const translations: Record<Locale, I18nStrings> = {
       subtext: 'Ein 4-Säulen-Framework für das somatische Nervensystem, entwickelt für Männer, die natürliche, zuverlässige Kontrolle wollen — keine Pillen, keine Sprays, keine peinlichen Tricks.',
       ctaPrimary: 'Sofortiger Zugang — $20',
       ctaSecondary: 'Mitgliederlogin',
+      guarantee: '30-Tage-Geld-zurück-Garantie',
+      discreetBilling: 'Diskrete Abrechnung',
+      instantDelivery: 'Sofortige Digitale Zustellung',
     },
     checkout: {
       title: 'Bestellung Abschließen',
@@ -2071,6 +2134,16 @@ const translations: Record<Locale, I18nStrings> = {
       fulfillment: 'Sofortige Zustellung',
       refundPolicy: '30-Tage-Geld-zurück-Garantie',
       discreetBilling: 'Diskrete Abrechnung',
+      orderConfirmed: 'Bestellung Bestätigt!',
+      orderVerified: 'Zahlung verifiziert',
+      successBody: 'Ihre digitalen Zugangsdaten wurden an Ihre E-Mail gesendet. Wenn Sie diese nicht innerhalb weniger Minuten sehen, überprüfen Sie Ihren Spam- oder Junk-Ordner.',
+      accessButton: 'Zugang zu Ihrem Digitalen Curriculum und Leitfäden',
+      supportLabel: 'Brauchen Sie Hilfe?',
+      pleaseEnterEmail: 'Bitte geben Sie Ihre E-Mail-Adresse ein, um fortzufahren.',
+      includedItems: {
+        instantAccess: 'Sofortiger digitaler Zugang nach der Zahlung',
+        moneyBack: '30-Tage-Geld-zurück-Garantie',
+      },
     },
     success: {
       title: 'Bestellung verifiziert. Willkommen bei Composure.',
@@ -2082,6 +2155,8 @@ const translations: Record<Locale, I18nStrings> = {
       title: 'Bezahlung Abgebrochen',
       body: 'Ihre Bezahlung wurde nicht abgeschlossen. Es wurde kein Betrag berechnet.',
       retryButton: 'Erneut Versuchen',
+      whatIsWaiting: 'Das Erwartet Sie',
+      returnToOverview: 'Zurück zur Übersicht',
     },
     footer: {
       tagline: 'Kontroll- und Vertrauenssystem',
@@ -2506,13 +2581,17 @@ async function detectGeoLocale(): Promise<Locale> {
     });
     clearTimeout(timeout);
     if (!response.ok) return detectBrowserLocale();
-    const data = await response.json();
-    const country = data.country_code as string;
-    if (country && COUNTRY_TO_LOCALE[country.toUpperCase()]) {
-      return COUNTRY_TO_LOCALE[country.toUpperCase()];
+    try {
+      const data = await response.json();
+      const country = data.country_code as string;
+      if (country && COUNTRY_TO_LOCALE[country.toUpperCase()]) {
+        return COUNTRY_TO_LOCALE[country.toUpperCase()];
+      }
+    } catch {
+      // opaque or invalid response
     }
   } catch {
-    // fallback to browser locale
+    // network, CORS, abort, etc.
   }
   return detectBrowserLocale();
 }
