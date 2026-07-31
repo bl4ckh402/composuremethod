@@ -23,12 +23,71 @@ export interface I18nStrings {
     memberLogin: string;
     getAccess: string;
     accessGranted: string;
+    back: string;
+    memberLoginCheck: string;
   };
   hero: {
     headline: string;
     subtext: string;
     ctaPrimary: string;
     ctaSecondary: string;
+    guarantee: string;
+    discreetBilling: string;
+    instantDelivery: string;
+  };
+  problem: {
+    headline: string;
+    subtext: string;
+    sprayTitle: string;
+    sprayDesc: string;
+    pillTitle: string;
+    pillDesc: string;
+    distractionTitle: string;
+    distractionDesc: string;
+    methodTitle: string;
+    methodDesc: string;
+    mechanismLabel: string;
+    mechanismTitle: string;
+    mechanismBody: string;
+    mechanismStat: string;
+    mechanismContext: string;
+  };
+  method: {
+    headline: string;
+    subtext: string;
+    ctaHeadline: string;
+    ctaBody: string;
+    ctaButton: string;
+  };
+  curriculum: {
+    headline: string;
+    subtext: string;
+    moduleLocked: string;
+    keyLessonsLabel: string;
+    viewModuleContent: string;
+    freeBonusesLabel: string;
+    bonusesHeading: string;
+    bonusesBody: string;
+    bonus1Label: string;
+    bonus2Label: string;
+    bonus3Label: string;
+    bonus4Label: string;
+    bonusesCta: string;
+    yourBonusesHeading: string;
+  };
+  guarantee: {
+    heading: string;
+    body: string;
+  };
+  faq: {
+    heading: string;
+    subtitle: string;
+  };
+  stickyCta: {
+    productTitle: string;
+    memberUnlocked: string;
+    nonMemberSubtitle: string;
+    cta: string;
   };
   checkout: {
     title: string;
@@ -43,6 +102,16 @@ export interface I18nStrings {
     fulfillment: string;
     refundPolicy: string;
     discreetBilling: string;
+    orderConfirmed: string;
+    orderVerified: string;
+    successBody: string;
+    accessButton: string;
+    supportLabel: string;
+    pleaseEnterEmail: string;
+    includedItems: {
+      instantAccess: string;
+      moneyBack: string;
+    };
   };
   success: {
     title: string;
@@ -54,6 +123,8 @@ export interface I18nStrings {
     title: string;
     body: string;
     retryButton: string;
+    whatIsWaiting: string;
+    returnToOverview: string;
   };
   footer: {
     tagline: string;
@@ -82,7 +153,20 @@ export interface I18nStrings {
   testimonials: {
     heading: string;
     subtitle: string;
-    reviews: TestimonialReview[];
+    reviews: Array<{
+      name: string;
+      age: string;
+      role: string;
+      rating: number;
+      headline: string;
+      text: string;
+      stat: string;
+      date: string;
+    }>;
+  };
+  testimonial: {
+    quote: string;
+    cite: string;
   };
   languageSwitcher: {
     en: string;
@@ -90,6 +174,155 @@ export interface I18nStrings {
     it: string;
     nl: string;
     de: string;
+  };
+  tools: {
+    breathing: {
+      title: string;
+      subtitle: string;
+      pillarLabel: string;
+      headerTitle: string;
+      headerDesc: string;
+      audioOn: string;
+      audioOff: string;
+      startProtocol: string;
+      pauseProtocol: string;
+      reset: string;
+      logSession: string;
+      cyclesDone: string;
+      elapsedTime: string;
+      cortisolImpact: string;
+    };
+    pelvic: {
+      title: string;
+      subtitle: string;
+      readyToTrain: string;
+      squeezeHold: string;
+      slowRelease: string;
+      beginSet: string;
+      pauseTrainer: string;
+      reset: string;
+      techniqueNote: string;
+    };
+    arousal: {
+      title: string;
+      subtitle: string;
+      interactiveTool: string;
+      lessonLabel: string;
+      baseline: string;
+      pointOfNoReturn: string;
+      climax: string;
+      recommendedProtocol: string;
+    };
+    clarity: {
+      title: string;
+      subtitle: string;
+      aiLabel: string;
+      generateProtocol: string;
+      synthesizing: string;
+      clear: string;
+      synthesizedProtocol: string;
+      recommendedBreathwork: string;
+      launchPacer: string;
+      tacticalSteps: string;
+      awaitingInputs: string;
+      awaitingDesc: string;
+    };
+    journal: {
+      title: string;
+      subtitle: string;
+      recordBaseline: string;
+      logBtn: string;
+      cancelBtn: string;
+      saveBtn: string;
+    };
+    roadmap: {
+      title: string;
+      subtitle: string;
+      lessonLabel: string;
+      days30: string;
+      days60: string;
+      days90: string;
+    };
+    scripts: {
+      title: string;
+      subtitle: string;
+      bonusLabel: string;
+      copyScript: string;
+      copied: string;
+    };
+    shameCycle: {
+      title: string;
+      subtitle: string;
+      interactiveDiagram: string;
+      lessonLabel: string;
+      simulate: string;
+      active: string;
+      insight: string;
+    };
+  };
+  practiceLog: {
+    bonusLabel: string;
+    title: string;
+    overview30Day: string;
+    totalSessions: string;
+    pelvicReps: string;
+    logToday: string;
+    cancel: string;
+    saveSession: string;
+    loggedEntries: string;
+    noLogs: string;
+    date: string;
+    pelvicFloorReps: string;
+    selfRatedControl: string;
+    breathingDone: string;
+    notes: string;
+  };
+  memberAccess: {
+    title: string;
+    subtitle: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    verifyButton: string;
+    verifyingButton: string;
+    notPurchased: string;
+    discreetVerification: string;
+  };
+  dashboard: {
+    memberAccessActive: string;
+    dailyTrainingLog: string;
+    loggedInAs: string;
+    backToHome: string;
+    currentStreak: string;
+    totalSessions: string;
+    weeklyCompletion: string;
+    avgControlRating: string;
+    logTodayTraining: string;
+    whatDidYouTrain: string;
+    duration: string;
+    controlRating: string;
+    notesOptional: string;
+    saveTrainingLog: string;
+    quickTools: string;
+    breathingPacer: string;
+    pelvicTrainer: string;
+    arousalScale: string;
+    clarityProtocol: string;
+    recentSessions: string;
+    clearHistory: string;
+    noLogsYet: string;
+    noLogsYetDesc: string;
+    trainingMode: string;
+    dailyLogger: string;
+    streak1: string;
+    streakMulti: string;
+    streakIncredible: string;
+    streakBuilding: string;
+    streakFirst: string;
+    sessionMin: string;
+    saveLogSuccess: string;
+    totalValue: string;
+    todayPrice: string;
+    todaySavings: string;
   };
 }
 
@@ -213,6 +446,219 @@ const translations: Record<Locale, I18nStrings> = {
       nl: 'Nederlands',
       de: 'Deutsch',
     },
+    problem: {
+      headline: 'Why Does This Happen in Your 30s — And Why Traditional "Solutions" Fail?',
+      subtext: 'Starting in your 30s, lifestyle load, career stress, and subtle hormonal shifts heighten your sympathetic nervous system. When performance pressure enters the equation, arousal accelerates faster than your conscious control can catch it.',
+      sprayTitle: 'Numbing Sprays & Creams',
+      sprayDesc: 'Dulls all physical sensation. Turns intimacy into a numb, mechanical chore and often transfers to your partner, ruining mutual pleasure.',
+      pillTitle: 'Unapproved Pills & Supplements',
+      pillDesc: 'Creates unpredictable side-effects (headaches, flushing). Treats timing as a chemical problem rather than retraining nervous system control.',
+      distractionTitle: 'Distraction & Mental Counting',
+      distractionDesc: 'Counting backwards or thinking about sports pulls your mind entirely out of the room. Destroys emotional intimacy and fails under high arousal.',
+      methodTitle: 'The Composure Method',
+      methodDesc: 'Retrains your pelvic neuromuscular response and parasympathetic nervous system. Builds genuine, natural stamina you retain for life.',
+      mechanismLabel: 'THE NEURO-PHYSIOLOGICAL MECHANISM',
+      mechanismTitle: 'How Retraining Parasympathetic Control Delays Climax Naturally',
+      mechanismBody: 'Ejaculation is governed by the autonomic nervous system. When anxiety or fast breathing shifts your body into sympathetic ("fight or flight") mode, nerve impulse velocity speeds up dramatically. By combining 4-2-7 parasympathetic breath exhales with targeted pelvic floor releases, you lower nerve signal pressure and maintain arousal smoothly in the optimal 4–6 range on the 1–10 scale.',
+      mechanismStat: '89%',
+      mechanismContext: 'of men report noticeable improvement in arousal control within 3 to 4 weeks of daily 10-minute practice.',
+    },
+    method: {
+      headline: 'A Complete, 4-Pillar System For Lasting Control',
+      subtext: 'The Composure Method combines physiological education, pelvic conditioning, parasympathetic breathwork, and partner scripts into a simple daily habit loop.',
+      ctaHeadline: 'Ready to retrain your nervous system and regain complete bedroom confidence?',
+      ctaBody: 'Get immediate access to all Assets + 4 Free Bonuses for $20 (Full Value $197).',
+      ctaButton: 'Get Started Now — $20 (Worth $197)',
+    },
+    curriculum: {
+      headline: 'What You Get Inside The Composure Method',
+      unlocked: 'Unlocked',
+      membersOnly: 'Members Only',
+      viewModuleContent: 'View Module Content',
+
+      subtext: '5 structured digital modules, step-by-step physical protocols, and 4 free instant bonuses designed for rapid, discreet implementation.',
+      moduleLocked: 'Members Only',
+      keyLessonsLabel: 'Key Lessons:',
+      viewModuleContent: 'View Module Content',
+      freeBonusesLabel: '4 FREE BONUSES',
+      bonusesHeading: 'Instant Action Digital Assets',
+      bonusesBody: 'Includes the "Tonight" In-Bed 5-Step Sheet, Partner Communication Playbook, 30/60/90 Progress Roadmap, and AI Assessor.',
+      bonus1Label: 'In-Bed 5-Step Quick Sheet ($30 Value)',
+      bonus2Label: 'Partner Communication Playbook ($25 Value)',
+      bonus3Label: '30/60/90-Day Progress Roadmap ($45 Value)',
+      bonus4Label: 'AI Personalization Protocol ($20 Value)',
+      bonusesCta: 'Claim All Bonuses for $20',
+      yourBonusesHeading: 'Your 4 Free Bonuses — Included Instantly',
+    },
+    guarantee: {
+      heading: '100% RISK-FREE IRONCLAD GUARANTEE',
+      body: 'Try The Composure Method For 30 Full Days — Zero Risk: take a full 30 days to go through the modules, practice the 4-2-7 breathwork, and try the pelvic exercises. If you don\'t notice a significant increase in arousal control, stamina, and bedroom confidence, send us a simple one-line email for a prompt, 100% full refund. No questions asked. You keep the guides as our thanks for giving it an honest try.',
+    },
+    faq: {
+      heading: 'Everything You Need To Know',
+      subtitle: 'Common questions about discreet billing, instant digital access, and how the program works.',
+    },
+    stickyCta: {
+      productTitle: 'The Composure Method Bundle',
+      memberUnlocked: 'Lifetime Member Access Active',
+      nonMemberSubtitle: '5 Modules + 4 Free Bonuses • Worth $197 (Save $177)',
+      cta: 'Get Instant Access ($20)',
+    },
+    testimonial: {
+      quote: 'In an era defined by constant noise, the ComposureMethod provided the architecture I needed to rebuild my focus. It is not just wellness; it is a tactical advantage.',
+      cite: 'Sarah Chen — Sr. Operations Lead, Meridian Health',
+    },
+    tools: {
+      breathing: {
+        title: 'Cortisol Reduction Breathwork',
+        subtitle: 'Synchronize your respiratory rate to stimulate the vagus nerve and immediately reduce serum cortisol levels.',
+        pillarLabel: 'PILLAR 01: COGNITIVE RESET',
+        headerTitle: 'Cortisol Reduction Breathwork',
+        headerDesc: 'Synchronize your respiratory rate to stimulate the vagus nerve and immediately reduce serum cortisol levels.',
+        audioOn: 'Audio On',
+        audioOff: 'Muted',
+        startProtocol: 'Start Protocol',
+        pauseProtocol: 'Pause Protocol',
+        reset: 'Reset',
+        logSession: 'Log Session',
+        cyclesDone: 'CYCLES DONE',
+        elapsedTime: 'ELAPSED TIME',
+        cortisolImpact: 'CORTISOL IMPACT',
+      },
+      pelvic: {
+        title: 'Pelvic Floor Neuromuscular Trainer',
+        subtitle: 'Guided trainer with timed contractions and releases.',
+        readyToTrain: 'READY TO TRAIN',
+        squeezeHold: 'SQUEEZE & HOLD',
+        slowRelease: 'SLOW RELEASE',
+        beginSet: 'Begin 10-Rep Set',
+        pauseTrainer: 'Pause Trainer',
+        reset: 'Reset',
+        techniqueNote: 'Technique Note:',
+        techniqueNoteBody: 'Do not hold your breath during contractions. Maintain smooth, abdominal breathing while gently lifting the pelvic floor upward and inward.',
+      },
+      arousal: {
+        title: 'The 1–10 Arousal Scale & Stop-Start Trainer',
+        subtitle: 'Drag the slider to explore how to navigate arousal zones and recognize Level 7 (Point of No Return).',
+        interactiveTool: 'INTERACTIVE TOOL · LESSON 2.2',
+        lessonLabel: 'INTERACTIVE TOOL · LESSON 2.2',
+        baseline: '1 (Baseline)',
+        pointOfNoReturn: '⚡ 7 = POINT OF NO RETURN',
+        climax: '10 (Climax)',
+        recommendedProtocol: 'Recommended Protocol:',
+      },
+      clarity: {
+        title: 'Generate Tactical Protocol',
+        subtitle: 'Input your current cognitive & physiological state. The AI Clarity Architect formulates a customized 3-step composure protocol.',
+        aiLabel: 'AI CLARITY ARCHITECT',
+        generateProtocol: 'Generate Composure Protocol',
+        synthesizing: 'Synthesizing Protocol...',
+        clear: 'Clear',
+        synthesizedProtocol: 'SYNTHESIZED PROTOCOL',
+        recommendedBreathwork: 'RECOMMENDED BREATHWORK',
+        launchPacer: 'Launch Pacer',
+        tacticalSteps: 'TACTICAL STEPS',
+        awaitingInputs: 'Awaiting Inputs',
+        awaitingDesc: 'Set your stress level and primary stressor on the left, then click Generate to receive your tailored protocol.',
+      },
+      journal: {
+        title: 'Baseline Clarity Journal',
+        subtitle: 'Track your daily composure score, physiological stress indicators, and deep focus window metrics.',
+        recordBaseline: 'Record Daily Baseline',
+        logBtn: 'Log Composure Baseline',
+        cancelBtn: 'Cancel',
+        saveBtn: 'Save Session to Log',
+      },
+      roadmap: {
+        title: 'The 30 / 60 / 90-Day Execution Roadmap',
+        subtitle: 'Track milestones across 3 phases with persistence checks and detailed task breakdowns.',
+        lessonLabel: 'ROADMAP TRACKER',
+        days30: 'Days 1–30: Foundation Phase',
+        days60: 'Days 31–60: Integration Phase',
+        days90: 'Days 61–90: Refinement & Mastery',
+      },
+      scripts: {
+        title: 'Partner Communication Scripts',
+        subtitle: 'Low-stakes, shame-free frameworks for opening conversations with a partner.',
+        bonusLabel: 'BONUS ASSET B · PARTNER SCRIPTS',
+        copyScript: 'Copy Script',
+        copied: 'Copied to Clipboard',
+        situation: 'Situation:',
+      },
+      shameCycle: {
+        title: 'The Shame Cycle & Interruption Mechanics',
+        subtitle: 'Interactive diagram showing how the anxiety-shame cycle works and where to interrupt it.',
+        interactiveDiagram: 'INTERACTIVE DIAGRAM · LESSON 1.3',
+        lessonLabel: 'INTERACTIVE DIAGRAM · LESSON 1.3',
+        simulate: 'Simulate Loop Interruption',
+        active: 'Awareness Active (Loop Interrupted)',
+        insight: 'Key Insight:',
+      },
+    },
+    practiceLog: {
+      bonusLabel: 'BONUS ASSET C · PRACTICE LOG',
+      title: 'Interactive Practice & Trend Tracker',
+      overview30Day: '30-DAY AVG CONTROL',
+      totalSessions: 'TOTAL SESSIONS LOGGED',
+      pelvicReps: 'PELVIC REPS CUMULATIVE',
+      logToday: 'Log Today\'s Practice',
+      cancel: 'Cancel',
+      saveSession: 'Save Session to Log',
+      loggedEntries: 'Logged Entries',
+      noLogs: 'No practice logs recorded yet.',
+      date: 'Date',
+      pelvicFloorReps: 'Pelvic Floor Reps',
+      selfRatedControl: 'Self-Rated Control (1–10)',
+      breathingDone: 'Completed 4-2-7 Parasympathetic Breathing Reset today',
+      notes: 'Notes / Observations',
+    },
+    memberAccess: {
+      title: 'Member Access Verification',
+      subtitle: 'Enter the email address you used during checkout to verify your paid order and instantly restore full digital access.',
+      emailLabel: 'CUSTOMER EMAIL ADDRESS',
+      emailPlaceholder: 'e.g. user@domain.com',
+      verifyButton: 'VERIFY PAID ACCESS',
+      verifyingButton: 'VERIFYING ORDER...',
+      notPurchased: 'Haven\'t purchased yet? Get access for $20.',
+      discreetVerification: 'Discreet verification • Instant delivery',
+    },
+    dashboard: {
+      memberAccessActive: 'MEMBER ACCESS ACTIVE',
+      dailyTrainingLog: 'Daily Training Log',
+      loggedInAs: 'Logged in as',
+      backToHome: 'Back to Home',
+      currentStreak: 'CURRENT STREAK',
+      totalSessions: 'TOTAL SESSIONS',
+      weeklyCompletion: 'WEEKLY COMPLETION',
+      avgControlRating: 'AVG CONTROL RATING',
+      logTodayTraining: 'Log Today\'s Training',
+      whatDidYouTrain: 'WHAT DID YOU TRAIN TODAY?',
+      duration: 'DURATION',
+      controlRating: 'CONTROL RATING',
+      notesOptional: 'NOTES (OPTIONAL)',
+      saveTrainingLog: 'Save Training Log',
+      quickTools: 'Quick Tools',
+      breathingPacer: 'Breathing Pacer',
+      pelvicTrainer: 'Pelvic Trainer',
+      arousalScale: 'Arousal Scale',
+      clarityProtocol: 'Clarity Protocol',
+      recentSessions: 'Recent Sessions',
+      clearHistory: 'Clear History',
+      noLogsYet: 'No training logs yet. Log your first session above.',
+      noLogsYetDesc: 'No logs yet. Start training above.',
+      trainingMode: 'TRAINING MODE',
+      dailyLogger: 'Daily Logger',
+      streak1: '1 Day Streak',
+      streakMulti: ' Day Streak',
+      streakIncredible: 'Incredible consistency. Keep it going.',
+      streakBuilding: 'Building momentum. Do not break the chain.',
+      streakFirst: 'Complete your first session today.',
+      sessionMin: ' min',
+      saveLogSuccess: '✓ Log saved successfully',
+      totalValue: 'TOTAL COMBINED RETAIL VALUE:',
+      todayPrice: 'TODAY\'S SPECIAL DISCOUNT PRICE',
+      todaySavings: 'Save $177 Today',
+    },
   },
   fr: {
     nav: {
@@ -224,6 +670,8 @@ const translations: Record<Locale, I18nStrings> = {
       memberLogin: 'Connexion Membre',
       getAccess: 'Accès Immédiat — 20 $',
       accessGranted: 'MEMBRE',
+      back: 'Retour',
+      memberLoginCheck: 'Connexion Membre / Vérifier l\'accès',
     },
     hero: {
       headline: 'Maîtrisez le contrôle de la pré-éjaculation et développez une endurance durable.',
@@ -325,6 +773,288 @@ const translations: Record<Locale, I18nStrings> = {
           date: 'Acheté en juin 2026',
         },
       ],
+    },
+    problem: {
+      headline: 'Pourquoi Ça Arrive Dans Votre Trentaine — Et Pourquoi Les "Solutions" Traditionnelles Échouent ?',
+      subtext: 'À partir de la trentaine, le stress professionnel, la charge de vie et de subtils changements hormonaux activent votre système nerveux sympathique. Quand la pression de performance s\'en mêle, l\'excitation s\'emballe plus vite que votre contrôle conscient ne peut le suivre.',
+      sprayTitle: 'Sprays et Crèmes Anesthésiants',
+      sprayDesc: 'Supprime toute sensation physique. Transforme l\'intimité en une tâche mécanique et insensible, et se transmet parfois au partenaire.',
+      pillTitle: 'Pilules et Suppléments Non Approuvés',
+      pillDesc: 'Provoque des effets secondaires imprévisibles. Traite le timing comme un problème chimique au lieu de rééduquer le contrôle nerveux.',
+      distractionTitle: 'Distraction et Compte Mental',
+      distractionDesc: 'Penser à autre chose vous sort complètement de l\'instant. Détruit l\'intimité émotionnelle et échoue sous forte excitation.',
+      methodTitle: 'La Méthode Composure',
+      methodDesc: 'Rééduque la réponse neuromusculaire pelvienne et le système nerveux parasympathique. Construit une endurance naturelle et durable.',
+      mechanismLabel: 'LE MÉCANISME NEUROPHYSIOLOGIQUE',
+      mechanismTitle: 'Comment La Rééducation Du Contrôle Parasympathique Retarde L\'éjaculation Naturellement',
+      mechanismBody: 'L\'éjaculation est gouvernée par le système nerveux autonome. Quand l\'anxiété ou une respiration rapide bascule votre corps en mode sympathique, la vélocité des impulsions nerveuses augmente dramatiquement. En combinant des expirations parasympathiques 4-2-7 avec des relâchements pelviens ciblés, vous réduisez la pression du signal nerveux et maintenez l\'excitation dans la zone optimale 4–6.',
+      mechanismStat: '89 %',
+      mechanismContext: 'des hommes constatent une amélioration notable du contrôle en 3 à 4 semaines de pratique quotidienne de 10 minutes.',
+    },
+    method: {
+      headline: 'Un Système Complet À 4 Piliers Pour Un Contrôle Durable',
+      subtext: 'La Méthode Composure associe éducation physiologique, conditionnement pelvien, travail respiratoire parasympathique et scripts de couple en une simple routine quotidienne.',
+      ctaHeadline: 'Prêt à rééduquer votre système nerveux et retrouver une confiance totale ?',
+      ctaBody: 'Accédez immédiatement à tous les contenus + 4 bonus pour 20 $ (valeur 197 $).',
+      ctaButton: 'Commencer Maintenant — 20 $ (valeur 197 $)',
+    },
+    curriculum: {
+      headline: 'Ce Que Vous Obtenez Avec La Méthode Composure',
+      subtext: '5 modules numériques structurés, protocoles physiques pas-à-pas et 4 bonus instantanés conçus pour une mise en œuvre rapide et discrète.',
+      moduleLocked: 'Membres Uniquement',
+      keyLessonsLabel: 'Leçons Clés :',
+      viewModuleContent: 'Voir Le Contenu Du Module',
+      freeBonusesLabel: '4 BONUS GRATUITS',
+      bonusesHeading: 'Actifs Numériques Actionnables',
+      bonusesBody: 'Inclut la fiche "Tonight", le playbook de communication de couple, la feuille de route 30/60/90 et l\'assesseur IA.',
+      bonus1Label: 'Fiche Rapide "Tonight" (valeur 30 $)',
+      bonus2Label: 'Playbook De Communication De Couple (valeur 25 $)',
+      bonus3Label: 'Feuille De Route 30/60/90 (valeur 45 $)',
+      bonus4Label: 'Protocole IA Personnalisé (valeur 20 $)',
+      bonusesCta: 'Réclamer Tous Les Bonus Pour 20 $',
+      yourBonusesHeading: 'Vos 4 Bonus Gratuits — Inclus Instantanément',
+    },
+    guarantee: {
+      heading: 'ESSAYEZ LA MÉTHODE COMPOSURE PENDANT 30 JOURS COMPLETS — ZERO RISQUE',
+      subheading: 'GARANTIE 100 % SANS RISQUE',
+      body: 'Prenez 30 jours complets pour parcourir les modules, pratiquer le breathwork 4-2-7 et essayer les exercices pelviens. Si vous ne constatez pas d\'amélioration notable du contrôle, de l\'endurance et de votre confiance, envoyez-nous un simple e-mail pour un remboursement intégral et immédiat. Sans question. Vous gardez les guides.',
+      noQuestionsAsked: 'Sans Question',
+      keepAllContent: 'Gardez Tout Le Contenu',
+      fullRefund: 'Remboursement Intégral 20 $',
+    },
+    selfQualification: {
+      headline: 'La Méthode Composure Est-Elle Fait Pour Vous ?',
+      subtext: 'Nous avons conçu ce système spécialement pour les hommes qui privilégient la maîtrise physique et mentale fondée sur des preuves aux faux espoirs.',
+      forYouTitle: 'Ceci Est Fait Pour Vous Si...',
+      forYouLabel: 'CANDIDAT IDÉAL',
+      notForYouTitle: 'Ceci N\'Est PAS Fait Pour Vous Si...',
+      notForYouLabel: 'CAS NON CONFORMES',
+      forYouBullets: [
+        'Vous êtes un homme de 30 ans ou plus, confronté à une éjaculation trop rapide ou à une anxiété pré-intime élevée.',
+        'Vous voulez une compétence physique permanente, sans sprays, crèmes ou pilules.',
+        'Vous pouvez consacrer 10 minutes par jour à des exercices pelviens et respiratoires discrets.',
+        'Vous valorisez la discrétion : un système numérique propre et privé, accessible sur téléphone ou ordinateur.',
+      ],
+      notForYouBullets: [
+        'Vous cherchez une pilule miracle nocturne : ce programme rééduque la mémoire musculaire et demande 4 à 8 semaines de régularité.',
+        'Vous préférez les produits anesthésiants : si vous aimez perdre toute sensation, ce programme n\'est pas fait pour vous.',
+        'Vous présentez des symptômes médicaux aigus graves : douleur soudaine, saignement ou problèmes de prostate nécessitant un urologue.',
+      ],
+    },
+    offer: {
+      headline: 'Obtenez Le Système Composure Complet Aujourd\'hui',
+      subtext: 'Tout ce dont vous avez besoin pour maîtriser le contrôle de l\'excitation, le conditionnement pelvien et la confiance en couple.',
+      retailValueLabel: 'VALEUR COMMERCIALE',
+      includedLabel: 'ACTIFS NUMÉRIQUES INCLUS',
+      totalRetailValue: 'VALEUR RÉTABLIE TOTALE :',
+      todayLabel: 'PRIX SPÉCIAL DU JOUR',
+      saveToday: 'Économisez 177 $ Aujourd\'hui',
+      currency: 'USD',
+      nonMemberButton: 'Réclamer Mon Accès Instantané Pour 20 $',
+      memberButton: 'Accéder Au Système Débloqué Complet',
+      guaranteeLine: 'Garantie Sans Risque 100 % 30 Jours',
+      discreetBillingLine: 'Facturation Discrète ("CM DIGITAL")',
+      instantLine: 'Accès Numérique Instantané',
+      oneTimeLine: 'Paiement unique • Pas d\'abonnement • Livraison numérique instantanée',
+      disclaimerLine: '100 % sans risque. Si vous ne constatez pas de progrès notable en 30 jours, vous êtes intégralement remboursé.',
+    },
+    faq: {
+      heading: 'Tout Ce Que Vous Devez Savoir',
+      subtitle: 'Questions fréquentes sur la facturation discrète, l\'accès numérique instantané et le fonctionnement du programme.',
+    },
+    stickyCta: {
+      productTitle: 'Le Pack Méthode Composure',
+      memberUnlocked: 'Accès Membre À Vie Actif',
+      nonMemberSubtitle: '5 Modules + 4 Bonus • Valeur 197 $',
+      cta: 'Accès Instantané (20 $)',
+    },
+    tools: {
+      breathing: {
+        title: 'Breathwork De Réduction Du Cortisol',
+        subtitle: 'Synchronisez votre respiration pour stimuler le nerf vague et réduire immédiatement le cortisol sérique.',
+        pillarLabel: 'PILIER 01 : RESET COGNITIF',
+        headerTitle: 'Breathwork De Réduction Du Cortisol',
+        headerDesc: 'Synchronisez votre respiration pour stimuler le nerf vague et réduire immédiatement le cortisol sérique.',
+        audioOn: 'Audio Activé',
+        audioOff: 'Muet',
+        startProtocol: 'Démarrer Le Protocole',
+        pauseProtocol: 'Mettre En Pause',
+        reset: 'Réinitialiser',
+        logSession: 'Enregistrer La Session',
+        cyclesDone: 'CYCLES EFFECTUÉS',
+        elapsedTime: 'TEMPS ÉCOULÉ',
+        cortisolImpact: 'IMPACT CORTISOL',
+      },
+      pelvic: {
+        title: 'Entraîneur Neuromusculaire Du Plancher Pelvien',
+        subtitle: 'Entraîneur guidé avec contractions et relâchements chronométrés.',
+        readyToTrain: 'PRÊT À S\'ENTRAÎNER',
+        squeezeHold: 'SERRER ET TENIR',
+        slowRelease: 'RELÂCHER LENTEMENT',
+        beginSet: 'Commencer La Série De 10',
+        pauseTrainer: 'Mettre En Pause',
+        reset: 'Réinitialiser',
+        techniqueNote: 'Remarque Technique :',
+        techniqueNoteBody: 'Ne retenez pas votre respiration pendant les contractions. Maintenez une respiration abdominale douce tout en soulevant doucement le plancher pelvien vers le haut et l\'intérieur.',
+      },
+      arousal: {
+        title: 'L\'échelle D\'excitation 1-10 Et Entraînement Stop-Start',
+        subtitle: 'Faites glisser le curseur pour découvrir comment naviguer dans les zones d\'excitation et reconnaître le niveau 7.',
+        interactiveTool: 'OUTIL INTERACTIF • LEÇON 2.2',
+        lessonLabel: 'OUTIL INTERACTIF • LEÇON 2.2',
+        baseline: '1 (Ligne De Base)',
+        pointOfNoReturn: '⚡ 7 = POINT DE NON-RETOUR',
+        climax: '10 (Paroxysme)',
+        recommendedProtocol: 'Protocole Recommandé :',
+      },
+      clarity: {
+        title: 'Générer Un Protocole Tactique',
+        subtitle: 'Entrez votre état cognitif et physiologique actuel. L\'Architecte De Clarity IA formule un protocole personnalisé en 3 étapes.',
+        aiLabel: 'ARCHITECTE DE CLARTÉ IA',
+        generateProtocol: 'Générer Le Protocole Composure',
+        synthesizing: 'Synthèse Du Protocole...',
+        clear: 'Effacer',
+        synthesizedProtocol: 'PROTOCOLE SYNTHÉTISÉ',
+        recommendedBreathwork: 'BREATHWORK RECOMMANDÉ',
+        launchPacer: 'Lancer Le Pacemaker',
+        tacticalSteps: 'ÉTAPES TACTIQUES',
+        awaitingInputs: 'En Attente D\'entrées',
+        awaitingDesc: 'Indiquez votre niveau de stress et votre facteur de stress principal, puis cliquez sur Générer.',
+      },
+      journal: {
+        title: 'Journal De Clarté De Référence',
+        subtitle: 'Suivez votre score quotidien de calme, vos indicateurs de stress physiologique et vos plages de concentration.',
+        recordBaseline: 'Enregistrer La Baseline Quotidienne',
+        logBtn: 'Journaliser La Baseline',
+        cancelBtn: 'Annuler',
+        saveBtn: 'Enregistrer La Session',
+      },
+      roadmap: {
+        title: 'La Feuille De Route D\'exécution 30 / 60 / 90 Jours',
+        subtitle: 'Suivez les jalons sur 3 phases avec contrôles de persévérance.',
+        lessonLabel: 'SUIVI FEUILLE DE ROUTE',
+        days30: 'Jours 1–30 : Phase Fondamentale',
+        days60: 'Jours 31–60 : Phase D\'intégration',
+        days90: 'Jours 61–90 : Affinement & Maîtrise',
+      },
+      scripts: {
+        title: 'Scripts De Communication Avec Le Partenaire',
+        subtitle: 'Cadres simples et sans honte pour ouvrir la conversation.',
+        bonusLabel: 'ATOUT BONUS B • SCRIPTS PARTENAIRE',
+        copyScript: 'Copier Le Script',
+        copied: 'Copié Dans Le Presse-papiers',
+        situation: 'Situation :',
+      },
+      shameCycle: {
+        title: 'Le Cycle De La Honte Et Mécanismes D\'interruption',
+        subtitle: 'Schéma interactif montrant le cycle anxiété-honte et où l\'interrompre.',
+        interactiveDiagram: 'SCHÉMA INTERACTIF • LEÇON 1.3',
+        lessonLabel: 'SCHÉMA INTERACTIF • LEÇON 1.3',
+        simulate: 'Simuler L\'interruption Du Cycle',
+        active: 'Conscience Active (Cycle Interrompu)',
+        insight: 'Point Clé :',
+      },
+    },
+    practiceLog: {
+      bonusLabel: 'ATOUT BONUS C • JOURNAL D\'ENTRAÎNEMENT',
+      title: 'Suivi D\'entraînement Et De Tendances',
+      overview30Day: 'CONTRÔLE MOYEN 30 JOURS',
+      totalSessions: 'SESSIONS ENREGISTRÉES',
+      pelvicReps: 'RÉPÉTITIONS PELVIENNES',
+      logToday: 'Journaliser La Session Du Jour',
+      cancel: 'Annuler',
+      saveSession: 'Enregistrer La Session',
+      loggedEntries: 'Entrées Journalisées',
+      noLogs: 'Aucune session d\'entraînement enregistrée pour le moment.',
+      date: 'Date',
+      pelvicFloorReps: 'Répétitions Du Plancher Pelvien',
+      selfRatedControl: 'Contrôle Auto-évalué (1–10)',
+      breathingDone: 'Reset respiratoire parasympathique 4-2-7 effectué aujourd\'hui',
+      notes: 'Notes / Observations',
+    },
+    memberAccess: {
+      title: 'Vérification D\'accès Membre',
+      subtitle: 'Entrez l\'adresse e-mail utilisée lors de la commande pour vérifier votre accès payant et restaurer instantanément l\'accès complet.',
+      emailLabel: 'E-MAIL CLIENT',
+      emailPlaceholder: 'p. ex. utilisateur@domaine.com',
+      verifyButton: 'VÉRIFIER L\'ACCÈS PAYANT',
+      verifyingButton: 'VÉRIFICATION EN COURS...',
+      notPurchased: 'Pas encore acheté ? Accédez pour 20 $.',
+      discreetVerification: 'Vérification discrète • Accès instantané',
+    },
+    dashboard: {
+      memberAccessActive: 'ACCÈS MEMBRE ACTIF',
+      dailyTrainingLog: 'Journal D\'entraînement Quotidien',
+      loggedInAs: 'Connecté en tant que',
+      backToHome: 'Retour À L\'accueil',
+      currentStreak: 'SÉRIE ACTUELLE',
+      totalSessions: 'SESSIONS TOTALES',
+      weeklyCompletion: 'COMPLETION HEBDOMADAIRE',
+      avgControlRating: 'NOTE MOYENNE DE CONTRÔLE',
+      logTodayTraining: 'Journaliser L\'entraînement Du Jour',
+      whatDidYouTrain: 'QU\'AVEZ-VOUS ENTRAÎNÉ AUJOURD\'HUI ?',
+      duration: 'DURÉE',
+      controlRating: 'NOTE DE CONTRÔLE',
+      notesOptional: 'NOTES (OPTIONNEL)',
+      saveTrainingLog: 'Enregistrer Le Journal',
+      quickTools: 'Outils Rapides',
+      breathingPacer: 'Pacemaker Respiratoire',
+      pelvicTrainer: 'Entraîneur Pelvien',
+      arousalScale: 'Échelle D\'excitation',
+      clarityProtocol: 'Protocole Clarity',
+      recentSessions: 'Sessions Récentes',
+      clearHistory: 'Effacer L\'historique',
+      noLogsYet: 'Aucune session d\'entraînement pour le moment. Journalisez votre première session ci-dessus.',
+      noLogsYetDesc: 'Pas encore de journal. Commencez à vous entraîner ci-dessus.',
+      trainingMode: 'MODE ENTRAÎNEMENT',
+      dailyLogger: 'Journal Quotidien',
+      streak1: 'Série De 1 Jour',
+      streakMulti: ' Jours De Série',
+      streakIncredible: 'Constance incroyable. Continuez comme ça.',
+      streakBuilding: 'Vous prenez de l\'élan. Ne rompez pas la chaîne.',
+      streakFirst: 'Complétez votre première session aujourd\'hui.',
+      sessionMin: ' min',
+      saveLogSuccess: '✓ Journal enregistré avec succès',
+      totalValue: 'VALEUR RÉTABLIE TOTALE :',
+      todayPrice: "PRIX SPÉCIAL DU JOUR",
+      todaySavings: 'Économisez 177 $ Aujourd\'hui',
+    },
+    mobileDashboard: {
+      memberAccessActive: 'ACCÈS MEMBRE ACTIF',
+      dailyTrainingLog: 'Journal D\'entraînement Quotidien',
+      loggedInAs: 'Connecté en tant que',
+      backToHome: 'Retour À L\'accueil',
+      currentStreak: 'SÉRIE ACTUELLE',
+      totalSessions: 'SESSIONS TOTALES',
+      weeklyCompletion: 'COMPLETION HEBDOMADAIRE',
+      avgControlRating: 'NOTE MOYENNE DE CONTRÔLE',
+      logTodayTraining: 'Journaliser L\'entraînement Du Jour',
+      whatDidYouTrain: 'QU\'AVEZ-VOUS ENTRAÎNÉ AUJOURD\'HUI ?',
+      duration: 'DURÉE',
+      controlRating: 'NOTE DE CONTRÔLE',
+      notesOptional: 'NOTES (OPTIONNEL)',
+      saveTrainingLog: 'Enregistrer Le Journal',
+      quickTools: 'Outils Rapides',
+      breathingPacer: 'Pacemaker Respiratoire',
+      pelvicTrainer: 'Entraîneur Pelvien',
+      arousalScale: 'Échelle D\'excitation',
+      clarityProtocol: 'Protocole Clarity',
+      recentSessions: 'Sessions Récentes',
+      clearHistory: 'Effacer L\'historique',
+      noLogsYet: 'Aucune session d\'entraînement pour le moment. Journalisez votre première session ci-dessus.',
+      noLogsYetDesc: 'Pas encore de journal. Commencez à vous entraîner ci-dessus.',
+      trainingMode: 'MODE ENTRAÎNEMENT',
+      dailyLogger: 'Journal Quotidien',
+      streak1: 'Série De 1 Jour',
+      streakMulti: ' Jours De Série',
+      streakIncredible: 'Constance incroyable. Continuez comme ça.',
+      streakBuilding: 'Vous prenez de l\'élan. Ne rompez pas la chaîne.',
+      streakFirst: 'Complétez votre première session aujourd\'hui.',
+      sessionMin: ' min',
+      saveLogSuccess: '✓ Journal enregistré avec succès',
+      totalValue: 'VALEUR RÉTABLIE TOTALE :',
+      todayPrice: "PRIX SPÉCIAL DU JOUR",
+      todaySavings: 'Économisez 177 $ Aujourd\'hui',
     },
     languageSwitcher: {
       en: 'English',
@@ -783,8 +1513,14 @@ export const I18nProvider: React.FC<{ children: React.ReactNode; defaultLocale?:
     detectGeoLocale().then(setLocale);
   }, []);
 
-  const t = useCallback((key: string): string => {
-    return getNestedValue(translations[locale], key);
+  const t = useCallback((key: string, params?: Record<string, string>): string => {
+    let str = getNestedValue(translations[locale], key);
+    if (params && str !== key) {
+      for (const [k, v] of Object.entries(params)) {
+        str = str.replace(new RegExp(`\\{${k}\\}`, 'g'), v);
+      }
+    }
+    return str;
   }, [locale]);
 
   const strings = useMemo(() => translations[locale], [locale]);

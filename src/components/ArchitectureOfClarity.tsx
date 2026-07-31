@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import { useI18n } from '../lib/i18n';
 
 interface ArchitectureProps {
   onOpenCheckout: () => void;
@@ -7,6 +8,7 @@ interface ArchitectureProps {
 }
 
 export const ArchitectureOfClarity: React.FC<ArchitectureProps> = ({ onOpenCheckout, isMemberVerified = false }) => {
+  const { t } = useI18n();
   const handleClick = () => {
     if (isMemberVerified) {
       const el = document.getElementById('curriculum');
@@ -35,7 +37,7 @@ export const ArchitectureOfClarity: React.FC<ArchitectureProps> = ({ onOpenCheck
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="font-display text-3xl md:text-[2.6rem] font-bold text-[#081d00] tracking-tight"
         >
-          A Complete, 4-Pillar System For Lasting Control
+          {t('method.headline')}
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -44,7 +46,7 @@ export const ArchitectureOfClarity: React.FC<ArchitectureProps> = ({ onOpenCheck
           transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="font-body text-sm md:text-base text-[#43483e] leading-relaxed"
         >
-          The Composure Method combines physiological education, pelvic conditioning, parasympathetic breathwork, and partner scripts into a simple daily habit loop.
+          {t('method.subtext')}
         </motion.p>
       </div>
 
@@ -91,10 +93,10 @@ export const ArchitectureOfClarity: React.FC<ArchitectureProps> = ({ onOpenCheck
 
         <div className="space-y-2 text-center md:text-left relative z-10">
           <h3 className="font-display text-xl md:text-2xl font-bold text-white">
-            Ready to retrain your nervous system and regain complete bedroom confidence?
+            {t('method.ctaHeadline')}
           </h3>
           <p className="font-body text-sm text-white/70">
-            Get immediate access to all Assets + 4 Free Bonuses for $20 (Full Value $197).
+            {t('method.ctaBody')}
           </p>
         </div>
 
@@ -103,7 +105,7 @@ export const ArchitectureOfClarity: React.FC<ArchitectureProps> = ({ onOpenCheck
           className="btn-accent shrink-0 text-sm py-4 px-8 relative z-10"
         >
           <span className="material-symbols-outlined text-[#081d00] text-lg">lock_open</span>
-          <span>{isMemberVerified ? 'Access Unlocked 4-Pillar System' : 'Get Started Now — $20 (Worth $197)'}</span>
+          <span>{isMemberVerified ? t('offer.memberButton') : t('method.ctaButton')}</span>
           <span className="material-symbols-outlined text-lg">arrow_forward</span>
         </button>
       </motion.div>

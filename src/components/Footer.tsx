@@ -1,5 +1,6 @@
 import React from 'react';
 import { ViewMode } from '../types';
+import { useI18n } from '../lib/i18n';
 
 interface FooterProps {
   onNavigate: (view: ViewMode) => void;
@@ -7,6 +8,7 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenCheckout }) => {
+  const { t } = useI18n();
   const scrollTo = (id: string) => {
     onNavigate('home');
     setTimeout(() => {
@@ -43,28 +45,28 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenCheckout }) =>
                       ComposureMethod
                     </span>
                     <span className="font-mono-caps text-[10px] text-[#b7f473]/70 block mt-0.5">
-                      Control &amp; Confidence System
+                      {t('footer.tagline')}
                     </span>
                   </div>
                 </div>
               </button>
 
               <p className="font-body text-sm text-white/65 max-w-sm leading-relaxed">
-                The evidence-based physiological and psychological system designed for men 30 and older to master arousal control, eliminate performance anxiety, and restore bedroom confidence.
+                {t('footer.guaranteeBody')}
               </p>
 
               <div className="space-y-2">
                 <div className="flex items-center gap-2 font-mono text-[11px] text-[#b7f473]/80">
                   <span className="material-symbols-outlined text-sm">lock</span>
-                  <span>Discreet Card Billing ("CM DIGITAL")</span>
+                  <span>{t('footer.discreetBilling')}</span>
                 </div>
                 <div className="flex items-center gap-2 font-mono text-[11px] text-[#b7f473]/80">
                   <span className="material-symbols-outlined text-sm">verified_user</span>
-                  <span>30-Day Risk-Free Money-Back Guarantee</span>
+                  <span>{t('footer.moneyBackGuarantee')}</span>
                 </div>
                 <div className="flex items-center gap-2 font-mono text-[11px] text-[#b7f473]/80">
                   <span className="material-symbols-outlined text-sm">bolt</span>
-                  <span>Instant Digital Delivery After Payment</span>
+                  <span>{t('footer.instantDelivery')}</span>
                 </div>
               </div>
             </div>
@@ -73,28 +75,28 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenCheckout }) =>
             <div className="md:col-span-4 grid grid-cols-2 gap-8 font-mono-caps text-[11px]">
               <div className="space-y-3">
                 <span className="text-[#b7f473] font-bold block uppercase tracking-wider border-b border-[#b7f473]/20 pb-2">
-                  NAVIGATION
+                  {t('footer.navigation')}
                 </span>
                 {[
-                  ['why-it-works', 'Why It Works'],
-                  ['the-method', '4-Pillar System'],
-                  ['curriculum', 'Curriculum & Bonuses'],
-                  ['reviews', 'Verified Reviews'],
-                  ['faq', 'FAQ'],
+                  ['why-it-works', 'footer.whyItWorks'],
+                  ['the-method', 'footer.fourPillarSystem'],
+                  ['curriculum', 'footer.curriculumBonuses'],
+                  ['reviews', 'footer.verifiedReviews'],
+                  ['faq', 'footer.faq'],
                 ].map(([id, label]) => (
                   <button key={id} onClick={() => scrollTo(id)} className="block text-white/60 hover:text-[#b7f473] transition-colors text-left">
-                    {label}
+                    {t(label)}
                   </button>
                 ))}
               </div>
 
               <div className="space-y-3">
                 <span className="text-[#b7f473] font-bold block uppercase tracking-wider border-b border-[#b7f473]/20 pb-2">
-                  LEGAL &amp; POLICIES
+                  {t('footer.legalPolicies')}
                 </span>
-                <button onClick={() => onNavigate('terms')} className="block text-white/60 hover:text-[#b7f473] transition-colors text-left">Terms of Service</button>
-                <button onClick={() => onNavigate('privacy')} className="block text-white/60 hover:text-[#b7f473] transition-colors text-left">Privacy Policy</button>
-                <button onClick={onOpenCheckout} className="block text-[#b7f473] font-bold hover:underline text-left">Get Instant Access ($20)</button>
+                <button onClick={() => onNavigate('terms')} className="block text-white/60 hover:text-[#b7f473] transition-colors text-left">{t('footer.terms')}</button>
+                <button onClick={() => onNavigate('privacy')} className="block text-white/60 hover:text-[#b7f473] transition-colors text-left">{t('footer.privacy')}</button>
+                <button onClick={onOpenCheckout} className="block text-[#b7f473] font-bold hover:underline text-left">{t('footer.getAccess')}</button>
               </div>
             </div>
 
@@ -103,17 +105,17 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenCheckout }) =>
               <div className="bg-white/5 p-6 rounded-2xl border border-white/8 space-y-3 hover:border-[#b7f473]/20 transition-colors">
                 <div className="flex items-center gap-2 text-[#b7f473] font-mono-caps text-xs font-bold">
                   <span className="material-symbols-outlined text-lg">verified_user</span>
-                  <span>30-DAY GUARANTEE</span>
+                  <span>{t('footer.guarantee')}</span>
                 </div>
                 <p className="font-body text-xs text-white/60 leading-relaxed">
-                  100% risk-free. If you don't feel noticeably more in control within 30 days, receive a full refund. No questions asked.
+                  {t('footer.guaranteeBody')}
                 </p>
 
                 <button
                   onClick={onOpenCheckout}
                   className="w-full btn-accent text-[10px] py-2.5 px-4 rounded-xl mt-2"
                 >
-                  <span>Get Access for $20</span>
+                  <span>{t('footer.getAccess')}</span>
                   <span className="material-symbols-outlined text-sm">arrow_forward</span>
                 </button>
               </div>
@@ -123,11 +125,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenCheckout }) =>
           {/* Bottom disclaimer */}
           <div className="space-y-4">
             <p className="text-[11px] font-body text-white/45 leading-relaxed max-w-4xl">
-              <strong className="text-white/60">Medical Disclaimer:</strong> The Composure Method is an educational digital system designed to teach somatic arousal regulation, pelvic neuromuscular conditioning, and parasympathetic breath control. It is not medical advice, diagnosis, or treatment. Consult a licensed healthcare provider or urologist for medical conditions.
+              <strong className="text-white/60">{t('footer.medicalDisclaimer')}</strong> {t('footer.medicalDisclaimerBody')}
             </p>
             <div className="flex flex-col sm:flex-row justify-between items-center gap-2 font-mono text-[10px] text-white/35 pt-2 border-t border-white/8">
-              <span>© 2026 SAVITY LLC / COMPOSURE METHOD. ALL RIGHTS RESERVED.</span>
-              <span>ENCRYPTED 256-BIT SSL DIGITAL CHECKOUT</span>
+              <span>{t('footer.copyright')}</span>
+              <span>{t('footer.encryptedCheckout')}</span>
             </div>
           </div>
         </div>

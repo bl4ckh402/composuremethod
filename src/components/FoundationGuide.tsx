@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { COMPOSURE_MODULES } from '../data/guideData';
 import { ViewMode } from '../types';
+import { useI18n } from '../lib/i18n';
 
 interface FoundationGuideProps {
   onNavigate: (view: ViewMode) => void;
@@ -14,6 +15,7 @@ export const FoundationGuide: React.FC<FoundationGuideProps> = ({
   onOpenCheckout,
   isMemberVerified,
 }) => {
+  const { t } = useI18n();
   const [selectedModule, setSelectedModule] = useState<string>('module-1');
 
   const bonuses = [
@@ -35,7 +37,7 @@ export const FoundationGuide: React.FC<FoundationGuideProps> = ({
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="font-display text-3xl md:text-[2.6rem] font-bold text-[#081d00] tracking-tight"
         >
-          What You Get Inside The Composure Method
+          {t('curriculum.headline')}
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -44,7 +46,7 @@ export const FoundationGuide: React.FC<FoundationGuideProps> = ({
           transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="font-body text-sm md:text-base text-[#43483e] leading-relaxed"
         >
-          5 structured digital modules, step-by-step physical protocols, and 4 free instant bonuses designed for rapid, discreet implementation.
+          {t('curriculum.subtext')}
         </motion.p>
       </div>
 
@@ -65,7 +67,7 @@ export const FoundationGuide: React.FC<FoundationGuideProps> = ({
                   <span className="material-symbols-outlined text-sm">
                     {isMemberVerified ? 'lock_open' : 'lock'}
                   </span>
-                  {isMemberVerified ? 'Unlocked' : 'Members Only'}
+                  {isMemberVerified ? t('curriculum.unlocked') : t('curriculum.membersOnly')}
                 </span>
               </div>
 
@@ -78,7 +80,7 @@ export const FoundationGuide: React.FC<FoundationGuideProps> = ({
 
               <div className="pt-3 border-t border-[#173404]/8 space-y-2">
                 <span className="font-mono-caps text-[10px] text-[#74796d] block uppercase tracking-wider">
-                  Key Lessons:
+                  {t('curriculum.keyLessonsLabel')}
                 </span>
                 <ul className="space-y-1.5 font-body text-xs text-[#1c1b1b]">
                   {mod.lessons.map((lesson) => (
@@ -98,12 +100,12 @@ export const FoundationGuide: React.FC<FoundationGuideProps> = ({
               {isMemberVerified ? (
                 <>
                   <span className="material-symbols-outlined text-sm">visibility</span>
-                  <span>View Module Content</span>
+                  <span>{t('curriculum.viewModuleContent')}</span>
                 </>
               ) : (
                 <>
                   <span className="material-symbols-outlined text-sm">lock</span>
-                  <span>Unlock Module ($20)</span>
+                  <span>{t('nav.getAccess')}</span>
                 </>
               )}
             </button>

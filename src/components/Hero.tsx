@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import lt from '../assets/images/lt.png';
 import { COPY } from '../lib/brand';
+import { useI18n } from '../lib/i18n';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,6 +13,7 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ onOpenCheckout, isMemberVerified = false }) => {
+  const { t } = useI18n();
   const handlePrimaryClick = () => {
     if (isMemberVerified) {
       const el = document.getElementById('curriculum');
@@ -67,7 +69,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckout, isMemberVerified = f
                 className="btn-primary text-base md:text-lg py-4 px-10"
               >
                 <span className="material-symbols-outlined text-[#b7f473] text-xl">lock_open</span>
-                <span>{isMemberVerified ? 'Access Member Curriculum' : COPY.ctaPrimary}</span>
+                <span>{isMemberVerified ? t('hero.ctaSecondary') : COPY.ctaPrimary}</span>
                 <span className="material-symbols-outlined text-lg">arrow_forward</span>
               </button>
             </div>
@@ -75,17 +77,17 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckout, isMemberVerified = f
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-1">
               <span className="flex items-center gap-1.5 font-mono text-[11px] text-[#52574c]">
                 <span className="material-symbols-outlined text-sm text-[#3e6a00]">verified_user</span>
-                30-Day Money-Back Guarantee
+                {t('footer.guarantee')}
               </span>
               <span className="text-[#ccc]">|</span>
               <span className="flex items-center gap-1.5 font-mono text-[11px] text-[#52574c]">
                 <span className="material-symbols-outlined text-sm text-[#3e6a00]">lock</span>
-                Discreet Billing
+                {t('footer.discreetBilling')}
               </span>
               <span className="text-[#ccc]">|</span>
               <span className="flex items-center gap-1.5 font-mono text-[11px] text-[#52574c]">
                 <span className="material-symbols-outlined text-sm text-[#3e6a00]">bolt</span>
-                Instant Digital Delivery
+                {t('footer.instantDelivery')}
               </span>
             </div>
           </div>

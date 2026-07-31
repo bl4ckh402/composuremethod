@@ -31,7 +31,8 @@ import { PartnerScriptsAccordion } from './components/PartnerScriptsAccordion';
 import { RoadmapTracker } from './components/RoadmapTracker';
 import { ShameCycleDiagram } from './components/ShameCycleDiagram';
 import { PracticeLogViewer } from './components/PracticeLogViewer';
-import { trackPageVisit } from './lib/redditPixel';
+import { trackPageVisit, trackPurchase as trackRedditPurchase } from './lib/redditPixel';
+import { trackTrafficStarsPurchase } from './lib/trafficStars';
 
 function ToolShell({ title, subtitle, onBack, children }: { title: string; subtitle?: string; onBack: () => void; children: React.ReactNode }) {
   return (
@@ -78,6 +79,18 @@ export default function App() {
     }
 
     const urlParams = new URLSearchParams(window.location.search);
+    const tsClickId =
+      urlParams.get('click_id') ||
+      urlParams.get('clickid') ||
+      urlParams.get('ts_click_id');
+    if (tsClickId) {
+      try {
+        localStorage.setItem('trafficstars_click_id', tsClickId);
+      } catch {
+        // ignore storage errors
+      }
+    }
+
     const checkoutStatus = urlParams.get('checkout');
     if (checkoutStatus === 'success') {
       const emailParam = urlParams.get('email');
@@ -92,9 +105,20 @@ export default function App() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: emailParam }),
         }).catch(() => {});
+        trackTrafficStarsPurchase({
+          value: 20,
+          price: 20,
+          orderId: checkoutId || undefined,
+          leadCode: checkoutId || emailParam,
+        });
       } else {
         localStorage.setItem('composure_verified_access', 'true');
         setIsMemberVerified(true);
+        trackTrafficStarsPurchase({
+          value: 20,
+          price: 20,
+          orderId: checkoutId || undefined,
+        });
       }
       if (checkoutId) {
         localStorage.setItem('composure_checkout_id', checkoutId);

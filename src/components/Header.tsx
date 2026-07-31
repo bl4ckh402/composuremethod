@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ViewMode } from '../types';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { useI18n } from '../lib/i18n';
 
 interface HeaderProps {
   currentView: ViewMode;
@@ -17,6 +18,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenMemberAccess,
   isMemberVerified,
 }) => {
+  const { t, strings } = useI18n();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -59,17 +61,17 @@ export const Header: React.FC<HeaderProps> = ({
             composuremethod.help
           </span>
           <span className="hidden md:block font-mono text-[9px] text-[#74796d] uppercase tracking-wider leading-none mt-0.5">
-            Control &amp; Confidence System
+            {t('footer.tagline')}
           </span>
         </div>
       </button>
 
       {/* Desktop nav links */}
       <div className="hidden lg:flex items-center gap-6 font-mono-caps text-[11px] text-[#52574c]">
-        <button onClick={() => scrollToSection('why-it-works')} className="hover:text-[#173404] transition-colors cursor-pointer">Why It Works</button>
-        <button onClick={() => scrollToSection('the-method')} className="hover:text-[#173404] transition-colors cursor-pointer">The Method</button>
-        <button onClick={() => scrollToSection('curriculum')} className="hover:text-[#173404] transition-colors cursor-pointer">Curriculum</button>
-        <button onClick={() => scrollToSection('reviews')} className="hover:text-[#173404] transition-colors cursor-pointer">Reviews</button>
+        <button onClick={() => scrollToSection('why-it-works')} className="hover:text-[#173404] transition-colors cursor-pointer">{t('nav.whyItWorks')}</button>
+        <button onClick={() => scrollToSection('the-method')} className="hover:text-[#173404] transition-colors cursor-pointer">{t('nav.theMethod')}</button>
+        <button onClick={() => scrollToSection('curriculum')} className="hover:text-[#173404] transition-colors cursor-pointer">{t('nav.curriculum')}</button>
+        <button onClick={() => scrollToSection('reviews')} className="hover:text-[#173404] transition-colors cursor-pointer">{t('nav.reviews')}</button>
       </div>
 
       {/* Action buttons */}
@@ -77,7 +79,7 @@ export const Header: React.FC<HeaderProps> = ({
         {isMemberVerified ? (
           <div className="flex items-center gap-2 bg-[#f4fce8] border border-[#3e6a00]/25 text-[#081d00] font-mono-caps text-[11px] px-3.5 py-2 rounded-full shadow-xs">
             <span className="w-2 h-2 rounded-full bg-[#3e6a00] animate-pulse" />
-            <span className="font-bold">MEMBER</span>
+            <span className="font-bold">{t('nav.accessGranted')}</span>
           </div>
         ) : (
           <div className="flex items-center gap-2">
@@ -86,7 +88,7 @@ export const Header: React.FC<HeaderProps> = ({
                 onClick={onOpenMemberAccess}
                 className="btn-ghost text-[10px] py-1.5 px-3"
               >
-                Member Login
+                {t('nav.memberLogin')}
               </button>
             </div>
             <div className="hidden sm:block">
@@ -96,7 +98,7 @@ export const Header: React.FC<HeaderProps> = ({
                 className="btn-primary text-[10px] py-1.5 px-3 rounded-full"
               >
                 <span className="material-symbols-outlined text-sm text-[#b7f473]">lock</span>
-                <span>Get Access ($20)</span>
+                <span>{t('nav.getAccess')}</span>
               </button>
             </div>
           </div>
@@ -123,18 +125,18 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="lg:hidden absolute top-16 left-0 w-full glass-panel border-b border-[#173404]/10 p-5 flex flex-col gap-3 shadow-xl z-50 animate-slideDown">
           <div className="grid grid-cols-2 gap-2 font-mono-caps text-[11px]">
             {[
-              ['why-it-works', 'Why It Works'],
-              ['the-method', 'The Method'],
-              ['curriculum', 'Curriculum'],
-              ['reviews', 'Reviews'],
-              ['faq', 'FAQ'],
-            ].map(([id, label]) => (
+              ['why-it-works', 'nav.whyItWorks'],
+              ['the-method', 'nav.theMethod'],
+              ['curriculum', 'nav.curriculum'],
+              ['reviews', 'nav.reviews'],
+              ['faq', 'faq'],
+            ].map(([id, labelKey]) => (
               <button
                 key={id}
                 onClick={() => scrollToSection(id)}
                 className="text-center font-bold py-2.5 rounded-xl bg-[#f0ebe3] text-[#173404] hover:bg-[#e0dada] transition-colors"
               >
-                {label}
+                {t(labelKey)}
               </button>
             ))}
           </div>
@@ -143,14 +145,14 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => { setMobileMenuOpen(false); onOpenMemberAccess(); }}
               className="w-full text-center font-mono-caps text-xs text-[#173404] py-2.5 rounded-xl bg-[#f0ebe3] font-bold hover:bg-[#e0dada] transition-colors"
             >
-              Member Login / Check Access
+              {t('nav.memberLoginCheck')}
             </button>
             <button
               onClick={() => { setMobileMenuOpen(false); onOpenCheckout(); }}
               className="w-full btn-primary text-xs py-3 rounded-xl"
             >
               <span className="material-symbols-outlined text-sm text-[#b7f473]">lock</span>
-              Get Instant Access — $20
+              {t('nav.getAccess')}
             </button>
             <div className="pt-1 flex justify-center">
               <LanguageSwitcher />

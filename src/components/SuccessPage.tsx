@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { ViewMode } from '../types';
 import { trackPurchase } from '../lib/redditPixel';
+import { trackTrafficStarsPurchase } from '../lib/trafficStars';
 import { COPY } from '../lib/brand';
 
 interface SuccessPageProps {
@@ -16,12 +17,20 @@ export const SuccessPage: React.FC<SuccessPageProps> = ({ userEmail, onNavigate 
     const sourceUrl = typeof window !== 'undefined' ? window.location.href : undefined;
     const storedAmount = typeof window !== 'undefined' ? localStorage.getItem('composure_checkout_amount') : null;
     const storedCurrency = typeof window !== 'undefined' ? localStorage.getItem('composure_checkout_currency') : null;
+    const checkoutId = typeof window !== 'undefined' ? localStorage.getItem('composure_checkout_id') : null;
     trackPurchase({
       value: storedAmount ? parseFloat(storedAmount) : 20,
       currency: storedCurrency || 'USD',
       orderId: `polar_${Date.now()}`,
       email: emailToTrack,
     }, sourceUrl);
+
+    trackTrafficStarsPurchase({
+      value: storedAmount ? parseFloat(storedAmount) : 20,
+      price: 20,
+      orderId: checkoutId || undefined,
+      leadCode: checkoutId || email || undefined,
+    });
   }, [email]);
 
   return (

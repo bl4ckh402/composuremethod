@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ViewMode } from '../types';
 import { trackAddToCart, trackLead, trackPurchase } from '../lib/redditPixel';
+import { trackTrafficStarsPurchase } from '../lib/trafficStars';
 import { COPY } from '../lib/brand';
 
 interface CheckoutModalProps {
@@ -49,6 +50,18 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
   const [polarProduct, setPolarProduct] = useState<PolarProduct | null>(null);
   const [fetchingProduct, setFetchingProduct] = useState(true);
   const [submitted, setSubmitted] = useState(false);
+
+  React.useEffect(() => {
+    if (submitted) {
+      const price = (productPrice?.priceAmount || 2000) / 100;
+      trackTrafficStarsPurchase({
+        value: price,
+        price,
+        orderId: productPrice ? `polar_${productPrice.priceAmount}` : undefined,
+        leadCode: email || undefined,
+      });
+    }
+  }, [submitted, productPrice, email]);
 
   React.useEffect(() => {
     const sourceUrl = typeof window !== 'undefined' ? window.location.href : undefined;
