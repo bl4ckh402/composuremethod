@@ -3,6 +3,7 @@ import {
   grantOrderEntitlement,
   revokeOrderEntitlement,
 } from '../../src/lib/entitlementsStore.js';
+import { fireTrafficStarsPostback } from '../../src/lib/s2sPostback.js';
 
 export default async (req: any, res: any) => {
   if (req.method !== 'POST') {
@@ -94,6 +95,16 @@ export default async (req: any, res: any) => {
       } catch (err) {
         console.error('[Polar Webhook] Error granting entitlement:', err);
       }
+
+      fireTrafficStarsPostback({
+        value: amount,
+        price: amount,
+        leadCode: orderId,
+        orderId,
+        email: customerEmail,
+      }).catch((err) => {
+        console.error('[TrafficStars S2S] Postback failed:', err);
+      });
 
       console.log(
         `[Polar Webhook] Successfully granted access to ${customerEmail} for order ${orderId}`
