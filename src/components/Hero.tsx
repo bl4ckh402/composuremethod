@@ -104,7 +104,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckout, isMemberVerified = f
           <div className="lg:col-span-6 relative w-full">
             <div
               ref={imageRef}
-              className="relative rounded-3xl overflow-hidden shadow-2xl border border-[#173404]/10 bg-white will-change-transform"
+              className="relative rounded-3xl overflow-hidden shadow-2xl border border-[#173404]/10 bg-[#081d00] will-change-transform"
             >
               <div className="aspect-video">
                 <img

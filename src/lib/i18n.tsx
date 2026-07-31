@@ -112,14 +112,19 @@ export interface I18nStrings {
   problem: {
     headline: string;
     subtext: string;
+    resultLabel: string;
     sprayTitle: string;
     sprayDesc: string;
+    sprayResult: string;
     pillTitle: string;
     pillDesc: string;
+    pillResult: string;
     distractionTitle: string;
     distractionDesc: string;
+    distractionResult: string;
     methodTitle: string;
     methodDesc: string;
+    methodResult: string;
     mechanismLabel: string;
     mechanismTitle: string;
     mechanismBody: string;
@@ -582,14 +587,19 @@ const translations: Record<Locale, I18nStrings> = {
     problem: {
       headline: 'Why Does This Happen in Your 30s — And Why Traditional "Solutions" Fail?',
       subtext: 'Starting in your 30s, lifestyle load, career stress, and subtle hormonal shifts heighten your sympathetic nervous system. When performance pressure enters the equation, arousal accelerates faster than your conscious control can catch it.',
+      resultLabel: 'Result',
       sprayTitle: 'Numbing Sprays & Creams',
       sprayDesc: 'Dulls all physical sensation. Turns intimacy into a numb, mechanical chore and often transfers to your partner, ruining mutual pleasure.',
+      sprayResult: 'Temporary Fix',
       pillTitle: 'Unapproved Pills & Supplements',
       pillDesc: 'Creates unpredictable side-effects (headaches, flushing). Treats timing as a chemical problem rather than retraining nervous system control.',
+      pillResult: 'Side Effects',
       distractionTitle: 'Distraction & Mental Counting',
       distractionDesc: 'Counting backwards or thinking about sports pulls your mind entirely out of the room. Destroys emotional intimacy and fails under high arousal.',
+      distractionResult: 'Doesn\'t Address Root Cause',
       methodTitle: 'The Composure Method',
       methodDesc: 'Retrains your pelvic neuromuscular response and parasympathetic nervous system. Builds genuine, natural stamina you retain for life.',
+      methodResult: 'Permanent Skill',
       mechanismLabel: 'THE NEURO-PHYSIOLOGICAL MECHANISM',
       mechanismTitle: 'How Retraining Parasympathetic Control Delays Climax Naturally',
       mechanismBody: 'Ejaculation is governed by the autonomic nervous system. When anxiety or fast breathing shifts your body into sympathetic ("fight or flight") mode, nerve impulse velocity speeds up dramatically. By combining 4-2-7 parasympathetic breath exhales with targeted pelvic floor releases, you lower nerve signal pressure and maintain arousal smoothly in the optimal 4–6 range on the 1–10 scale.',
@@ -1039,14 +1049,19 @@ const translations: Record<Locale, I18nStrings> = {
     problem: {
       headline: 'Pourquoi Ça Arrive Dans Votre Trentaine — Et Pourquoi Les "Solutions" Traditionnelles Échouent ?',
       subtext: 'À partir de la trentaine, le stress professionnel, la charge de vie et de subtils changements hormonaux activent votre système nerveux sympathique. Quand la pression de performance s\'en mêle, l\'excitation s\'emballe plus vite que votre contrôle conscient ne peut le suivre.',
+      resultLabel: 'Résultat',
       sprayTitle: 'Sprays et Crèmes Anesthésiants',
       sprayDesc: 'Supprime toute sensation physique. Transforme l\'intimité en une tâche mécanique et insensible, et se transmet parfois au partenaire.',
+      sprayResult: 'Solution Temporaire',
       pillTitle: 'Pilules et Suppléments Non Approuvés',
       pillDesc: 'Provoque des effets secondaires imprévisibles. Traite le timing comme un problème chimique au lieu de rééduquer le contrôle nerveux.',
+      pillResult: 'Effets Secondaires',
       distractionTitle: 'Distraction et Compte Mental',
       distractionDesc: 'Penser à autre chose vous sort complètement de l\'instant. Détruit l\'intimité émotionnelle et échoue sous forte excitation.',
+      distractionResult: 'Ne Traite Pas La Cause Racine',
       methodTitle: 'La Méthode Composure',
       methodDesc: 'Rééduque la réponse neuromusculaire pelvienne et le système nerveux parasympathique. Construit une endurance naturelle et durable.',
+      methodResult: 'Compétence Permanente',
       mechanismLabel: 'LE MÉCANISME NEUROPHYSIOLOGIQUE',
       mechanismTitle: 'Comment La Rééducation Du Contrôle Parasympathique Retarde L\'éjaculation Naturellement',
       mechanismBody: 'L\'éjaculation est gouvernée par le système nerveux autonome. Quand l\'anxiété ou une respiration rapide bascule votre corps en mode sympathique, la vélocité des impulsions nerveuses augmente dramatiquement. En combinant des expirations parasympathiques 4-2-7 avec des relâchements pelviens ciblés, vous réduisez la pression du signal nerveux et maintenez l\'excitation dans la zone optimale 4–6.',
@@ -1510,14 +1525,19 @@ const translations: Record<Locale, I18nStrings> = {
     problem: {
       headline: 'Perché Succede Nei Tuoi 30 Anni — E Perché Le "Soluzioni" Tradizionali Falliscono?',
       subtext: 'A partire dai 30 anni, il carico dello stile di vita, lo stress lavorativo e sottili cambiamenti ormonali intensificano il sistema nervoso simpatico. Quando la pressione della performance entra in gioco, l\'eccitazione accelera più velocemente di quanto il tuo controllo cosciente riesca a gestire.',
+      resultLabel: 'Risultato',
       sprayTitle: 'Spray E Creme Anestetizzanti',
       sprayDesc: 'Attutisce ogni sensazione fisica. Trasforma l\'intimità in un compito meccanico e insensibile, e spesso si trasferisce al partner, rovinando il piacere reciproco.',
+      sprayResult: 'Soluzione Temporanea',
       pillTitle: 'Pillole E Integratori Non Approvati',
       pillDesc: 'Crea effetti collaterali imprevedibili (mal di testa, arrossamento). Tratta il tempismo come un problema chimico invece di rieducare il controllo del sistema nervoso.',
+      pillResult: 'Effetti Collaterali',
       distractionTitle: 'Distrazione E Conteggio Mentale',
       distractionDesc: 'Contare alla rovescia o pensare allo sport ti allontana completamente dal momento. Distrugge l\'intimità emotiva e fallisce con eccitazione elevata.',
+      distractionResult: 'Non Tratta La Causa Radice',
       methodTitle: 'Il Metodo Composure',
       methodDesc: 'Rieduca la risposta neuromuscolare pelvica e il sistema nervoso parasimpatico. Costruisce una resistenza genuina e naturale che dura per tutta la vita.',
+      methodResult: 'Competenza Permanente',
       mechanismLabel: 'IL MECCANISMO NEUROFISIOLOGICO',
       mechanismTitle: 'Come La Rieducazione Del Controllo Parasimpatico Ritarda Naturalmente Il Climax',
       mechanismBody: 'L\'eiaculazione è governata dal sistema nervoso autonomo. Quando l\'ansia o una respirazione rapida spostano il corpo in modalità simpatica ("lotta o fuga"), la velocità degli impulsi nervosi aumenta drasticamente. Combinando espirazioni parasimpatiche 4-2-7 con rilasci pelvici mirati, riduci la pressione del segnale nervoso e mantieni l\'eccitazione in modo fluido nella fascia ottimale 4–6 sulla scala 1–10.',
@@ -1974,14 +1994,19 @@ const translations: Record<Locale, I18nStrings> = {
     problem: {
       headline: 'Waarom Gebeurt Dit In Je Dertiger Jaren — En Waarom Traditionele \'Oplossingen\' Falen?',
       subtext: 'Vanaf je dertigste verhogen levensstijlbelasting, carrièrestress en subtiele hormonale verschuivingen je sympathische zenuwstelsel. Wanneer prestatiedruk erbij komt, versnelt opwinding sneller dan je bewuste controle kan bijhouden.',
+      resultLabel: 'Resultaat',
       sprayTitle: 'Verdovende Sprays & Crèmes',
       sprayDesc: 'Verdooft alle fysieke gevoel. Maakt intimiteit tot een gevoelloze, mechanische verplichting en draagt vaak over op je partner, wat wederzijds plezier verpest.',
+      sprayResult: 'Tijdelijke Oplossing',
       pillTitle: 'Niet-goedgekeurde Pillen & Supplementen',
       pillDesc: 'Veroorzaakt onvoorspelbare bijwerkingen (hoofdpijn, blozen). Behandelt timing als een chemisch probleem in plaats van het zenuwstelsel opnieuw te trainen.',
+      pillResult: 'Bijwerkingen',
       distractionTitle: 'Afleiding & Mentaal Tellen',
       distractionDesc: 'Terugtellen of aan sport denken haalt je volledig uit het moment. Vernietigt emotionele intimiteit en faalt bij hoge opwinding.',
+      distractionResult: 'Lost De Oorzaak Niet Op',
       methodTitle: 'De Composure Methode',
       methodDesc: 'Traint je bekkenneuromusculaire respons en parasympathisch zenuwstelsel opnieuw. Bouwt echt, natuurlijk uithoudingsvermogen op dat je levenslang behoudt.',
+      methodResult: 'Permanente Vaardigheid',
       mechanismLabel: 'HET NEUROFYSIOLOGISCHE MECHANISME',
       mechanismTitle: 'Hoe Het Hertrainen Van Parasympathische Controle Op Natuurlijke Wijze Het Climax Uitstelt',
       mechanismBody: 'Ejaculatie wordt bestuurd door het autonome zenuwstelsel. Wanneer angst of snelle ademhaling je lichaam in de sympathische (\'vecht-of-vlucht\') modus brengt, neemt de snelheid van zenuwimpulsen dramatisch toe. Door 4-2-7 parasympathische uitademingen te combineren met gerichte bekkenbodemontspanningen, verlaag je de zenuwsignaaldruk en houd je de opwinding soepel in het optimale bereik van 4–6 op de schaal van 1–10.',
@@ -2438,14 +2463,19 @@ const translations: Record<Locale, I18nStrings> = {
     problem: {
       headline: 'Warum Passiert Das In Den 30ern — Und Warum Traditionelle \'Lösungen\' Scheitern?',
       subtext: 'Ab den 30ern verstärken Lebensstilbelastung, Karrierestress und subtile hormonelle Veränderungen Ihr sympathisches Nervensystem. Wenn Leistungsdruck ins Spiel kommt, beschleunigt sich die Erregung schneller, als Ihre bewusste Kontrolle mithalten kann.',
+      resultLabel: 'Ergebnis',
       sprayTitle: 'Betäubende Sprays & Cremes',
       sprayDesc: 'Betäubt jedes körperliche Gefühl. Verwandelt Intimität in eine gefühllose, mechanische Pflicht und überträgt sich oft auf Ihre Partnerin, was das gemeinsame Vergnügen ruiniert.',
+      sprayResult: 'Temporäre Lösung',
       pillTitle: 'Nicht Zugelassene Pillen & Nahrungsergänzungsmittel',
       pillDesc: 'Verursacht unvorhersehbare Nebenwirkungen (Kopfschmerzen, Erröten). Behandelt Timing als chemisches Problem statt die Kontrolle des Nervensystems neu zu trainieren.',
+      pillResult: 'Nebenwirkungen',
       distractionTitle: 'Ablenkung & Gedankliches Zählen',
       distractionDesc: 'Rückwärtszählen oder an Sport denken reißt Sie vollständig aus dem Moment. Zerstört emotionale Intimität und versagt bei starker Erregung.',
+      distractionResult: 'Behebt Nicht Die Ursache',
       methodTitle: 'Die Composure Methode',
       methodDesc: 'Trainiert Ihre neuromuskuläre Beckenreaktion und Ihr parasympathisches Nervensystem neu. Baut echte, natürliche Ausdauer auf, die Sie ein Leben lang behalten.',
+      methodResult: 'Dauerhafte Fähigkeit',
       mechanismLabel: 'DER NEUROPHYSIOLOGISCHE MECHANISMUS',
       mechanismTitle: 'Wie Das Neutraining Der Parasympathischen Kontrolle Den Höhepunkt Auf Natürliche Weise Verzögert',
       mechanismBody: 'Die Ejakulation wird vom autonomen Nervensystem gesteuert. Wenn Angst oder schnelle Atmung Ihren Körper in den sympathischen (\'Kampf-oder-Flucht\'-)Modus versetzen, steigt die Geschwindigkeit der Nervenimpulse dramatisch an. Durch die Kombination von 4-2-7-parasympathischen Ausatmungen mit gezielten Beckenboden-Entspannungen senken Sie den Nervensignaldruck und halten die Erregung gleichmäßig im optimalen Bereich von 4–6 auf der Skala von 1–10.',
