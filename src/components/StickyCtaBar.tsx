@@ -28,7 +28,7 @@ export const StickyCtaBar: React.FC<StickyCtaProps> = ({ onOpenCheckout, isMembe
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 w-full z-40 sticky-cta-enter">
+    <div className="fixed bottom-0 left-0 w-full z-40 sticky-cta-enter lg:hidden">
       {/* Gradient border at top */}
       <div className="h-px bg-gradient-to-r from-transparent via-[#b7f473]/60 to-transparent" />
 

@@ -242,8 +242,8 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
               {polarProduct && (
                 <div className="bg-[#f4f7f2] border border-[#173404]/10 p-3.5 rounded-xl font-mono text-xs flex items-center justify-between text-[#43483e]">
                   <div>
-                    <span className="text-[10px] text-[#74796d] block uppercase">Product ID</span>
-                    <span className="text-[#081d00] font-bold truncate block max-w-[200px] sm:max-w-[280px]">{polarProduct.id}</span>
+                    <span className="text-[10px] text-[#74796d] block uppercase">Product</span>
+                    <span className="text-[#081d00] font-bold truncate block max-w-[200px] sm:max-w-[280px]">{polarProduct.name}</span>
                   </div>
                   <span className="text-[#173404] font-bold text-sm">{priceFormatted}</span>
                 </div>

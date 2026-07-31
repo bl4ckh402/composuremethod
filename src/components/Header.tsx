@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ViewMode } from '../types';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 interface HeaderProps {
   currentView: ViewMode;
@@ -101,6 +102,10 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         )}
 
+        <div className="hidden lg:block">
+          <LanguageSwitcher />
+        </div>
+
         {/* Mobile hamburger */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -147,6 +152,9 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="material-symbols-outlined text-sm text-[#b7f473]">lock</span>
               Get Instant Access — $20
             </button>
+            <div className="pt-1 flex justify-center">
+              <LanguageSwitcher />
+            </div>
           </div>
         </div>
       )}
