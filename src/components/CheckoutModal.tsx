@@ -51,6 +51,14 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
   const [fetchingProduct, setFetchingProduct] = useState(true);
   const [submitted, setSubmitted] = useState(false);
 
+  const productPrice = polarProduct?.prices?.[0];
+  const priceFormatted = productPrice
+    ? `${(productPrice.priceAmount / 100).toFixed(2)} ${(productPrice.priceCurrency || 'usd').toUpperCase()}`
+    : '';
+
+  const productDescription = getShortDescription(polarProduct);
+  const productImage = polarProduct?.medias?.[0]?.publicUrl || '';
+
   React.useEffect(() => {
     if (submitted) {
       const price = (productPrice?.priceAmount || 2000) / 100;
@@ -122,14 +130,6 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
       checkoutLink.click();
     }
   };
-
-  const productPrice = polarProduct?.prices?.[0];
-  const priceFormatted = productPrice
-    ? `${(productPrice.priceAmount / 100).toFixed(2)} ${(productPrice.priceCurrency || 'usd').toUpperCase()}`
-    : '';
-
-  const productDescription = getShortDescription(polarProduct);
-  const productImage = polarProduct?.medias?.[0]?.publicUrl || '';
 
   // ─── SUCCESS STATE ─────────────────────────────────────
   const successContent = (
@@ -286,6 +286,17 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
                 Instant Fulfillment • 30-Day Refund Policy • Discreet Billing
               </p>
             </form>
+
+            <a
+              id="polar-checkout-link"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: 'none' }}
+              aria-hidden="true"
+            >
+              Polar Checkout
+            </a>
           </div>
         </div>
       </div>
