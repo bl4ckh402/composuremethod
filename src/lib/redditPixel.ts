@@ -31,16 +31,23 @@ function generateConversionId(eventAt: number, eventName: string, value?: number
 function fireCAPI(eventPayload: Record<string, any>): void {
   if (typeof window === 'undefined') return;
   const url = '/api/reddit/capi';
+  const payload = JSON.stringify({ events: [eventPayload] });
   if (navigator.sendBeacon) {
-    const blob = new Blob([JSON.stringify({ events: [eventPayload] })], { type: 'application/json' });
-    navigator.sendBeacon(url, blob);
+    try {
+      const blob = new Blob([payload], { type: 'application/json' });
+      navigator.sendBeacon(url, blob);
+    } catch {
+      // ignore beacon failures so analytics never breaks checkout
+    }
   } else {
     fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ events: [eventPayload] }),
+      body: payload,
       keepalive: true,
-    }).catch(() => {});
+    }).catch(() => {
+      // ignore network failures so analytics never breaks checkout
+    });
   }
 }
 
