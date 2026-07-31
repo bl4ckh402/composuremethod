@@ -462,7 +462,7 @@ const translations: Record<Locale, I18nStrings> = {
       markVideoAria: 'Mark testimonial video',
       muteVideo: 'Mute video',
       unmuteVideo: 'Unmute video',
-      markLabel: 'Mark',
+      markLabel: 'Mark - Founder',
     },
     checkout: {
       title: 'Complete Your Order',
@@ -931,7 +931,7 @@ const translations: Record<Locale, I18nStrings> = {
       markVideoAria: 'Vidéo témoignage de Mark',
       muteVideo: 'Couper le son',
       unmuteVideo: 'Réactiver le son',
-      markLabel: 'Mark',
+      markLabel: 'Mark - Founder',
     },
     checkout: {
       title: 'Finalisez Votre Commande',
@@ -1400,7 +1400,7 @@ const translations: Record<Locale, I18nStrings> = {
       markVideoAria: 'Video testimonianza di Mark',
       muteVideo: 'Disattiva audio',
       unmuteVideo: 'Attiva audio',
-      markLabel: 'Mark',
+      markLabel: 'Mark - Founder',
     },
     checkout: {
       title: 'Completa il Tuo Ordine',
@@ -1869,7 +1869,7 @@ const translations: Record<Locale, I18nStrings> = {
       markVideoAria: 'Mark getuigenisvideo',
       muteVideo: 'Geluid uitzetten',
       unmuteVideo: 'Geluid aanzetten',
-      markLabel: 'Mark',
+      markLabel: 'Mark - Founder',
     },
     checkout: {
       title: 'Voltooi Je Bestelling',
@@ -2338,7 +2338,7 @@ const translations: Record<Locale, I18nStrings> = {
       markVideoAria: 'Mark-Zeugenaussage-Video',
       muteVideo: 'Stummschalten',
       unmuteVideo: 'Stummschaltung aufheben',
-      markLabel: 'Mark',
+      markLabel: 'Mark - Founder',
     },
     checkout: {
       title: 'Bestellung Abschließen',
