@@ -1,24 +1,6 @@
-import express from 'express';
-
-export function registerS2SRoutes(app: express.Application) {
-  app.post('/api/track/ts-click', express.json(), async (req, res) => {
-    const { click_id, email } = req.body || {};
-    if (!click_id || typeof click_id !== 'string') {
-      return res.status(400).json({ error: 'click_id is required' });
-    }
-
-    await storeClickId(click_id, email);
-
-    return res.json({ received: true });
-  });
-}
-
 const getEnv = (key: string): string | undefined => {
   if (typeof process !== 'undefined' && process.env && process.env[key]) {
     return process.env[key];
-  }
-  if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env[key]) {
-    return import.meta.env[key];
   }
   return undefined;
 };
@@ -39,17 +21,25 @@ interface ClickRecord {
   capturedAt: number;
 }
 
-const USE_REDIS = typeof process !== 'undefined' && !!process.env.UPSTASH_REDIS_REST_URL;
-
-const redis = USE_REDIS
-  ? new (await import('@upstash/redis')).Redis({
-      url: process.env.UPSTASH_REDIS_REST_URL!,
-      token: process.env.UPSTASH_REDIS_REST_TOKEN || '',
-    })
-  : null;
-
 const CLICK_TTL_SECONDS = 24 * 60 * 60;
 const clickStore = new Map<string, ClickRecord>();
+
+let redis: any = null;
+
+async function getRedis() {
+  if (redis) return redis;
+  if (typeof process === 'undefined' || !process.env.UPSTASH_REDIS_REST_URL) return null;
+  try {
+    const redisModule = require('@upstash/redis');
+    redis = new redisModule.Redis({
+      url: process.env.UPSTASH_REDIS_REST_URL,
+      token: process.env.UPSTASH_REDIS_REST_TOKEN || '',
+    });
+  } catch (err) {
+    console.error('[S2S] Failed to initialize Redis:', err);
+  }
+  return redis;
+}
 
 function cleanupClicks() {
   const now = Date.now();
@@ -64,10 +54,11 @@ export async function storeClickId(clickId: string, email?: string): Promise<voi
   if (!clickId) return;
   const key = email ? email.toLowerCase().trim() : clickId;
 
-  if (redis) {
+  const redisClient = await getRedis();
+  if (redisClient) {
     try {
       const redisKey = email ? `trafficstars:click:${key}` : `trafficstars:click:${clickId}`;
-      await redis.set(redisKey, clickId, { ex: CLICK_TTL_SECONDS });
+      await redisClient.set(redisKey, clickId, { ex: CLICK_TTL_SECONDS });
     } catch {
       // ignore Redis errors
     }
@@ -84,11 +75,12 @@ export async function storeClickId(clickId: string, email?: string): Promise<voi
 export async function getClickIdByEmail(email: string): Promise<string | undefined> {
   if (!email) return undefined;
 
-  if (redis) {
+  const redisClient = await getRedis();
+  if (redisClient) {
     try {
       const redisKey = `trafficstars:click:${email.toLowerCase().trim()}`;
-      const stored = await redis.get<string>(redisKey);
-      if (stored) return stored;
+      const stored = await redisClient.get(redisKey);
+      if (stored) return stored as string;
     } catch {
       // ignore Redis errors
     }
@@ -99,12 +91,13 @@ export async function getClickIdByEmail(email: string): Promise<string | undefin
 }
 
 export async function getAnyClickId(): Promise<string | undefined> {
-  if (redis) {
+  const redisClient = await getRedis();
+  if (redisClient) {
     try {
-      const keys = await redis.keys('trafficstars:click:*');
+      const keys = await redisClient.keys('trafficstars:click:*');
       if (keys.length > 0) {
-        const stored = await redis.get<string>(keys[0]);
-        if (stored) return stored;
+        const stored = await redisClient.get(keys[0]);
+        if (stored) return stored as string;
       }
     } catch {
       // ignore Redis errors
@@ -149,7 +142,7 @@ export async function fireTrafficStarsPostback(options: {
     .replace('{value}', encodeURIComponent(String(value)))
     .replace('{price}', encodeURIComponent(String(price)))
     .replace('{lead_code}', encodeURIComponent(leadCode))
-    .replace('{click_id}', encodeURIComponent(clickId))
+    .replace('{click_id}', encodeURIComponent(String(clickId)))
     .replace('{key}', encodeURIComponent(TRAFFICSTARS_KEY))
     .replace('{goalid}', encodeURIComponent(TRAFFICSTARS_GOAL_ID));
 
@@ -158,4 +151,32 @@ export async function fireTrafficStarsPostback(options: {
   } catch {
     // ignore postback failures
   }
+}
+
+export function registerS2SRoutes(app: any) {
+  app.post('/api/track/ts-click', expressJson(), async (req: any, res: any) => {
+    const { click_id, email } = req.body || {};
+    if (!click_id || typeof click_id !== 'string') {
+      return res.status(400).json({ error: 'click_id is required' });
+    }
+
+    await storeClickId(click_id, email);
+
+    return res.json({ received: true });
+  });
+}
+
+function expressJson() {
+  return (req: any, res: any, next: any) => {
+    let data = '';
+    req.on('data', (chunk: any) => { data += chunk; });
+    req.on('end', () => {
+      try {
+        req.body = data ? JSON.parse(data) : {};
+      } catch {
+        req.body = {};
+      }
+      next();
+    });
+  };
 }
