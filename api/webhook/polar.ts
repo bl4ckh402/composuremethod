@@ -3,7 +3,111 @@ import {
   grantOrderEntitlement,
   revokeOrderEntitlement,
 } from '../../src/lib/entitlementsStore.js';
-import { fireTrafficStarsPostback } from '../../src/lib/s2sPostback.js';
+
+const TRAFFICSTARS_POSTBACK_URL = process.env.VITE_TRAFFICSTARS_POSTBACK_URL || '';
+const TRAFFICSTARS_KEY = process.env.VITE_TRAFFICSTARS_KEY || '';
+const TRAFFICSTARS_GOAL_ID = process.env.VITE_TRAFFICSTARS_GOAL_ID || '';
+const TRAFFICSTARS_DEFAULT_VALUE = process.env.VITE_TRAFFICSTARS_DEFAULT_VALUE
+  ? parseFloat(process.env.VITE_TRAFFICSTARS_DEFAULT_VALUE)
+  : undefined;
+const TRAFFICSTARS_DEFAULT_PRICE = process.env.VITE_TRAFFICSTARS_DEFAULT_PRICE
+  ? parseFloat(process.env.VITE_TRAFFICSTARS_DEFAULT_PRICE)
+  : undefined;
+
+async function getRedis() {
+  if (typeof process === 'undefined' || !process.env.UPSTASH_REDIS_REST_URL) return null;
+  try {
+    const { Redis } = await import('@upstash/redis');
+    return new Redis({
+      url: process.env.UPSTASH_REDIS_REST_URL,
+      token: process.env.UPSTASH_REDIS_REST_TOKEN || '',
+    });
+  } catch {
+    return null;
+  }
+}
+
+async function getClickIdByEmail(email: string): Promise<string | undefined> {
+  const redis = await getRedis();
+  if (!redis) return undefined;
+  try {
+    const stored = await redis.get(`trafficstars:click:${email.toLowerCase().trim()}`);
+    if (stored) return stored as string;
+  } catch {}
+  return undefined;
+}
+
+async function getAnyClickId(): Promise<string | undefined> {
+  const redis = await getRedis();
+  if (!redis) return undefined;
+  try {
+    const keys = await redis.keys('trafficstars:click:*');
+    if (keys.length > 0) {
+      const stored = await redis.get(keys[0]);
+      if (stored) return stored as string;
+    }
+  } catch {}
+  return undefined;
+}
+
+async function fireTrafficStarsPostback(options: {
+  value?: number;
+  price?: number;
+  leadCode?: string;
+  orderId?: string;
+  email?: string;
+}): Promise<void> {
+  if (!TRAFFICSTARS_POSTBACK_URL || !TRAFFICSTARS_KEY || !TRAFFICSTARS_GOAL_ID) {
+    console.warn('[TrafficStars S2S] Missing env vars, skipping postback');
+    return;
+  }
+
+  const value = options.value ?? TRAFFICSTARS_DEFAULT_VALUE;
+  const price = options.price ?? TRAFFICSTARS_DEFAULT_PRICE;
+  if (value == null || price == null) {
+    console.warn('[TrafficStars S2S] Missing value/price, skipping postback');
+    return;
+  }
+
+  const leadCode = options.leadCode || options.orderId || `order_${Date.now()}`;
+  let clickId = '';
+
+  if (options.email) {
+    clickId = (await getClickIdByEmail(options.email)) || '';
+    if (clickId) {
+      console.log(`[TrafficStars S2S] Found clickId by email ${options.email}: ${clickId}`);
+    }
+  }
+
+  if (!clickId) {
+    clickId = (await getAnyClickId()) || '';
+    if (clickId) {
+      console.log(`[TrafficStars S2S] Using fallback clickId: ${clickId}`);
+    }
+  }
+
+  if (!clickId) {
+    console.warn(`[TrafficStars S2S] No clickId found for order ${options.orderId}`);
+    return;
+  }
+
+  const url = TRAFFICSTARS_POSTBACK_URL
+    .replace('{value}', encodeURIComponent(String(value)))
+    .replace('{price}', encodeURIComponent(String(price)))
+    .replace('{lead_code}', encodeURIComponent(leadCode))
+    .replace('{click_id}', encodeURIComponent(clickId))
+    .replace('{key}', encodeURIComponent(TRAFFICSTARS_KEY))
+    .replace('{goalid}', encodeURIComponent(TRAFFICSTARS_GOAL_ID));
+
+  console.log(`[TrafficStars S2S] Firing postback: ${url}`);
+
+  try {
+    await fetch(url, { method: 'GET' });
+    console.log(`[TrafficStars S2S] Postback fired successfully`);
+  } catch (err) {
+    console.error(`[TrafficStars S2S] Postback failed:`, err);
+  }
+}
 
 export default async (req: any, res: any) => {
   console.log(`[Polar Webhook] Received ${req.method} request`);
@@ -113,27 +217,6 @@ export default async (req: any, res: any) => {
       console.log(
         `[Polar Webhook] Successfully granted access to ${customerEmail} for order ${orderId}`
       );
-
-      const postbackUrl = (() => {
-        const url = TRAFFICSTARS_POSTBACK_URL
-          .replace('{value}', encodeURIComponent(String(amount)))
-          .replace('{price}', encodeURIComponent(String(amount)))
-          .replace('{lead_code}', encodeURIComponent(orderId))
-          .replace('{click_id}', encodeURIComponent(clickId))
-          .replace('{key}', encodeURIComponent(TRAFFICSTARS_KEY))
-          .replace('{goalid}', encodeURIComponent(TRAFFICSTARS_GOAL_ID));
-        return url;
-      })();
-
-      console.log(`[TrafficStars S2S] Firing postback: ${postbackUrl}`);
-
-      try {
-        await fetch(postbackUrl, { method: 'GET' });
-        console.log(`[TrafficStars S2S] Postback fired successfully`);
-      } catch (err) {
-        console.error(`[TrafficStars S2S] Postback failed:`, err);
-      }
-
       break;
     }
 
