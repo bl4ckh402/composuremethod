@@ -7,6 +7,7 @@ import {
 const TRAFFICSTARS_POSTBACK_URL = process.env.VITE_TRAFFICSTARS_POSTBACK_URL || '';
 const TRAFFICSTARS_KEY = process.env.VITE_TRAFFICSTARS_KEY || '';
 const TRAFFICSTARS_GOAL_ID = process.env.VITE_TRAFFICSTARS_GOAL_ID || '';
+const TRAFFICSTARS_CHECKOUT_GOAL_ID = process.env.VITE_TRAFFICSTARS_CHECKOUT_GOAL_ID || '';
 const TRAFFICSTARS_DEFAULT_VALUE = process.env.VITE_TRAFFICSTARS_DEFAULT_VALUE
   ? parseFloat(process.env.VITE_TRAFFICSTARS_DEFAULT_VALUE)
   : undefined;
@@ -56,8 +57,10 @@ async function fireTrafficStarsPostback(options: {
   leadCode?: string;
   orderId?: string;
   email?: string;
+  goalId?: string;
 }): Promise<void> {
-  if (!TRAFFICSTARS_POSTBACK_URL || !TRAFFICSTARS_KEY || !TRAFFICSTARS_GOAL_ID) {
+  const goalId = options.goalId || TRAFFICSTARS_GOAL_ID;
+  if (!TRAFFICSTARS_POSTBACK_URL || !TRAFFICSTARS_KEY || !goalId) {
     console.warn('[TrafficStars S2S] Missing env vars, skipping postback');
     return;
   }
@@ -97,7 +100,7 @@ async function fireTrafficStarsPostback(options: {
     .replace('{lead_code}', encodeURIComponent(leadCode))
     .replace('{click_id}', encodeURIComponent(clickId))
     .replace('{key}', encodeURIComponent(TRAFFICSTARS_KEY))
-    .replace('{goalid}', encodeURIComponent(TRAFFICSTARS_GOAL_ID));
+    .replace('{goalid}', encodeURIComponent(goalId));
 
   console.log(`[TrafficStars S2S] Firing postback: ${url}`);
 
@@ -210,8 +213,20 @@ export default async (req: any, res: any) => {
         leadCode: orderId,
         orderId,
         email: customerEmail,
+        goalId: TRAFFICSTARS_CHECKOUT_GOAL_ID || undefined,
       }).catch((err) => {
-        console.error('[TrafficStars S2S] Postback failed:', err);
+        console.error('[TrafficStars S2S] Checkout postback failed:', err);
+      });
+
+      fireTrafficStarsPostback({
+        value: amount,
+        price: amount,
+        leadCode: orderId,
+        orderId,
+        email: customerEmail,
+        goalId: TRAFFICSTARS_GOAL_ID || undefined,
+      }).catch((err) => {
+        console.error('[TrafficStars S2S] Purchase postback failed:', err);
       });
 
       console.log(

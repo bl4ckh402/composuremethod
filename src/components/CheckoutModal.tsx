@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ViewMode } from '../types';
 import { trackAddToCart, trackLead, trackPurchase } from '../lib/redditPixel';
-import { trackTrafficStarsPurchase, trackTrafficStarsClick } from '../lib/trafficStars';
+import { trackTrafficStarsClick } from '../lib/trafficStars';
 import { useI18n } from '../lib/i18n';
 
 interface CheckoutModalProps {
@@ -66,12 +66,6 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
   React.useEffect(() => {
     if (submitted) {
       const price = (productPrice?.priceAmount || 2000) / 100;
-      trackTrafficStarsPurchase({
-        value: price,
-        price,
-        orderId: productPrice ? `polar_${productPrice.priceAmount}` : undefined,
-        leadCode: email || undefined,
-      });
     }
   }, [submitted, productPrice, email]);
 

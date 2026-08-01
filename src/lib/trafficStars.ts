@@ -1,13 +1,3 @@
-const TRAFFICSTARS_POSTBACK_URL = import.meta.env.VITE_TRAFFICSTARS_POSTBACK_URL || '';
-const TRAFFICSTARS_KEY = import.meta.env.VITE_TRAFFICSTARS_KEY || '';
-const TRAFFICSTARS_GOAL_ID = import.meta.env.VITE_TRAFFICSTARS_GOAL_ID || '';
-const TRAFFICSTARS_DEFAULT_VALUE = import.meta.env.VITE_TRAFFICSTARS_DEFAULT_VALUE
-  ? parseFloat(import.meta.env.VITE_TRAFFICSTARS_DEFAULT_VALUE)
-  : undefined;
-const TRAFFICSTARS_DEFAULT_PRICE = import.meta.env.VITE_TRAFFICSTARS_DEFAULT_PRICE
-  ? parseFloat(import.meta.env.VITE_TRAFFICSTARS_DEFAULT_PRICE)
-  : undefined;
-
 function getTrafficStarsClickId(): string | null {
   if (typeof window === 'undefined') return null;
   const urlParams = new URLSearchParams(window.location.search);
@@ -44,14 +34,4 @@ export function trackTrafficStarsClick(email?: string): void {
   } catch {
     // ignore
   }
-}
-
-export function trackTrafficStarsPurchase(options?: {
-  value?: number;
-  price?: number;
-  leadCode?: string;
-  orderId?: string;
-}) {
-  // Client-side purchase pixel removed intentionally.
-  // Conversion tracking is handled server-side from the Polar webhook via fireTrafficStarsPostback().
 }

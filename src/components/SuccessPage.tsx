@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { ViewMode } from '../types';
 import { trackPurchase } from '../lib/redditPixel';
-import { trackTrafficStarsPurchase, trackTrafficStarsClick } from '../lib/trafficStars';
+import { trackTrafficStarsClick } from '../lib/trafficStars';
 import { COPY } from '../lib/brand';
 
 interface SuccessPageProps {
@@ -28,12 +28,6 @@ export const SuccessPage: React.FC<SuccessPageProps> = ({ userEmail, onNavigate 
     if (emailToTrack) {
       trackTrafficStarsClick(emailToTrack);
     }
-    trackTrafficStarsPurchase({
-      value: storedAmount ? parseFloat(storedAmount) : 20,
-      price: 20,
-      orderId: checkoutId || undefined,
-      leadCode: checkoutId || email || undefined,
-    });
   }, [email]);
 
   return (
