@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import lt from '../assets/images/lt.png';
+import cs from '../assets/images/cs.png';
 import markTestimonial from '../assets/images/mark_testmonial.mp4';
 import { useI18n } from '../lib/i18n';
 
@@ -108,7 +108,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckout, isMemberVerified = f
             >
               <div className="w-full">
                 <img
-                  src={lt}
+                  src={cs}
                   alt={t('hero.productImageAlt')}
                   fetchPriority="high"
                   className="w-full h-auto object-contain"
@@ -124,7 +124,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckout, isMemberVerified = f
           </div>
         </div>
 
-        <div className="mt-8 md:mt-12 max-w-4xl mx-auto">
+        {/* <div className="mt-8 md:mt-12 max-w-4xl mx-auto">
           <div className="relative rounded-3xl overflow-hidden shadow-xl border border-[#173404]/10 bg-[#081d00]">
             <div className="aspect-video">
               <video
@@ -156,7 +156,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckout, isMemberVerified = f
                 </span>
               </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

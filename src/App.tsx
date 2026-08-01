@@ -242,7 +242,7 @@ export default function App() {
                 <ArchitectureOfClarity onOpenCheckout={handleOpenCheckout} isMemberVerified={isMemberVerified} />
                 <FoundationGuide onNavigate={handleNavigate} onOpenCheckout={handleOpenCheckout} isMemberVerified={isMemberVerified} />
                  <SelfQualification />
-                 <div className="max-w-4xl mx-auto">
+                 {/* <div className="max-w-4xl mx-auto">
                    <div className="relative rounded-3xl overflow-hidden shadow-xl border border-[#173404]/10 bg-[#081d00]">
                      <div className="aspect-video">
                         <video
@@ -280,7 +280,7 @@ export default function App() {
                      </div>
                    </div>
                  </div>
-                 <TestimonialsSection />
+                 <TestimonialsSection /> */}
                 <OfferValueStack onOpenCheckout={handleOpenCheckout} isMemberVerified={isMemberVerified} />
                 <GuaranteeSection />
                 <FaqSection />
