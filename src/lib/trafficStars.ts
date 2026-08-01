@@ -17,6 +17,15 @@ function getTrafficStarsClickId(): string | null {
   }
 }
 
+export function clearTrafficStarsClickId(): void {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.removeItem('trafficstars_click_id');
+  } catch {
+    // ignore storage errors
+  }
+}
+
 export function trackTrafficStarsClick(email?: string): void {
   if (typeof window === 'undefined') return;
   const clickId = getTrafficStarsClickId();
