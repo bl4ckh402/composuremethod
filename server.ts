@@ -11,7 +11,7 @@ import {
   getAllEntitlements,
   revokeOrderEntitlement,
 } from "./src/lib/entitlementsStore";
-import { registerS2SRoutes, fireTrafficStarsPostback } from "./src/lib/s2sPostback";
+import { fireTrafficStarsPostback } from "./src/lib/s2sPostback";
 
 dotenv.config();
 
@@ -249,8 +249,6 @@ async function startServer() {
   });
 
   app.post("/api/reddit/capi", handleRedditCAPI);
-
-  registerS2SRoutes(app);
 
   // API Endpoint: Generate Custom Composure & Cortisol Reset Protocol
   app.post("/api/clarity-protocol", async (req, res) => {

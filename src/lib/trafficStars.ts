@@ -23,17 +23,13 @@ export function trackTrafficStarsClick(email?: string): void {
   if (!clickId) return;
 
   try {
-    fetch('/api/track/ts-click', {
+    fetch('/api/track/ts-event', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ click_id: clickId, email: email?.trim().toLowerCase() }),
+      body: JSON.stringify({ click_id: clickId, email: email?.trim().toLowerCase(), type: 'click' }),
       keepalive: true,
-    }).catch(() => {
-      // ignore tracking failures so page load never breaks
-    });
-  } catch {
-    // ignore
-  }
+    }).catch(() => {});
+  } catch {}
 }
 
 export function trackTrafficStarsLead(email?: string): void {
@@ -42,17 +38,13 @@ export function trackTrafficStarsLead(email?: string): void {
   if (!clickId) return;
 
   try {
-    fetch('/api/track/ts-lead', {
+    fetch('/api/track/ts-event', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ click_id: clickId, email: email?.trim().toLowerCase() }),
+      body: JSON.stringify({ click_id: clickId, email: email?.trim().toLowerCase(), type: 'lead' }),
       keepalive: true,
-    }).catch(() => {
-      // ignore tracking failures so page load never breaks
-    });
-  } catch {
-    // ignore
-  }
+    }).catch(() => {});
+  } catch {}
 }
 
 export function trackTrafficStarsCheckout(email?: string): void {
@@ -61,15 +53,11 @@ export function trackTrafficStarsCheckout(email?: string): void {
   if (!clickId) return;
 
   try {
-    fetch('/api/track/ts-checkout', {
+    fetch('/api/track/ts-event', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ click_id: clickId, email: email?.trim().toLowerCase() }),
+      body: JSON.stringify({ click_id: clickId, email: email?.trim().toLowerCase(), type: 'checkout' }),
       keepalive: true,
-    }).catch(() => {
-      // ignore tracking failures so page load never breaks
-    });
-  } catch {
-    // ignore
-  }
+    }).catch(() => {});
+  } catch {}
 }
