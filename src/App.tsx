@@ -33,7 +33,7 @@ import { ShameCycleDiagram } from './components/ShameCycleDiagram';
 import { PracticeLogViewer } from './components/PracticeLogViewer';
 import stephanTestimonial from './assets/images/stephan_testimonial.mp4';
 import { trackPageVisit, trackPurchase as trackRedditPurchase } from './lib/redditPixel';
-import { trackTrafficStarsClick } from './lib/trafficStars';
+import { trackTrafficStarsClick, trackTrafficStarsLead } from './lib/trafficStars';
 
 function ToolShell({ title, subtitle, onBack, children }: { title: string; subtitle?: string; onBack: () => void; children: React.ReactNode }) {
   return (
@@ -130,7 +130,10 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleOpenCheckout = () => setCheckoutModalOpen(true);
+  const handleOpenCheckout = () => {
+    trackTrafficStarsLead();
+    setCheckoutModalOpen(true);
+  };
   const handleOpenMemberAccess = () => setMemberAccessModalOpen(true);
   const handleAccessGranted = (email: string) => {
     setIsMemberVerified(true);

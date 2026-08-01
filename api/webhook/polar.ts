@@ -7,7 +7,6 @@ import {
 const TRAFFICSTARS_POSTBACK_URL = process.env.VITE_TRAFFICSTARS_POSTBACK_URL || '';
 const TRAFFICSTARS_KEY = process.env.VITE_TRAFFICSTARS_KEY || '';
 const TRAFFICSTARS_GOAL_ID = process.env.VITE_TRAFFICSTARS_GOAL_ID || '';
-const TRAFFICSTARS_CHECKOUT_GOAL_ID = process.env.VITE_TRAFFICSTARS_CHECKOUT_GOAL_ID || '';
 const TRAFFICSTARS_DEFAULT_VALUE = process.env.VITE_TRAFFICSTARS_DEFAULT_VALUE
   ? parseFloat(process.env.VITE_TRAFFICSTARS_DEFAULT_VALUE)
   : undefined;
@@ -206,17 +205,6 @@ export default async (req: any, res: any) => {
       } catch (err) {
         console.error('[Polar Webhook] Error granting entitlement:', err);
       }
-
-      fireTrafficStarsPostback({
-        value: amount,
-        price: amount,
-        leadCode: orderId,
-        orderId,
-        email: customerEmail,
-        goalId: TRAFFICSTARS_CHECKOUT_GOAL_ID || undefined,
-      }).catch((err) => {
-        console.error('[TrafficStars S2S] Checkout postback failed:', err);
-      });
 
       fireTrafficStarsPostback({
         value: amount,

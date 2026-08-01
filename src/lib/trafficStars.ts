@@ -35,3 +35,41 @@ export function trackTrafficStarsClick(email?: string): void {
     // ignore
   }
 }
+
+export function trackTrafficStarsLead(email?: string): void {
+  if (typeof window === 'undefined') return;
+  const clickId = getTrafficStarsClickId();
+  if (!clickId) return;
+
+  try {
+    fetch('/api/track/ts-lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ click_id: clickId, email: email?.trim().toLowerCase() }),
+      keepalive: true,
+    }).catch(() => {
+      // ignore tracking failures so page load never breaks
+    });
+  } catch {
+    // ignore
+  }
+}
+
+export function trackTrafficStarsCheckout(email?: string): void {
+  if (typeof window === 'undefined') return;
+  const clickId = getTrafficStarsClickId();
+  if (!clickId) return;
+
+  try {
+    fetch('/api/track/ts-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ click_id: clickId, email: email?.trim().toLowerCase() }),
+      keepalive: true,
+    }).catch(() => {
+      // ignore tracking failures so page load never breaks
+    });
+  } catch {
+    // ignore
+  }
+}

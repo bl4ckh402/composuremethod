@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ViewMode } from '../types';
 import { trackAddToCart, trackLead, trackPurchase } from '../lib/redditPixel';
-import { trackTrafficStarsClick } from '../lib/trafficStars';
+import { trackTrafficStarsClick, trackTrafficStarsCheckout } from '../lib/trafficStars';
 import { useI18n } from '../lib/i18n';
 
 interface CheckoutModalProps {
@@ -121,6 +121,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
     setLoading(true);
     trackLead(email, typeof window !== 'undefined' ? window.location.href : undefined);
     trackTrafficStarsClick(email);
+    trackTrafficStarsCheckout(email);
     const checkoutLink = document.getElementById('polar-checkout-link') as HTMLAnchorElement | null;
     if (checkoutLink) {
       const productId = polarProduct?.id ? encodeURIComponent(polarProduct.id) : '';
