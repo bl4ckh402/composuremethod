@@ -7,6 +7,14 @@ This project uses Mixpanel for event tracking.
 - **SDK:** `mixpanel-browser`
 - **Token:** stored in `.env` as `VITE_MIXPANEL_TOKEN`
 - **Init:** `src/lib/mixpanel.ts` via `initMixpanel()` called in `src/App.tsx`
+- **Session Replay:** enabled in `initMixpanel()` with `record_sessions_percent: 100` and `record_heatmap_data: true` for full playback and click analysis
+
+## Session Replay
+
+- Replays are captured via Mixpanel Session Replay.
+- Heatmap data is enabled to capture clicks, rage clicks, and dead clicks.
+- Text and inputs are masked by default for privacy.
+- To view: Mixpanel dashboard → Session Replay.
 
 ## Tracking Calls
 

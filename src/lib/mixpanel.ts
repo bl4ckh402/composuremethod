@@ -4,7 +4,11 @@ const token = import.meta.env.VITE_MIXPANEL_TOKEN as string | undefined;
 
 export function initMixpanel() {
   if (!token || typeof window === 'undefined') return;
-  mixpanel.init(token, { debug: false });
+  mixpanel.init(token, {
+    debug: true,
+    record_sessions_percent: 100,
+    record_heatmap_data: true,
+  });
 }
 
 export function track(event: string, properties?: Record<string, unknown>) {
