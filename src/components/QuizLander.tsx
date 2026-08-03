@@ -32,10 +32,10 @@ export default function QuizLander({ onStartQuiz }) {
             steady. in control. together.
           </p>
           <h1 className="font-display text-[clamp(2.1rem,8vw,3.75rem)] leading-[1.08] text-cream">
-            Master your timing
+            Last longer in Bed
             <br className="hidden sm:block" /> in 90 days
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-relaxed text-sage/90 sm:text-base">
+          <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-relaxed text-white sm:text-base">
             A private, step-by-step path to lasting control, confidence, and
             connection — built for men 30 and older.
           </p>
