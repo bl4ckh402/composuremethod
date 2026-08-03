@@ -26,47 +26,46 @@ export function clearTrafficStarsClickId(): void {
   }
 }
 
+function sendBeacon(url: string, data: Record<string, any>): void {
+  if (typeof window === 'undefined' || typeof navigator === 'undefined') return;
+  const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+  if (navigator.sendBeacon && navigator.sendBeacon(url, blob)) {
+    return;
+  }
+  fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+    keepalive: true,
+  }).catch(() => {});
+}
+
 export function trackTrafficStarsClick(email?: string): void {
-  if (typeof window === 'undefined') return;
   const clickId = getTrafficStarsClickId();
   if (!clickId) return;
-
-  try {
-    fetch('/api/track/ts-event', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ click_id: clickId, email: email?.trim().toLowerCase(), type: 'click' }),
-      keepalive: true,
-    }).catch(() => {});
-  } catch {}
+  sendBeacon('/api/track/ts-event', {
+    click_id: clickId,
+    email: email?.trim().toLowerCase(),
+    type: 'click',
+  });
 }
 
 export function trackTrafficStarsLead(email?: string): void {
-  if (typeof window === 'undefined') return;
   const clickId = getTrafficStarsClickId();
   if (!clickId) return;
-
-  try {
-    fetch('/api/track/ts-event', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ click_id: clickId, email: email?.trim().toLowerCase(), type: 'lead' }),
-      keepalive: true,
-    }).catch(() => {});
-  } catch {}
+  sendBeacon('/api/track/ts-event', {
+    click_id: clickId,
+    email: email?.trim().toLowerCase(),
+    type: 'lead',
+  });
 }
 
 export function trackTrafficStarsCheckout(email?: string): void {
-  if (typeof window === 'undefined') return;
   const clickId = getTrafficStarsClickId();
   if (!clickId) return;
-
-  try {
-    fetch('/api/track/ts-event', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ click_id: clickId, email: email?.trim().toLowerCase(), type: 'checkout' }),
-      keepalive: true,
-    }).catch(() => {});
-  } catch {}
+  sendBeacon('/api/track/ts-event', {
+    click_id: clickId,
+    email: email?.trim().toLowerCase(),
+    type: 'checkout',
+  });
 }

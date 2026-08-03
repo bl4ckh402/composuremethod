@@ -21,6 +21,17 @@
   --color-on-surface:            #1c1b1b;
   --color-on-surface-variant:    #43483e;
 
+  /* Quiz lander palette */
+  --color-cream:                 #F4F1EA;
+  --color-ink:                   #1C1B1B;
+  --color-forest:                #1A3A1A;
+  --color-sage:                  #8FAE8B;
+  --color-light:                 #E8F5D4;
+  --color-mid:                   #C5D5A4;
+  --color-dark:                  #2F4F2F;
+  --color-amber:                 #E59500;
+  --color-amber-light:           #FFF3D6;
+
   /* Ease curves */
   --ease-spring: cubic-bezier(0.37, 0, 0.63, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -336,6 +347,29 @@
 @keyframes reveal-scale-in {
   from { opacity: 0; transform: scale(0.96); }
   to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes ring-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+@keyframes ring-breathe-slow {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+@keyframes ring-breathe-slower {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.ring-breathe { animation: ring-breathe 6s ease-in-out infinite; transform-origin: center; }
+.ring-breathe-slow { animation: ring-breathe-slow 8s ease-in-out infinite; transform-origin: center; }
+.ring-breathe-slower { animation: ring-breathe-slower 10s ease-in-out infinite; transform-origin: center; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ring-breathe, .ring-breathe-slow, .ring-breathe-slower {
+    animation: none !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

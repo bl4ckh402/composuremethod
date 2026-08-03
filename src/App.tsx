@@ -31,6 +31,8 @@ import { PartnerScriptsAccordion } from './components/PartnerScriptsAccordion';
 import { RoadmapTracker } from './components/RoadmapTracker';
 import { ShameCycleDiagram } from './components/ShameCycleDiagram';
 import { PracticeLogViewer } from './components/PracticeLogViewer';
+import QuizLander from './components/QuizLander';
+import Quiz from './quiz/Quiz';
 import stephanTestimonial from './assets/images/stephan_testimonial.mp4';
 import { trackPageVisit, trackPurchase as trackRedditPurchase } from './lib/redditPixel';
 import { trackTrafficStarsClick, trackTrafficStarsLead } from './lib/trafficStars';
@@ -57,7 +59,15 @@ function ToolShell({ title, subtitle, onBack, children }: { title: string; subti
 }
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<ViewMode>('home');
+  const getInitialView = (): ViewMode => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('variant') === 'quiz') return 'quiz-landing';
+    const savedAccess = localStorage.getItem('composure_verified_access');
+    if (savedAccess === 'true') return 'journal';
+    return 'home';
+  };
+
+  const [currentView, setCurrentView] = useState<ViewMode>(getInitialView);
   const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
   const [memberAccessModalOpen, setMemberAccessModalOpen] = useState(false);
   const [isMemberVerified, setIsMemberVerified] = useState(false);
@@ -78,7 +88,6 @@ export default function App() {
     if (savedAccess === 'true') {
       setIsMemberVerified(true);
       if (savedEmail) setVerifiedEmail(savedEmail);
-      setCurrentView('journal');
     }
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -131,8 +140,14 @@ export default function App() {
   };
 
   const handleOpenCheckout = () => {
-    trackTrafficStarsLead();
     setCheckoutModalOpen(true);
+  };
+  const handleStartQuiz = () => {
+    trackTrafficStarsLead();
+    setCurrentView('quiz');
+  };
+  const handleExitQuiz = () => {
+    setCurrentView('quiz-landing');
   };
   const handleOpenMemberAccess = () => setMemberAccessModalOpen(true);
   const handleAccessGranted = (email: string) => {
@@ -210,19 +225,25 @@ export default function App() {
         <span className="w-2 h-2 rounded-full bg-[#b7f473] animate-pulse shrink-0" />
       </div>
 
-      <Header
-        currentView={currentView}
-        onNavigate={handleNavigate}
-        onOpenCheckout={handleOpenCheckout}
-        onOpenMemberAccess={handleOpenMemberAccess}
-        isMemberVerified={isMemberVerified}
-      />
+      {currentView !== 'quiz' && currentView !== 'quiz-landing' && (
+        <Header
+          currentView={currentView}
+          onNavigate={handleNavigate}
+          onOpenCheckout={handleOpenCheckout}
+          onOpenMemberAccess={handleOpenMemberAccess}
+          isMemberVerified={isMemberVerified}
+        />
+      )}
 
-      <main className="flex-grow max-w-7xl w-full mx-auto px-5 md:px-12">
+<main className="flex-grow max-w-7xl mx-auto flex flex-col items-center justify-center w-full">
         {isMemberVerified && currentView === 'home' && isMobile ? (
           <MobileDashboard email={verifiedEmail} onNavigate={(view) => handleNavigate(view as ViewMode)} />
         ) : isMemberVerified && currentView === 'home' && !isMobile ? (
           <MemberDashboard email={verifiedEmail} onNavigate={(view) => handleNavigate(view as ViewMode)} />
+        ) : currentView === 'quiz' ? (
+          <Quiz onExit={handleExitQuiz} onOpenCheckout={handleOpenCheckout} />
+        ) : currentView === 'quiz-landing' ? (
+          <QuizLander onStartQuiz={handleStartQuiz} />
         ) : currentView !== 'home' && currentView !== 'success' && currentView !== 'cancel' && currentView !== 'terms' && currentView !== 'privacy' ? (
           renderToolView()
         ) : (

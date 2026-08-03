@@ -9,7 +9,8 @@ export type ViewMode =
   | 'success'
   | 'cancel'
   | 'terms' 
-  | 'privacy';
+  | 'privacy'
+  | 'quiz-landing';
 
 export interface JournalEntry {
   id: string;

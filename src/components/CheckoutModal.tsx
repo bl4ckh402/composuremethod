@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ViewMode } from '../types';
 import { trackAddToCart, trackLead, trackPurchase } from '../lib/redditPixel';
-import { trackTrafficStarsClick, trackTrafficStarsCheckout } from '../lib/trafficStars';
+import { trackTrafficStarsClick, trackTrafficStarsCheckout, trackTrafficStarsLead } from '../lib/trafficStars';
 import { useI18n } from '../lib/i18n';
 
 interface CheckoutModalProps {
@@ -120,6 +120,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
     }
     setLoading(true);
     trackLead(email, typeof window !== 'undefined' ? window.location.href : undefined);
+    trackTrafficStarsLead(email);
     trackTrafficStarsClick(email);
     trackTrafficStarsCheckout(email);
     const checkoutLink = document.getElementById('polar-checkout-link') as HTMLAnchorElement | null;
@@ -257,7 +258,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
               </div>
 
               {polarProduct && (
-                <div className="bg-[#f4f7f2] border border-[#173404]/10 p-3.5 rounded-xl font-mono text-xs flex items-center justify-between text-[#43483e]">
+                <div className="bg-[#f4f7f2] border border-[#173404]/10 p-3.5 rounded-xl font-mono text-xs flex items-center justify-between text-[#43483e] flex-col gap-2">
                   <div>
                     <span className="text-[10px] text-[#74796d] block uppercase">{t('checkout.productLabel')}</span>
                     <span className="text-[#081d00] font-bold truncate block max-w-[200px] sm:max-w-[280px]">{polarProduct.name}</span>
