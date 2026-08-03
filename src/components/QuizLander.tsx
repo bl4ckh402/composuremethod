@@ -29,6 +29,51 @@ export default function QuizLander({ onStartQuiz }) {
     document.addEventListener('click', handleClick, true);
     return () => document.removeEventListener('click', handleClick, true);
   }, []);
+
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const sections = Array.from(document.querySelectorAll('section'));
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const section = entry.target as HTMLElement;
+            const id = section.getAttribute('id') || section.getAttribute('data-section') || 'unknown';
+            track('quiz_lander_section_viewed', {
+              section_id: id,
+              section_heading: section.querySelector('h1, h2, h3')?.textContent?.trim()?.slice(0, 120) || null,
+              page: 'quiz_lander',
+            });
+          }
+        });
+      },
+      { threshold: 0.6 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const startTime = Date.now();
+    const handleVisibility = () => {
+      if (document.visibilityState === 'hidden') {
+        const scrollDepth = Math.round(
+          (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
+        );
+        track('quiz_lander_exited', {
+          time_on_page_seconds: Math.round((Date.now() - startTime) / 1000),
+          scroll_depth_percent: isFinite(scrollDepth) ? scrollDepth : 0,
+          page: 'quiz_lander',
+        });
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+    return () => document.removeEventListener('visibilitychange', handleVisibility);
+  }, []);
   return (
     <div className="min-h-screen bg-cream text-ink font-body">
       {/* Header */}
@@ -50,7 +95,7 @@ export default function QuizLander({ onStartQuiz }) {
       </header>
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-forest px-6 py-16 text-center sm:py-24">
+      <section id="hero" data-section="hero" className="relative overflow-hidden bg-forest px-6 py-16 text-center sm:py-24">
         <div className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[140%] -translate-x-1/2 -translate-y-1/2 sm:w-[85%]">
           <RingMotif className="h-full w-full" tone="light" />
         </div>
@@ -61,7 +106,7 @@ export default function QuizLander({ onStartQuiz }) {
           </p>
           <h1 className="font-display text-[clamp(2.1rem,8vw,3.75rem)] leading-[1.08] text-cream">
             Last longer in Bed
-            <br className="hidden sm:block" /> in 90 days
+            <br className="hidden sm:block" /> with Just 5 Minutes a Day
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-relaxed text-white sm:text-base">
             A private, step-by-step path to lasting control, confidence, and
@@ -81,7 +126,7 @@ export default function QuizLander({ onStartQuiz }) {
       </section>
 
       {/* Normalize */}
-      <section className="bg-sage px-6 py-14 sm:py-20">
+      <section id="normalize" data-section="normalize" className="bg-sage px-6 py-14 sm:py-20">
         <div className="mx-auto max-w-2xl text-center">
           <p className="font-display text-lg italic text-dark sm:text-xl">
             "It's more common — and more fixable — than it feels."
