@@ -1,6 +1,34 @@
+import React from "react";
 import RingMotif from "./RingMotif";
+import { track } from "../lib/mixpanel";
 
 export default function QuizLander({ onStartQuiz }) {
+  const handleStart = () => {
+    track("quiz_started", {
+      source: "quiz_lander",
+      url: typeof window !== "undefined" ? window.location.href : undefined,
+    });
+    onStartQuiz();
+  };
+
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+      const section = target.closest('section')?.getAttribute('id') || target.closest('header')?.tagName.toLowerCase() || target.closest('footer')?.tagName.toLowerCase() || 'unknown';
+      track('quiz_lander_click', {
+        element_tag: target.tagName.toLowerCase(),
+        element_text: (target.textContent || '').trim().slice(0, 120),
+        element_id: target.id || null,
+        element_classes: target.className || null,
+        section,
+        page: 'quiz_lander',
+      });
+    };
+    document.addEventListener('click', handleClick, true);
+    return () => document.removeEventListener('click', handleClick, true);
+  }, []);
   return (
     <div className="min-h-screen bg-cream text-ink font-body">
       {/* Header */}
@@ -14,7 +42,7 @@ export default function QuizLander({ onStartQuiz }) {
           <span className="font-display text-lg text-forest">composure</span>
         </div>
         <button
-          onClick={onStartQuiz}
+          onClick={handleStart}
           className="hidden sm:inline-flex items-center rounded-full border border-forest/15 px-4 py-2 text-sm font-medium text-forest hover:border-forest/40 transition-colors"
         >
           Take the assessment
@@ -41,7 +69,7 @@ export default function QuizLander({ onStartQuiz }) {
           </p>
 
           <button
-            onClick={onStartQuiz}
+            onClick={handleStart}
             className="mt-8 inline-flex min-h-[44px] items-center justify-center rounded-full bg-amber px-7 py-4 text-[15px] font-bold text-forest shadow-lg shadow-black/30 transition-transform active:scale-[0.98] hover:bg-amber-light sm:text-base"
           >
             Take the 60-second assessment
@@ -131,7 +159,7 @@ export default function QuizLander({ onStartQuiz }) {
           Sixty seconds, a few questions, a plan built around your answers.
         </p>
         <button
-          onClick={onStartQuiz}
+          onClick={handleStart}
           className="mt-7 inline-flex min-h-[44px] items-center justify-center rounded-full bg-amber px-7 py-4 text-[15px] font-bold text-forest shadow-lg shadow-black/30 transition-transform active:scale-[0.98] hover:bg-amber-light sm:text-base"
         >
           Take the 60-second assessment

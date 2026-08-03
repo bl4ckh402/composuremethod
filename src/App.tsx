@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { ViewMode } from './types';
 import { I18nProvider } from './lib/i18n';
+import { initMixpanel, track } from './lib/mixpanel';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { ProblemSection } from './components/ProblemSection';
@@ -60,8 +61,10 @@ function ToolShell({ title, subtitle, onBack, children }: { title: string; subti
 
 export default function App() {
   const getInitialView = (): ViewMode => {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('variant') === 'quiz') return 'quiz-landing';
+    const rawSearch = window.location.search.replace(/\?/g, '&');
+    const urlParams = new URLSearchParams(rawSearch);
+    const variant = urlParams.get('variant');
+    if (variant === 'quiz' || variant?.startsWith('quiz&')) return 'quiz-landing';
     const savedAccess = localStorage.getItem('composure_verified_access');
     if (savedAccess === 'true') return 'journal';
     return 'home';
@@ -83,6 +86,13 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    initMixpanel();
+    track('app_viewed', {
+      path: window.location.pathname,
+      search: window.location.search,
+      view: getInitialView(),
+    });
+
     const savedAccess = localStorage.getItem('composure_verified_access');
     const savedEmail = localStorage.getItem('composure_user_email');
     if (savedAccess === 'true') {
@@ -140,6 +150,10 @@ export default function App() {
   };
 
   const handleOpenCheckout = () => {
+    track('checkout_opened', {
+      path: window.location.pathname,
+      view: currentView,
+    });
     setCheckoutModalOpen(true);
   };
   const handleStartQuiz = () => {

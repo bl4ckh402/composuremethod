@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ViewMode } from '../types';
 import { trackAddToCart, trackLead, trackPurchase } from '../lib/redditPixel';
 import { trackTrafficStarsClick, trackTrafficStarsCheckout, trackTrafficStarsLead } from '../lib/trafficStars';
+import { track } from '../lib/mixpanel';
 import { useI18n } from '../lib/i18n';
 
 interface CheckoutModalProps {
@@ -80,6 +81,18 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
       if (savedEmail) {
         setEmail(savedEmail);
       }
+      track('checkout_completed', {
+        email: savedEmail || undefined,
+        product: polarProduct?.name || 'The Composure Method',
+        price: typeof window !== 'undefined' ? localStorage.getItem('composure_checkout_amount') : null,
+        currency: typeof window !== 'undefined' ? localStorage.getItem('composure_checkout_currency') : null,
+        checkout_id: urlParams.get('checkout_id') || null,
+      });
+    } else if (urlParams.get('checkout') === 'cancel' || urlParams.get('checkout') === 'fail') {
+      track('checkout_canceled', {
+        reason: urlParams.get('checkout'),
+        email: email || undefined,
+      });
     }
 
     fetch('/api/polar/products')
@@ -119,6 +132,12 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ onNavigate, onClos
       return;
     }
     setLoading(true);
+    track('checkout_started', {
+      email: email.trim().toLowerCase(),
+      product: polarProduct?.name || 'The Composure Method',
+      price: (productPrice?.priceAmount || 2000) / 100,
+      currency: (productPrice?.priceCurrency || 'usd').toUpperCase(),
+    });
     trackLead(email, typeof window !== 'undefined' ? window.location.href : undefined);
     trackTrafficStarsLead(email);
     trackTrafficStarsClick(email);

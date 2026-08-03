@@ -1,6 +1,9 @@
 import { useState } from "react";
 import RingMotif from "../components/RingMotif";
 import { STEPS, getQ7Options, questionProgress, buildResults, buildRecap } from "./quizData";
+import { track } from "../lib/mixpanel";
+
+const ANSWERED_STEPS = new Set(["q1","q2a","q2b","q2c","q3","q4","q5","q6a","q6b","q6c","q7","q8","q9"]);
 
 export default function Quiz({ onExit, onOpenCheckout }) {
   const [stepId, setStepId] = useState("q1");
@@ -10,6 +13,19 @@ export default function Quiz({ onExit, onOpenCheckout }) {
   const step = STEPS[stepId];
 
   function goTo(nextId, tagKey, tagValue) {
+    if (ANSWERED_STEPS.has(stepId)) {
+      track("quiz_question_answered", {
+        question_number: step.qNum,
+        question_id: stepId,
+        question: step.question,
+        answer_label: tagValue ? (step.options?.find(o => o.tagValue === tagValue)?.label || step.options?.find(o => o.next === nextId)?.label || String(tagValue)) : null,
+        tag_key: tagKey || null,
+        tag_value: tagValue || null,
+        next_step_id: nextId,
+        total_questions: 9,
+      });
+    }
+
     setHistory((h) => [...h, stepId]);
     if (tagKey) {
       setTags((t) => ({ ...t, [tagKey]: tagValue }));
@@ -32,12 +48,22 @@ export default function Quiz({ onExit, onOpenCheckout }) {
 
   const progress = questionProgress(stepId);
 
+  function handleExit() {
+    track("quiz_exited", {
+      exit_step_id: stepId,
+      exit_question_number: step.qNum || null,
+      questions_answered: history.filter((id) => ANSWERED_STEPS.has(id)).length,
+      total_questions: 9,
+    });
+    onExit();
+  }
+
   return (
     <div className="min-h-screen bg-cream px-5 py-10 sm:px-8 sm:py-16">
       <div className="mx-auto max-w-2xl">
         <div className="mb-6 flex items-center justify-between">
           <button
-            onClick={onExit}
+            onClick={handleExit}
             className="text-sm text-ink/50 hover:text-ink/80 transition-colors"
           >
             &larr; Back to composure
@@ -71,7 +97,7 @@ export default function Quiz({ onExit, onOpenCheckout }) {
           {step.type === "question" && (
             <QuestionCard step={step} stepId={stepId} tags={tags} onAnswer={goTo} />
           )}
-          {step.type === "stat" && <StatCard step={step} onContinue={() => goTo(step.next)} />}
+          {step.type === "stat" && <StatCard step={step} onContinue={() => goTo(step.next, null, null)} />}
           {step.type === "results" && <ResultsCard tags={tags} onExit={onExit} onOpenCheckout={onOpenCheckout} />}
         </div>
       </div>
@@ -125,6 +151,14 @@ function StatCard({ step, onContinue }) {
 function ResultsCard({ tags, onExit, onOpenCheckout }) {
   const { headline, subheadline, reassurance, goalLine } = buildResults(tags);
   const recap = buildRecap(tags);
+
+  if (typeof window !== 'undefined') {
+    track('quiz_completed', {
+      tags,
+      recap,
+      total_questions: 9,
+    });
+  }
 
   return (
     <div className="animate-fadeIn">
